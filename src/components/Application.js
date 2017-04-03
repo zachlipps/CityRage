@@ -3,8 +3,7 @@ import SignIn from './SignIn';
 import CurrentUser from '../containers/CurrentUserContainer';
 import Loading from './Loading';
 
-const Application = ({ auth, signIn, signOut }) => {
-  console.log(auth);
+const Application = ({ auth, signIn, signOut }) => {  
   return (
     
     <main className="Application">
