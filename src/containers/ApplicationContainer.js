@@ -4,6 +4,7 @@ import { signIn, signOut } from '../actions/auth';
 
 
 const mapStateToProps = ({ auth }) => {  
+  console.log('this is application container', auth);
   return { auth };
 };
 

@@ -14,9 +14,7 @@ export const signIn = () => {
 export const signOut = (uid) => {  
   return (dispatch) => {
     dispatch({type: 'ATTEMPTING_LOGIN'});
-
     database.ref('users/' + uid).child('currentlyOn').set(false);
-    
     auth.signOut();    
   };
 };

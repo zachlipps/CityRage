@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import SignIn from './SignIn';
-import CurrentUser from './CurrentUser';
+import CurrentUser from '../containers/CurrentUserContainer';
 import Loading from './Loading';
 
 const Application = ({ auth, signIn, signOut }) => {
