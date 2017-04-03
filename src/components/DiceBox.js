@@ -3,7 +3,10 @@ import React, { Component } from 'react';
 class DiceBox extends Component {
   render() {
     return (
-      <div> I am the diceBox div </div>
+      <div style={{ display: 'flex' }}>
+        <div />
+        <div>actual dice div </div>
+      </div>
     );
   }
 }
