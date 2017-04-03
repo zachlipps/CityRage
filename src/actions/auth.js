@@ -42,7 +42,12 @@ export const startListeningToAuthChanges = () => {
         dispatch(signedIn(user));
 
         var obj = Object.assign({}, pick(user, ['displayName', 'photoURL', 'email', 'uid']), {
-          'currentlyOn': true
+          'currentlyOn': true,
+          stats: {
+            energy: 0,
+            health: 10,
+            points: 0
+          }
         });
 
         usersRef.child(user.uid).set(obj);

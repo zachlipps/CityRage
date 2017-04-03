@@ -11,14 +11,12 @@ export default function(state = [], action) {
 }
 
 
-
 export const showOnlineUsers = () => {
   var array = [];
   database.ref('/users').on('value', (snapshot) => {               
     snapshot.forEach(user =>{           
       if (user.val().currentlyOn) {          
-        array.push(user.val().displayName);
-        console.log('Whos here', user.val().displayName);
+        array.push(user.val());        
       }
     });
   }); 

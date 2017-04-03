@@ -8,7 +8,7 @@ export default function usersReducer(state = initialState.users, action) {
     return extend(clone(state), { [action.uid]: {
       displayName: action.displayName,
       email: action.email,
-      photoURL: action.photoURL
+      photoURL: action.photoURL,      
     }});
   default:
     return state;
