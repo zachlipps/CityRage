@@ -6,6 +6,7 @@ import thunk from 'redux-thunk';
 import reducer from './reducers/index';
 import initialState from './initial-state';
 import Application from './containers/ApplicationContainer';
+import {showOnlineUsersAction} from './actions/users';
 import './index.css';
 
 import { startListeningToAuthChanges } from './actions/auth';
@@ -28,6 +29,7 @@ const store = createStore(
 
 store.dispatch(startListeningToAuthChanges());
 store.dispatch(startListeningForUsers());
+store.dispatch(showOnlineUsersAction());
 
 ReactDOM.render(
   <Provider store={store}>

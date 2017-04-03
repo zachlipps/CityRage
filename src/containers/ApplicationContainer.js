@@ -3,8 +3,7 @@ import Application from '../components/Application';
 import { signIn, signOut } from '../actions/auth';
 
 
-const mapStateToProps = ({ auth }) => {  
-  console.log('this is application container', auth);
+const mapStateToProps = ({ auth }) => {    
   return { auth };
 };
 

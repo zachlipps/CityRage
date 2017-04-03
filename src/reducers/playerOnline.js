@@ -1,17 +1,18 @@
-import {database} from '../firebase.js';
+import {database} from '../firebase';
 
 export default function(state = [], action) {
   switch (action.type) {
-  case 'ADD_ONLINEPLAYER' : 
-    return 'lol';
-  default: 
-    console.log('reducer', state);
+  case 'UPDATE_PLAYERS' :
+    console.log('action.playersOnline', action.playersOnline); 
+    return showOnlineUsers();
+  default:     
     return state;
   }
 }
 
 
-function showNames() {
+
+export const showOnlineUsers = () => {
   var array = [];
   database.ref('/users').on('value', (snapshot) => {               
     snapshot.forEach(user =>{           
@@ -21,6 +22,6 @@ function showNames() {
       }
     });
   }); 
-  console.log(array);
+  console.log('showOnlineUsers', array);
   return array;
-}
+};

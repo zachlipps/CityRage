@@ -7,8 +7,7 @@ class CurrentUser extends React.Component {
     super(props);  
   }
 
-  render() {    
-    console.log('current user props', this.props);
+  render() {        
     const { auth, signOut } = this.props;    
     return (
     <div className="CurrentUser">
@@ -22,7 +21,7 @@ class CurrentUser extends React.Component {
         <p className="CurrentUser--email">{ auth.email }</p>
         <button
           className="CurrentUser--signout"          
-          onClick={()=>{ signOut(auth.uid); console.log('im gere', auth); }}
+          onClick={()=>{ signOut(auth.uid); }}
         >
         Sign Out
         </button>
@@ -31,7 +30,9 @@ class CurrentUser extends React.Component {
         return <p>user</p>; 
       })}*/}
 
-      {JSON.stringify(this.props)}
+      {this.props.playersOnline.map(user => {
+        return <div key={user}>{user}</div>;
+      })}
         
                 
           
