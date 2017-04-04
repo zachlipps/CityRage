@@ -7,7 +7,6 @@ class CurrentUser extends React.Component {
     super(props);
   }
 
-
   render() {    
     console.log(this.props);
     const { auth, signOut } = this.props;
@@ -26,8 +25,6 @@ class CurrentUser extends React.Component {
             onClick={() => { signOut(auth.uid); console.log('im gere', auth); }}
           > Sign Out</button>   
        
-                   
-
       {this.props.playersOnline.map(user => {
         return <div key={user.uid}>{user.displayName}
           <ul>
@@ -40,7 +37,8 @@ class CurrentUser extends React.Component {
 
       <button onClick={()=> { this.props.increaseHealth(auth.uid); }} >up health</button>
       <button onClick={()=> { this.props.decreaseHealth(auth.uid); }}>down health</button>
-
+      <button onClick={()=> { this.props.increasePoints(auth.uid); }} >up Points</button>
+      <button onClick={()=> { this.props.decreasePoints(auth.uid); }}>down Points</button>
       </div>
       </div>
     );

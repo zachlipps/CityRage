@@ -1,6 +1,5 @@
 import {database} from '../firebase';
 
-
 export const increaseHealth = (uid) =>{
   //do some stuff in firebase
   return (dispatch) =>{
@@ -13,7 +12,6 @@ export const increaseHealth = (uid) =>{
     database.ref('users/' + uid + '/stats/health').set(health);
     
   };
-  //call the increase health thing
 };
 
 
@@ -27,17 +25,5 @@ export const decreaseHealth = (uid) =>{
     });
     health = health - 1;
     database.ref('users/' + uid + '/stats/health').set(health);
-    
   };
-  //call the increase health thing
 };
-
-
-
-// export const decreaseHealth = (user) => {
-//   return {
-//     type: 'DECREASE_HEALTH',
-//     uid: user.uid    
-//   };
-// };
-
