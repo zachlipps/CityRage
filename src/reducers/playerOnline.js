@@ -1,25 +1,25 @@
-import {database} from '../firebase';
+import { database } from '../firebase';
 
-export default function(state = [], action) {
+export default function (state = [], action) {
   switch (action.type) {
-  case 'UPDATE_PLAYERS' :
-    console.log('action.playersOnline', action.playersOnline); 
-    return showOnlineUsers();
-  default:     
-    return state;
+    case 'UPDATE_PLAYERS' :
+      console.log('action.playersOnline', action.playersOnline);
+      return showOnlineUsers();
+    default:
+      return state;
   }
 }
 
 
 export const showOnlineUsers = () => {
-  var array = [];
-  database.ref('/users').on('value', (snapshot) => {               
-    snapshot.forEach(user =>{           
-      if (user.val().currentlyOn) {          
-        array.push(user.val());        
+  const array = [];
+  database.ref('/users').on('value', (snapshot) => {
+    snapshot.forEach((user) => {
+      if (user.val().currentlyOn) {
+        array.push(user.val());
       }
     });
-  }); 
+  });
   console.log('showOnlineUsers', array);
   return array;
 };
