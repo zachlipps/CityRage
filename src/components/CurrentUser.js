@@ -7,7 +7,7 @@ class CurrentUser extends React.Component {
     super(props);
   }
 
-  render() {    
+  render() {
     console.log(this.props);
     const { auth, signOut } = this.props;
     return (
@@ -23,30 +23,27 @@ class CurrentUser extends React.Component {
           <button
             className="CurrentUser--signout"
             onClick={() => { signOut(auth.uid); console.log('im gere', auth); }}
-          > Sign Out</button>   
-       
-      {this.props.playersOnline.map(user => {
-        return <div key={user.uid}>{user.displayName}
-          <ul>
-            <li>energy {user.stats.energy}</li>
-            <li>health {user.stats.health}</li>
-            <li>points {user.stats.points}</li>
-          </ul>
-          </div>;
-      })}
+          > Sign Out</button>
 
-      <button onClick={()=> { this.props.increaseHealth(auth.uid); }} >up health</button>
-      <button onClick={()=> { this.props.decreaseHealth(auth.uid); }}>down health</button>
-      <button onClick={()=> { this.props.increasePoints(auth.uid); }} >up Points</button>
-      <button onClick={()=> { this.props.decreasePoints(auth.uid); }}>down Points</button>
-      <button onClick={()=> { this.props.increaseEnergy(auth.uid); }} >up Energy</button>
-      <button onClick={()=> { this.props.decreaseEnergy(auth.uid); }}>down Energy</button>
-      </div>
+          {this.props.playersOnline.map(user => <div key={user.uid}>{user.displayName}
+            <ul>
+              <li>energy {user.stats.energy}</li>
+              <li>health {user.stats.health}</li>
+              <li>points {user.stats.points}</li>
+            </ul>
+          </div>)}
+
+          <button onClick={() => { this.props.increaseHealth(auth.uid); }} >up health</button>
+          <button onClick={() => { this.props.decreaseHealth(auth.uid); }}>down health</button>
+          <button onClick={() => { this.props.increasePoints(auth.uid); }} >up Points</button>
+          <button onClick={() => { this.props.decreasePoints(auth.uid); }}>down Points</button>
+          <button onClick={() => { this.props.increaseEnergy(auth.uid); }} >up Energy</button>
+          <button onClick={() => { this.props.decreaseEnergy(auth.uid); }}>down Energy</button>
+        </div>
       </div>
     );
   }
 }
-
 
 CurrentUser.propTypes = {
   auth: PropTypes.shape({
@@ -57,6 +54,5 @@ CurrentUser.propTypes = {
   }),
   signOut: PropTypes.func.isRequired,
 };
-
 
 export default CurrentUser;

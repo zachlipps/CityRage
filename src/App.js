@@ -1,22 +1,22 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import {database} from './firebase';
+import { database } from './firebase';
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: null
+      data: null,
     };
   }
-  
+
   componentDidMount() {
     database.ref().on('value', (snapshot) => {
       console.log(snapshot.val());
       console.log('hello!');
       this.setState({
-        data: snapshot.val()
+        data: snapshot.val(),
       });
     });
   }
