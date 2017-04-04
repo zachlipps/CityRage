@@ -1,7 +1,8 @@
 import { connect } from 'react-redux';
 import CurrentUser from '../components/CurrentUser';
 import {bindActionCreators} from 'redux';
-import {increaseHealth, decreaseHealth} from '../actions/stats';
+import {increaseHealth, decreaseHealth} from '../actions/health';
+import {increasePoints, decreasePoints} from '../actions/points';
 
 const mapStateToProps = (state) => {  
   return {
@@ -10,9 +11,11 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => {
-  // return {
-  //   increaseHealth(user) { dispatch(increaseHealth(user)); }    
-  // };
-  return bindActionCreators({increaseHealth, decreaseHealth}, dispatch);
+  return bindActionCreators({
+    increaseHealth, 
+    decreaseHealth,
+    increasePoints, 
+    decreasePoints,
+  }, dispatch);
 };
 export default connect(mapStateToProps, mapDispatchToProps)(CurrentUser);
