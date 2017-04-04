@@ -10,10 +10,11 @@ const Application = ({ auth, signIn, signOut }) => (
 
       { auth.status === 'ANONYMOUS' && <SignIn signIn={signIn} /> }
       { auth.status === 'SIGNED_IN' && <CurrentUser auth={auth} signOut={signOut} />}
-      {/* { auth.status === 'SIGNED_IN' && <NewMessageContainer /> }*/}
+      { auth.status === 'SIGNED_IN' && <DiceBox />}
       { auth.status === 'AWAITING_AUTH_RESPONSE' && <Loading /> }
+
     </div>
-    <DiceBox />
+
   </main>
 );
 
