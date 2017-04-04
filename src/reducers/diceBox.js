@@ -1,6 +1,5 @@
 import { database } from '../firebase';
 
-const 
 
 export default function (state = [], action) {
   switch (action.type) {
@@ -10,4 +9,4 @@ export default function (state = [], action) {
     default:
       return state;
   }
-} 
+}
