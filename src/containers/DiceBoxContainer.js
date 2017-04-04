@@ -9,5 +9,4 @@ const mapStateToProps = ({ currentDieRoll }) => ({
 // mapDispatchToProps = (dispatch) => {}
 // map all of the actions
 
-
 export default connect(mapStateToProps)(DiceBox);
