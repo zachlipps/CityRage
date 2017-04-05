@@ -5,7 +5,7 @@ const diceOptions = {
   1: '1',
   2: '2',
   3: '3',
-  4: 'power',
+  4: 'energy',
   5: 'health',
   6: 'attack',
 };
@@ -87,17 +87,6 @@ export const selectDice = die => (dispatch) => {
   });
 };
 
-
-// const getCurrentPlayer = () => {
-//   let playerName;
-//   database.ref('currentPlayer').once('value', (snapshot) => {
-//     console.log(snapshot.val());
-//     playerName = snapshot.val();
-//   });
-//   // NOW WE KNOW THE PLAYER GO LOOP THOUGH ALL USERS TO FIND UID
-//   return playerName;
-// };
-
 export const submitRoll = die => (dispatch) => {
   const submittedRoll = [];
   let currentPlayer = '';
@@ -114,13 +103,10 @@ export const submitRoll = die => (dispatch) => {
     })
   .then((currentPlayer) => {
     const objectifiedRolls = groupBy(submittedRoll);
-    console.log(objectifiedRolls);
-
     currentPlayer = currentPlayer.val().uid;
+
     // check for heal
     if (objectifiedRolls.health !== undefined && objectifiedRolls.health.length !== 0) {
-      console.log('health', objectifiedRolls.health.length);
-      console.log(currentPlayer);
       database.ref(`/users/${currentPlayer}/stats/health`).once('value', (snapshot) => {
         const health = snapshot.val() + objectifiedRolls.health.length;
         database.ref(`/users/${currentPlayer}/stats/health`).set(health);
@@ -128,9 +114,15 @@ export const submitRoll = die => (dispatch) => {
     }
 
     // check power
-    if (objectifiedRolls.power !== undefined && objectifiedRolls.power.length !== 0) {
-      console.log('power', objectifiedRolls.power.length);
+    console.log(objectifiedRolls);
+    if (objectifiedRolls.energy !== undefined && objectifiedRolls.energy.length !== 0) {
+      console.log('energy', objectifiedRolls.energy.length);
+      database.ref(`/users/${currentPlayer}/stats/energy`).once('value', (snapshot) => {
+        const energy = snapshot.val() + objectifiedRolls.energy.length;
+        database.ref(`/users/${currentPlayer}/stats/energy`).set(energy);
+      });
     }
+
 
     // check for numbs
 
