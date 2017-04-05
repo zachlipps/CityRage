@@ -15,6 +15,17 @@ const updateRolls = listOfDice => ({
   listOfDice,
 });
 
+const decrementRoll = () => {
+  database.ref('/rollCount').once('value', (snapshot) => {
+    const rollCount = snapshot.val();
+    return rollCount;
+  }).then((rollCount) => {
+    const newRollCount = rollCount.val() - 1;
+    console.log('newRollCount', newRollCount);
+    database.ref('/rollCount').set(newRollCount);
+  });
+};
+
 export const rollDice = () => (dispatch) => {
   let listOfDice;
 
@@ -33,6 +44,7 @@ export const rollDice = () => (dispatch) => {
     listOfDice = snapshot.val();
   }).then(() => {
     console.log(listOfDice);
+    decrementRoll();
     dispatch(updateRolls(listOfDice));
   });
 });
