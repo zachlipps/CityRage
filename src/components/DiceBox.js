@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import map from 'lodash/map';
 
 class DiceBox extends Component {
   render() {
@@ -11,7 +12,10 @@ class DiceBox extends Component {
         </div>
 
         <div style={{ flexDirection: 'column', flex: 4, border: '1px solid orange', display: 'flex' }}>
-          <div style={{ border: '1px solid purple', flexFlow: 'row-wrap', flex: 1, justifyContent: 'space-around' }}> actual dice </div>
+          <div style={{ border: '1px solid purple', flexFlow: 'row-wrap', flex: 1, justifyContent: 'space-around' }}>
+            {map(this.props.diceBox, (item, key) => <div onClick={() => this.props.selectDice(key)} key={key}>{item.val}</div>)}
+          </div>
+
         </div>
       </div>
     );
