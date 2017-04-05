@@ -65,3 +65,36 @@ export const selectDice = die => (dispatch) => {
   });
 };
 
+export const submitRoll = die => (dispatch) => {
+  const submittedRoll = [];
+ // When submitRoll is clicked grab the user's dice and apply effects
+  database.ref('/diceBox').once('value', (snapshot) => {
+    for (const i in snapshot.val()) {
+      submittedRoll.push(snapshot.val()[i].val);
+    }
+  }).then(() => {
+    // if there are any attacks
+    if (submittedRoll.indexOf('attack') !== -1) {
+      // check to see if there's a king
+      database.ref('/king').once('value', (snapshot) => {
+        if (snapshot.val() === 'none') {
+          // if not set this user as the king
+          setKing();
+        } else {
+          // else ask the other king if they want to leave
+        }
+      });
+    }
+  });
+};
+
+
+const setKing = () => {
+  database.ref('currentPlayer').once('value', (snapshot) => {
+    console.log(snapshot.val());
+    return snapshot.val();
+  }).then((currentPlayer) => {
+    console.log(currentPlayer.val());
+    database.ref('/king').set(currentPlayer.val());
+  });
+};

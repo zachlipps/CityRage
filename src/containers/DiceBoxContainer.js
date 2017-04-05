@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import diceBoxComponent from '../components/DiceBox';
-import { rollDice, selectDice } from '../actions/diceBox';
+import { rollDice, selectDice, submitRoll } from '../actions/diceBox';
 
 const mapStateToProps = state => ({
   diceBox: state.diceBox,
@@ -10,6 +10,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   rollDice() { dispatch(rollDice()); },
   selectDice(...args) { dispatch(selectDice(...args)); },
+  submitRoll() { dispatch(submitRoll()); },
 });
 
 

@@ -9,7 +9,7 @@ class DiceBox extends Component {
         <div style={{ display: 'flex', border: '1px solid black', width: '400px', height: '150px' }}>
           <div style={{ display: 'flex', flexDirection: 'column', border: '1px solid green', flex: 1 }}>
             <div style={{ flex: 1 }}> DICEBOX </div><button onClick={() => { this.props.rollDice(); }}>Roll</button>
-            <div style={{ flex: 1 }}> SUBMIT </div><button onClick={() => {}}>Submit</button>
+            <div style={{ flex: 1 }}> SUBMIT </div><button onClick={() => { this.props.submitRoll(); }}>Submit</button>
           </div>
 
           <div style={{ flexDirection: 'column', flex: 4, border: '1px solid orange', display: 'flex' }}>
