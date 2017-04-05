@@ -25,6 +25,7 @@ export default function (state = market, action) {
         copy.discarded.push(c);
       });
       copy.face_up = [];
+      // deal three new cards here or in actions file...?
       return copy;
     default:
       return state;

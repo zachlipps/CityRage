@@ -8,7 +8,8 @@ export const dealCard = () => ({
   type: 'DEAL_CARD',
 });
 
-// deals three new cards in the market, discards the old ones
+// discards the old ones
+// where do i fire the cards
 export const resetMarket = () => ({
   type: 'DEAL_NEW_MARKET',
 });
