@@ -16,7 +16,11 @@ export default function (state = market, action) {
       copy.deck.shift();
       return copy;
     case 'DEAL_NEW_MARKET':
-      return state;
+      copy.face_up.forEach((c) => {
+        copy.discarded.push(c);
+      });
+      copy.face_up = [];
+      return copy;
     default:
       return state;
   }

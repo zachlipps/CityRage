@@ -16,7 +16,7 @@ class Deck extends Component {
     return (
       <div className="market-container" style={{ marginBottom: '25px', margin: '10px', border: '1px solid black' }}>
         <button onClick={() => this.props.dealCard()}> DealNewCard </button> <br />
-        <button onClick={() => this.props.resetCards()}> ResetCards </button>
+        <button onClick={() => this.props.resetMarket()}> ResetCards </button>
         <div style={this.cardStyle}>Deck</div>
         { this.createMarket() }
         <div style={this.cardStyle}>Discar Pile</div>
