@@ -11,9 +11,11 @@ export default function (state = market, action) {
       }
       return copy;
     case 'DEAL_CARD':
-      const toBeDealt = copy.deck[0];
-      copy.face_up.push(toBeDealt);
-      copy.deck.shift();
+      if (copy.face_up.length < 3) {
+        const toBeDealt = copy.deck[0];
+        copy.face_up.push(toBeDealt);
+        copy.deck.shift();
+      }
       return copy;
     case 'DEAL_NEW_MARKET':
       copy.face_up.forEach((c) => {
