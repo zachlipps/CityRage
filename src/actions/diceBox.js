@@ -1,4 +1,5 @@
 import { database } from '../firebase';
+import groupBy from 'lodash/groupBy';
 
 const diceOptions = {
   1: '1',
@@ -65,14 +66,53 @@ export const selectDice = die => (dispatch) => {
   });
 };
 
+
+// const getCurrentPlayer = () => {
+//   let playerName;
+//   database.ref('currentPlayer').once('value', (snapshot) => {
+//     console.log(snapshot.val());
+//     playerName = snapshot.val();
+//   });
+//   // NOW WE KNOW THE PLAYER GO LOOP THOUGH ALL USERS TO FIND UID
+//   return playerName;
+// };
+
 export const submitRoll = die => (dispatch) => {
   const submittedRoll = [];
+  let currentPlayer = '';
  // When submitRoll is clicked grab the user's dice and apply effects
   database.ref('/diceBox').once('value', (snapshot) => {
     for (const i in snapshot.val()) {
       submittedRoll.push(snapshot.val()[i].val);
     }
-  }).then(() => {
+  })
+  .then(() => {
+    database.ref('currentPlayer').once('value', (snapshot) => {
+      currentPlayer = snapshot.val();
+      return currentPlayer;
+    })
+  .then((currentPlayer) => {
+    const objectifiedRolls = groupBy(submittedRoll);
+    console.log(objectifiedRolls);
+
+    currentPlayer = currentPlayer.val().uid;
+    // check for heal
+    if (objectifiedRolls.health !== undefined && objectifiedRolls.health.length !== 0) {
+      console.log('health', objectifiedRolls.health.length);
+      console.log(currentPlayer);
+      database.ref(`/users/${currentPlayer}/stats/health`).once('value', (snapshot) => {
+        const health = snapshot.val() + objectifiedRolls.health.length;
+        database.ref(`/users/${currentPlayer}/stats/health`).set(health);
+      });
+    }
+
+    // check power
+    if (objectifiedRolls.power !== undefined && objectifiedRolls.power.length !== 0) {
+      console.log('power', objectifiedRolls.power.length);
+    }
+
+    // check for numbs
+
     // if there are any attacks
     if (submittedRoll.indexOf('attack') !== -1) {
       // check to see if there's a king
@@ -85,6 +125,7 @@ export const submitRoll = die => (dispatch) => {
         }
       });
     }
+  });
   });
 };
 

@@ -3,7 +3,7 @@ import map from 'lodash/map';
 
 class DiceBox extends Component {
   render() {
-    console.log('dicebox component', this.props);
+    // console.log('dicebox component', this.props);
     return (
       <div>
         <div style={{ display: 'flex', border: '1px solid black', width: '400px', height: '150px' }}>
