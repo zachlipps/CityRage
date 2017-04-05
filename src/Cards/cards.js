@@ -1,0 +1,50 @@
+import shuffle from 'lodash/shuffle';
+
+// dummyCards for testing
+const cards = [
+  {
+    title: 'Quake',
+    cost: 1,
+    type: 'Discard',
+    text: 'deal one dmg to all players',
+    effect: {
+    },
+  },
+  {
+    title: 'Roar',
+    cost: 2,
+    type: 'Keep',
+    ability: 'your attk + 1',
+  },
+  {
+    title: 'Shield',
+    cost: 3,
+    type: 'Keep',
+    ability: 'all dmg to you - 1',
+  },
+  {
+    title: 'Gobbler',
+    cost: 3,
+    type: 'Discard',
+    ability: 'energy + 1',
+  },
+  {
+    title: 'Swift',
+    cost: 2,
+    type: 'Keep',
+    ability: 'roll die: -1 dmg if <3',
+  },
+  {
+    title: 'Heal',
+  },
+];
+// dummyCards for testing
+
+const market = {
+  deck: shuffle(cards),
+  face_up: [],
+  discarded: [],
+};
+
+export default market;
+console.log('deck in cards.js', market);
