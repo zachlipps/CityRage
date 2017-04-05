@@ -1,6 +1,5 @@
 import { database } from '../firebase';
 
-
 const diceOptions = {
   1: '1',
   2: '2',
