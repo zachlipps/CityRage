@@ -3,15 +3,17 @@ import SignIn from './SignIn';
 import CurrentUser from '../containers/CurrentUserContainer';
 import Loading from './Loading';
 import DiceBox from '../containers/DiceBoxContainer';
+import Game from '../containers/GameContainer';
 
 const Application = ({ auth, signIn, signOut }) => (
   <main className="Application">
     <div className="Application--sidebar">
 
       { auth.status === 'ANONYMOUS' && <SignIn signIn={signIn} /> }
+      { auth.status === 'AWAITING_AUTH_RESPONSE' && <Loading /> }
       { auth.status === 'SIGNED_IN' && <CurrentUser auth={auth} signOut={signOut} />}
       { auth.status === 'SIGNED_IN' && <DiceBox />}
-      { auth.status === 'AWAITING_AUTH_RESPONSE' && <Loading /> }
+      { auth.status === 'SIGNED_IN' && <Game />}
 
     </div>
 

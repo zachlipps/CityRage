@@ -19,6 +19,8 @@ const initialState = {
   },
 };
 
+
+// set the dicebox
 database.ref('/diceBox/one').set({ val: '?', selected: false });
 database.ref('/diceBox/two').set({ val: '?', selected: false });
 database.ref('/diceBox/three').set({ val: '?', selected: false });
@@ -26,5 +28,11 @@ database.ref('/diceBox/four').set({ val: '?', selected: false });
 database.ref('/diceBox/five').set({ val: '?', selected: false });
 database.ref('/diceBox/six').set({ val: '?', selected: false });
 
+// set roll count
+database.ref('/rollCount').set(3);
+// set king
+database.ref('/king').set('none');
+// set current player
+database.ref('/currentPlayer').set('none');
 
 export default initialState;
