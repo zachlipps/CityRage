@@ -1,4 +1,7 @@
 import market from '../Cards/cards';
+import { database } from '../firebase';
+
+//  working on executing these actions in firebase as well
 
 export default function (state = market, action) {
   const copy = Object.assign({}, state);
