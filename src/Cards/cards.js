@@ -6,7 +6,9 @@ const cards = [
     title: 'Quake',
     cost: 1,
     type: 'Discard',
-    ability: 'deal one dmg to all players',
+    text: 'deal one dmg to all players',
+    effect: {
+    },
   },
   {
     title: 'Roar',
@@ -34,14 +36,15 @@ const cards = [
   },
   {
     title: 'Heal',
-    cost: 1,
-    type: 'Discard',
-    ability: 'gain 2 <3\'s',
   },
 ];
 // dummyCards for testing
 
+const market = {
+  deck: shuffle(cards),
+  face_up: [],
+  discarded: [],
+};
 
-const deck = shuffle(cards);
-export default deck;
-console.log('deck in cards.js', deck);
+export default market;
+console.log('deck in cards.js', market);

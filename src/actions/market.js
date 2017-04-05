@@ -1,7 +1,7 @@
-export const buyCard = (buyer, card) => ({
+export const buyCard = (card, buyer) => ({
   type: 'BUY_CARD',
-  buyer,
   card,
+  buyer,
 });
 
 export const dealCard = () => ({

@@ -1,14 +1,22 @@
-import deck from '../Cards/cards';
+import market from '../Cards/cards';
 
-export default function (state = deck, action) {
+export default function (state = market, action) {
+  const copy = Object.assign({}, state);
   switch (action.type) {
     case 'BUY_CARD':
-      console.log(state);
-      return state;
+      for (let i = 0; i < copy.face_up.length; i++) {
+        if (copy.face_up[i].title === action.card) {
+          copy.face_up.splice(i, 1);
+        }
+      }
+      return copy;
     case 'DEAL_CARD':
-      return action.payload;
+      const toBeDealt = copy.deck[0];
+      copy.face_up.push(toBeDealt);
+      copy.deck.shift();
+      return copy;
     case 'DEAL_NEW_MARKET':
-      return action.payload;
+      return state;
     default:
       return state;
   }
