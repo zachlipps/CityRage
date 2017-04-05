@@ -8,7 +8,6 @@ class CurrentUser extends React.Component {
   }
 
   render() {
-    console.log(this.props);
     const { auth, signOut } = this.props;
     return (
       <div className="CurrentUser">

@@ -3,7 +3,6 @@ import { database } from '../firebase';
 export default function (state = [], action) {
   switch (action.type) {
     case 'UPDATE_PLAYERS' :
-      console.log('action.playersOnline', action.playersOnline);
       return showOnlineUsers();
     default:
       return state;
@@ -20,6 +19,5 @@ export const showOnlineUsers = () => {
       }
     });
   });
-  console.log('showOnlineUsers', array);
   return array;
 };

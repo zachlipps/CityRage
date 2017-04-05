@@ -13,8 +13,6 @@ class App extends Component {
 
   componentDidMount() {
     database.ref().on('value', (snapshot) => {
-      console.log(snapshot.val());
-      console.log('hello!');
       this.setState({
         data: snapshot.val(),
       });

@@ -1,12 +1,16 @@
 import { connect } from 'react-redux';
 import diceBoxComponent from '../components/DiceBox';
-import { rollDice } from '../actions/diceBox';
-import { bindActionCreators } from 'redux';
+import { rollDice, selectDice } from '../actions/diceBox';
 
-const mapStateToProps = ({ currentDieRoll }) => ({
-  currentDieRoll,
+const mapStateToProps = state => ({
+  diceBox: state.diceBox,
 });
 
-const mapDispatchToProps = dispatch => bindActionCreators({ rollDice }, dispatch);
+
+const mapDispatchToProps = dispatch => ({
+  rollDice() { dispatch(rollDice()); },
+  selectDice(...args) { dispatch(selectDice(...args)); },
+});
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(diceBoxComponent);
