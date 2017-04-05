@@ -1,3 +1,5 @@
+import shuffle from 'lodash/shuffle';
+
 // dummyCards for testing
 const cards = [
   {
@@ -37,5 +39,9 @@ const cards = [
     ability: 'gain 2 <3\'s',
   },
 ];
-export default cards;
 // dummyCards for testing
+
+
+const deck = shuffle(cards);
+export default deck;
+console.log('deck in cards.js', deck);

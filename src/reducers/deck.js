@@ -1,6 +1,6 @@
-import deck from '../Cards/cards';
+import cards from '../Cards/cards';
 
-export default function (state = deck, action) {
+export default function (state = cards, action) {
   switch (action.type) {
     case 'BUY_CARD':
       console.log(state);
