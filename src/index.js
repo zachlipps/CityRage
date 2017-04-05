@@ -7,7 +7,6 @@ import reducer from './reducers/index';
 import initialState from './initial-state';
 import Application from './containers/ApplicationContainer';
 import { showOnlineUsersAction } from './actions/users';
-import './index.css';
 
 import { startListeningToAuthChanges } from './actions/auth';
 import { startListeningForUsers } from './actions/users';
