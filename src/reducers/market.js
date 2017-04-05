@@ -25,7 +25,11 @@ export default function (state = market, action) {
         copy.discarded.push(c);
       });
       copy.face_up = [];
-      // deal three new cards here or in actions file...?
+      const length = copy.deck.length >= 3 ? 3 : copy.deck.length;
+      for (let i = 0; i < length; i++) {
+        copy.face_up.push(copy.deck[0]);
+        copy.deck.splice(0, 1);
+      }
       return copy;
     default:
       return state;
