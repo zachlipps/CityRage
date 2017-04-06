@@ -1,7 +1,7 @@
 import initialState from '../initial-state.js';
 
 
-export default function (state = initialState.currentDice, action) {
+export default function (state = initialState.diceBox, action) {
   switch (action.type) {
     case 'DEFAULT_DICE':
       return action.playload;

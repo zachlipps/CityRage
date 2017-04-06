@@ -8,8 +8,8 @@ const initialState = {
     photoURL: null,
     uid: null,
   },
-  users: { },
-  currentDice: {
+  users: {},
+  diceBox: {
     one: { val: '?', selected: false },
     two: { val: '?', selected: false },
     three: { val: '?', selected: false },

@@ -1,15 +1,17 @@
 import React, { Component } from 'react';
 import map from 'lodash/map';
+import groupBy from 'lodash/groupBy';
 
 class DiceBox extends Component {
   render() {
-    // console.log('dicebox component', this.props);
+    const rolled = this.props.diceBox.one.val;
+    console.log('dicebox component', this.props);
     return (
       <div>
         <div style={{ display: 'flex', border: '1px solid black', width: '400px', height: '150px' }}>
           <div style={{ display: 'flex', flexDirection: 'column', border: '1px solid green', flex: 1 }}>
             <div style={{ flex: 1 }}> DICEBOX </div><button onClick={() => { this.props.rollDice(); }}>Roll</button>
-            <div style={{ flex: 1 }}> SUBMIT </div><button onClick={() => { this.props.submitRoll(); }}>Submit</button>
+            {rolled !== '?' ? <div><div style={{ flex: 1 }}> SUBMIT </div><button onClick={() => { this.props.submitRoll(); }}>Submit</button></div> : <div />}
           </div>
 
           <div style={{ flexDirection: 'column', flex: 4, border: '1px solid orange', display: 'flex' }}>

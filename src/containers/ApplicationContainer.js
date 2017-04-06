@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import Application from '../components/Application';
 import { signIn, signOut } from '../actions/auth';
 
-const mapStateToProps = ({ auth }) => ({ auth });
+const mapStateToProps = state => (state);
 
 const mapDispatchToProps = dispatch => ({
   signIn() { dispatch(signIn()); },
