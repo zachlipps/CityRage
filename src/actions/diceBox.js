@@ -15,16 +15,20 @@ const updateRolls = listOfDice => ({
   listOfDice,
 });
 
-const decrementRoll = () => {
-  database.ref('/rollCount').once('value', (snapshot) => {
-    const rollCount = snapshot.val();
-    return rollCount;
-  }).then((rollCount) => {
-    const newRollCount = rollCount.val() - 1;
-    console.log('newRollCount', newRollCount);
-    database.ref('/rollCount').set(newRollCount);
-  });
-};
+const updateRollCount = newRollCount => ({
+  type: 'UPDATE_ROLLCOUNT',
+  newRollCount,
+});
+
+const decrementRoll = () => database.ref('/rollCount').once('value', (snapshot) => {
+  const rollCount = snapshot.val();
+  return rollCount;
+}).then((rollCount) => {
+  const newRollCount = rollCount.val() - 1;
+  database.ref('/rollCount').set(newRollCount);
+  console.log('low key fam lmaoi', newRollCount);
+  return newRollCount;
+});
 
 export const rollDice = () => (dispatch) => {
   let listOfDice;
@@ -39,13 +43,18 @@ export const rollDice = () => (dispatch) => {
       }
     }
   },
-).then(() => {
+)
+.then(() => {
   database.ref('/diceBox').once('value', (snapshot) => {
     listOfDice = snapshot.val();
-  }).then(() => {
-    console.log(listOfDice);
-    decrementRoll();
+  })
+  .then(() => {
     dispatch(updateRolls(listOfDice));
+    return decrementRoll();
+    // dispatch(updateRollCount(decrementRoll());)
+  })
+  .then((newRollCount) => {
+    dispatch(updateRollCount(newRollCount));
   });
 });
 };
