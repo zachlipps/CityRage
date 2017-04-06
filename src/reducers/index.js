@@ -5,6 +5,7 @@ import playersOnlineReducer from './playerOnline';
 import diceBoxReducer from './diceBox';
 import gameReducer from './game';
 import marketReducer from './market';
+import rollCountReducer from './rollCount';
 
 const reducer = combineReducers({
   auth: authReducer,
@@ -13,6 +14,7 @@ const reducer = combineReducers({
   diceBox: diceBoxReducer,
   game: gameReducer,
   market: marketReducer,
+  rollCount: rollCountReducer,
 });
 
 export default reducer;

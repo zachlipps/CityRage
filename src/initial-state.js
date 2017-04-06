@@ -17,6 +17,7 @@ const initialState = {
     five: { val: '?', selected: false },
     six: { val: '?', selected: false },
   },
+  rollCount: 3,
 };
 
 
