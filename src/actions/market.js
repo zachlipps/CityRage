@@ -1,3 +1,9 @@
+import { database } from '../firebase';
+import market from '../Cards/cards';
+
+// const marketRef = database.ref('market');
+
+// must move all logic from market-reducer to this file!
 export const buyCard = (card, buyer) => ({
   type: 'BUY_CARD',
   card,
@@ -8,13 +14,19 @@ export const dealCard = () => ({
   type: 'DEAL_CARD',
 });
 
-// discards the old ones
-// where do i fire the cards
 export const resetMarket = () => ({
   type: 'DEAL_NEW_MARKET',
 });
 
-// moves card from the user's hand to the discard pile
-export const trashCard = () => ({
-  type: 'DEAL_NEW_MARKET',
-});
+// for reference
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ //
+// export const updateMarket = () => ({
+//   type: 'UPDATE_MARKET',
+// });
+
+// export const startListeningToMarket = () => (dispatch) => {
+//   marketRef.on('value', (snapshot) => {
+//     dispatch(updateMarket());
+//   });
+// };
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ //

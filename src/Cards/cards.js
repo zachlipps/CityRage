@@ -6,9 +6,7 @@ const cards = [
     title: 'Quake',
     cost: 1,
     type: 'Discard',
-    text: 'deal one dmg to all players',
-    effect: {
-    },
+    ability: 'deal 1 dmg to all players',
   },
   {
     title: 'Roar',
@@ -36,6 +34,21 @@ const cards = [
   },
   {
     title: 'Heal',
+    cost: 2,
+    type: 'Discard',
+    ability: 'Gain 2 health',
+  },
+  {
+    title: 'Savant',
+    cost: 5,
+    type: 'Discard',
+    ability: 'Take another turn after this one',
+  },
+  {
+    title: 'Savant',
+    cost: 2,
+    type: 'Keep',
+    ability: 'Add a 1 to your dice on submission',
   },
 ];
 // dummyCards for testing
@@ -47,4 +60,3 @@ const market = {
 };
 
 export default market;
-console.log('deck in cards.js', market);
