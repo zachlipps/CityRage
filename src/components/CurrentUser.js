@@ -38,6 +38,8 @@ class CurrentUser extends React.Component {
           <button onClick={() => { this.props.decreasePoints(auth.uid); }}>down Points</button>
           <button onClick={() => { this.props.increaseEnergy(auth.uid); }} >up Energy</button>
           <button onClick={() => { this.props.decreaseEnergy(auth.uid); }}>down Energy</button>
+          <button onClick={() => { this.props.joinGame(auth.uid); }}> JOIN GAME </button>
+          <button onClick={() => { this.props.leaveGame(auth.uid); }}> LEAVE GAME </button>
         </div>
       </div>
     );
