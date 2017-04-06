@@ -124,19 +124,30 @@ export const submitRoll = die => (dispatch) => {
     }
 
 
-    // check for numbs
+    // check for numbers 3
+    if (objectifiedRolls[3] && objectifiedRolls[3].length >= 3) {
+      //
+      const bonus = objectifiedRolls[3].length - 3;
+      database.ref(`/users/${currentPlayer}/stats/points`).once('value', (snapshot) => {
+        const points = snapshot.val() + bonus + 3;
+        database.ref(`/users/${currentPlayer}/stats/points`).set(points);
+      });
+    }
+
 
     // if there are any attacks
-    if (submittedRoll.indexOf('attack') !== -1) {
+    {
+      if (submittedRoll.indexOf('attack') !== -1) {
       // check to see if there's a king
-      database.ref('/king').once('value', (snapshot) => {
-        if (snapshot.val() === 'none') {
+        database.ref('/king').once('value', (snapshot) => {
+          if (snapshot.val() === 'none') {
           // if not set this user as the king
-          setKing();
-        } else {
+            setKing();
+          } else {
           // else ask the other king if they want to leave
-        }
-      });
+          }
+        });
+      }
     }
   });
   });
