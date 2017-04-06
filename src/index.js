@@ -11,7 +11,6 @@ import { showOnlineUsersAction } from './actions/users';
 import { startListeningToAuthChanges } from './actions/auth';
 import { startListeningForUsers } from './actions/users';
 
-// console.log([thunk]);
 
 const middleware = [thunk];
 const enhancers = [];
@@ -25,6 +24,7 @@ const store = createStore(
     ...enhancers,
   ),
 );
+
 
 store.dispatch(startListeningToAuthChanges());
 store.dispatch(startListeningForUsers());

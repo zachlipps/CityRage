@@ -24,7 +24,7 @@ const cards = [
     title: 'Gobbler',
     cost: 3,
     type: 'Discard',
-    ability: 'energy + 1',
+    ability: '+4 energy',
   },
   {
     title: 'Swift',
@@ -45,7 +45,7 @@ const cards = [
     ability: 'Take another turn after this one',
   },
   {
-    title: 'Savant',
+    title: 'Brain Growth',
     cost: 2,
     type: 'Keep',
     ability: 'Add a 1 to your dice on submission',
