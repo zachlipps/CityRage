@@ -23,11 +23,9 @@ export const joinGame = uid => (dispatch) => {
 export const leaveGame = uid => (dispatch) => {
   game.child('/playerPosition').once('value', (snapshot) => {
     const currentPlayerIndex = snapshot.val().indexOf(uid);
-    // console.log(currentPlayerIndex);
     if (currentPlayerIndex !== -1) {
       const playerArr = snapshot.val();
       playerArr.splice(currentPlayerIndex, 1);
-      // console.log('currentPlayer', playerArr);
       game.child('/playerPosition').set(playerArr);
       dispatch({ type: 'LEAVE_GAME', playerArr });
     }
