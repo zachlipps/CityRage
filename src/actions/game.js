@@ -41,7 +41,8 @@ export const startGame = () => (dispatch) => {
     .then(resolvedPlayerArray => database.ref('playerArr').set(resolvedPlayerArray))
     .then(
       database.ref('playerArr').once('value')
-      .then(newPlayerArr => dispatch(startGameAction(newPlayerArr))),
+      .then(newPlayerArr => dispatch(startGameAction(newPlayerArr)))
+      .then(() => database.ref('market').set(market)),
     );
 
   // Populate the players list with the playerPositionArray
