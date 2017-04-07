@@ -13,7 +13,6 @@ const startGameAction = playerArr => ({
 const initializePlayer = (uid, idx) => database.ref(`/users/${uid}`).once('value')
   .then((user) => {
     const playerObj = Object.assign({}, {
-      uid,
       turnOrder: idx,
       displayName: user.val().displayName,
       stats: {
@@ -22,13 +21,14 @@ const initializePlayer = (uid, idx) => database.ref(`/users/${uid}`).once('value
         points: 0,
       },
     });
-    return playerObj;
+    console.log('this is the uid penis', uid);
+    return [uid, playerObj];
   });
 
 
 export const startGame = () => (dispatch) => {
   const playerArr = [];
-  database.ref('/PlayersInGame').once('value')
+  database.ref('/playerPosition').once('value')
     .then((userIDS) => {
       if (userIDS.val()) {
         userIDS.val().map((userID, idx) => {
@@ -38,7 +38,13 @@ export const startGame = () => (dispatch) => {
       }
     })
     .then(players => Promise.all(players))
-    .then(resolvedPlayerArray => database.ref('playerArr').set(resolvedPlayerArray))
+    .then((resolvedPlayerArray) => {
+      const playerObj = {};
+      resolvedPlayerArray.map((el) => {
+        playerObj[el[0]] = el[1];
+      });
+      database.ref('playerOBJZACH').set(playerObj);
+    })
     .then(
       database.ref('playerArr').once('value')
       .then(newPlayerArr => dispatch(startGameAction(newPlayerArr)))
