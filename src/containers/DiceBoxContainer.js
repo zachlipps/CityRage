@@ -4,6 +4,7 @@ import { rollDice, selectDice, submitRoll } from '../actions/diceBox';
 
 const mapStateToProps = state => ({
   diceBox: state.diceBox,
+  rollCount: state.rollCount,
 });
 
 

@@ -1,17 +1,8 @@
 import React from 'react';
 import Game from '../containers/GameContainer';
-
 import CurrentUser from '../containers/CurrentUserContainer';
 import DiceBox from '../containers/DiceBoxContainer';
 import Market from '../containers/MarketContainer';
-
-
-import {
-  BrowserRouter as Router,
-  Route,
-  Link,
-} from 'react-router-dom';
-
 
 class Home extends React.Component {
   constructor(props) {
@@ -21,17 +12,14 @@ class Home extends React.Component {
       cont: false,
       new: false,
     };
-    // this.joinedClick = this.joinedClick
   }
 
   joinedClick() {
-    console.log('herhe');
     this.setState({ joined: true });
   }
 
   render() {
     const test = (this.state.joined === false && this.state.cont === false && this.state.new === false);
-    console.log(test);
     return (
 
       <div>
@@ -48,10 +36,7 @@ class Home extends React.Component {
         {this.state.joined ? <div><Game /><Market /><CurrentUser auth={this.props.auth} signOut={this.props.signOut} /><DiceBox /></div> : <div />}
 
         <p><button onClick={() => { this.props.signOut(this.props.auth.uid); }}> Sign Out</button></p>
-
-
       </div>
-
     );
   }
 }
