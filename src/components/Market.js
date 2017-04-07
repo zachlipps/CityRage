@@ -6,12 +6,18 @@ class Deck extends Component {
     this.cardStyle = { margin: '10px', width: '100px', height: '100px', border: '1px solid black', float: 'left' };
   }
 
+  test(e, card) {
+    console.log('in test market method', card);
+    this.props.buyCard(card);
+    this.props.addToHand();
+  }
+
   createMarket() {
     return this.props.market.face_up.map(card => (
-      <div key={card.title} onClick={() => this.props.buyCard(card.title)} className="market-card" style={this.cardStyle}>
+      <div key={card.title} onClick={() => this.test(null, card)} className="market-card" style={this.cardStyle}>
         <div>{card.title}</div>
         <div>Cost: {card.cost}</div>
-        <div>Effect:{card.ability}</div>
+        <div>Effect: {card.ability}</div>
       </div>
       ));
   }
@@ -19,7 +25,6 @@ class Deck extends Component {
   render() {
     return (
       <div className="market-container" style={{ marginBottom: '25px', margin: '10px', border: '1px solid black', height: '155px', width: '625px' }}>
-        <button onClick={() => this.props.dealCard()}> DealNewCard </button>
         <button onClick={() => this.props.resetMarket()}> ResetCards </button><br />
         <div style={this.cardStyle}>Deck</div>
         { this.createMarket() }

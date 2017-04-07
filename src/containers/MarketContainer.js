@@ -1,7 +1,7 @@
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import Market from '../components/Market';
-import { buyCard, dealCard, resetMarket } from '../actions/market';
+import { buyCard, resetMarket, addToHand, dealCard } from '../actions/market';
 
 function mapStateToProps(state) {
   return {
@@ -13,8 +13,9 @@ function matchDispatchToProps(dispatch) {
   return bindActionCreators(
     {
       buyCard,
-      dealCard,
       resetMarket,
+      addToHand,
+      dealCard,
     },
    dispatch);
 }
