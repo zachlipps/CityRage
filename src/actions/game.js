@@ -66,12 +66,15 @@ export const startGame = () => (dispatch) => {
   },
   );
 
-  // set the current player
+  // set the first player
   game.child('/playerPosition').once('value')
   .then(playersArray => playersArray.val()[0]).then((firstPlayer) => {
     game.child('/players').once('value')
     .then((players) => {
+      console.log(players.val());
       game.child('/chosenOne').set({ uid: players.val()[firstPlayer].uid, displayName: players.val()[firstPlayer].displayName });
     });
+  }).then(() => {
+    game.child('started').set(true);
   });
 };

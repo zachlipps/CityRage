@@ -106,9 +106,9 @@ export const submitRoll = die => (dispatch) => {
 
     // check for heal
     if (objectifiedRolls.health !== undefined && objectifiedRolls.health.length !== 0) {
-      game.child(`/player/${currentPlayer}/stats/health`).once('value', (snapshot) => {
+      game.child(`/players/${currentPlayer}/stats/health`).once('value', (snapshot) => {
         const health = snapshot.val() + objectifiedRolls.health.length;
-        game.child(`/player/${currentPlayer}/stats/health`).set(health);
+        game.child(`/players/${currentPlayer}/stats/health`).set(health);
       });
     }
 
@@ -116,9 +116,9 @@ export const submitRoll = die => (dispatch) => {
     console.log(objectifiedRolls);
     if (objectifiedRolls.energy !== undefined && objectifiedRolls.energy.length !== 0) {
       console.log('energy', objectifiedRolls.energy.length);
-      database.ref(`/users/${currentPlayer}/stats/energy`).once('value', (snapshot) => {
+      game.child(`/players/${currentPlayer}/stats/energy`).once('value', (snapshot) => {
         const energy = snapshot.val() + objectifiedRolls.energy.length;
-        database.ref(`/users/${currentPlayer}/stats/energy`).set(energy);
+        game.child(`/players/${currentPlayer}/stats/energy`).set(energy);
       });
     }
 
@@ -127,9 +127,30 @@ export const submitRoll = die => (dispatch) => {
     if (objectifiedRolls[3] && objectifiedRolls[3].length >= 3) {
       //
       const bonus = objectifiedRolls[3].length - 3;
-      database.ref(`/users/${currentPlayer}/stats/points`).once('value', (snapshot) => {
+      game.child(`/players/${currentPlayer}/stats/points`).once('value', (snapshot) => {
         const points = snapshot.val() + bonus + 3;
-        database.ref(`/users/${currentPlayer}/stats/points`).set(points);
+        game.child(`/players/${currentPlayer}/stats/points`).set(points);
+      });
+    }
+
+     // check for numbers 2
+    if (objectifiedRolls[2] && objectifiedRolls[2].length >= 3) {
+      //
+      const bonus = objectifiedRolls[2].length - 3;
+      game.child(`/players/${currentPlayer}/stats/points`).once('value', (snapshot) => {
+        const points = snapshot.val() + bonus + 2;
+        game.child(`/players/${currentPlayer}/stats/points`).set(points);
+      });
+    }
+
+
+     // check for numbers 1
+    if (objectifiedRolls[1] && objectifiedRolls[1].length >= 3) {
+      //
+      const bonus = objectifiedRolls[1].length - 3;
+      game.child(`/players/${currentPlayer}/stats/points`).once('value', (snapshot) => {
+        const points = snapshot.val() + bonus + 1;
+        game.child(`/players/${currentPlayer}/stats/points`).set(points);
       });
     }
 
@@ -154,11 +175,11 @@ export const submitRoll = die => (dispatch) => {
 
 
 const setKing = () => {
-  game.child('currentPlayer').once('value', (snapshot) => {
+  game.child('/chosenOne').once('value', (snapshot) => {
     console.log(snapshot.val());
     return snapshot.val();
   }).then((currentPlayer) => {
     console.log(currentPlayer.val());
-    database.ref('/king').set(currentPlayer.val());
+    game.child('/king').set(currentPlayer.val());
   });
 };

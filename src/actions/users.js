@@ -1,6 +1,7 @@
 import { database } from '../firebase';
 // import {bindActionCreators}
 const usersRef = database.ref('users');
+const game = database.ref('games/aqwewq334');
 
 export const addUser = user => ({
   type: 'ADD_USER',
@@ -14,7 +15,7 @@ export const showOnlineUsersAction = () => ({
 });
 
 export const startListeningForUsers = () => (dispatch) => {
-  usersRef.on('value', (snapshot) => {
+  game.on('value', (snapshot) => {
     dispatch(showOnlineUsersAction());
   });
 };
