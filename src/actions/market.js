@@ -1,7 +1,7 @@
 import shuffle from 'lodash/shuffle';
 import { database } from '../firebase';
 const marketRef = database.ref('/market');
-
+const usersRef = database.ref('/users');
 
 function firebaseFix(obj) {
   if (!obj.deck) obj.deck = [];
@@ -33,7 +33,13 @@ export const buyCard = (card, buyer) => (dispatch) => {
       regenDeckIfEmpty(copy);
     }
     marketRef.set(copy)
+    // when done: set the line bellow inside the check for energy creds after it
     .then(() => database.ref(`/users/${buyer}/hand`).push(card))
+    .then(() => usersRef.once('value', (users) => {
+      // users.val()[buyer].stats.energy;
+      const energyLeft = users.val()[buyer].stats.energy - card.cost;
+      database.ref(`/users/${buyer}/stats/energy`).set(energyLeft);
+    }))
     .then(() => dispatch({ type: 'DEAL_CARD', payload: copy }));
   });
 };
