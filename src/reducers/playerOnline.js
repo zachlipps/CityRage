@@ -1,6 +1,9 @@
 import { database } from '../firebase';
 
 
+const game = database.ref('games/aqwewq334');
+
+
 export default function (state = [], action) {
   switch (action.type) {
     case 'UPDATE_PLAYERS' :
@@ -13,12 +16,13 @@ export default function (state = [], action) {
 
 export const showOnlineUsers = () => {
   const array = [];
-  database.ref('/users').on('value', (snapshot) => {
-    snapshot.forEach((user) => {
-      if (user.val().currentlyOn) {
-        array.push(user.val());
-      }
-    });
+
+  game.child('/players').on('value', (snapshot) => {
+    for (const i in snapshot.val()) {
+      array.push(snapshot.val()[i]);
+    }
   });
+
+  console.log(array);
   return array;
 };
