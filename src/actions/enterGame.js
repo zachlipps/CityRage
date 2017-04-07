@@ -1,17 +1,18 @@
 import { database } from '../firebase';
 
+const game = database.ref('games/aqwewq334');
 
 export const joinGame = uid => (dispatch) => {
-  database.ref('/PlayersInGame').once('value')
+  game.child('/playerPosition').once('value')
   .then((PlayersInGame) => {
     if (!PlayersInGame.val()) {
-      database.ref('/PlayersInGame').set([uid]);
+      game.child('/playerPosition').set([uid]);
       dispatch({ type: 'JOIN_GAME', newPlayers: [uid] });
     } else {
-      database.ref('/PlayersInGame').once('value', (snapshot) => {
+      game.child('/playerPosition').once('value', (snapshot) => {
         if (snapshot.val().indexOf(uid) === -1) {
           const newPlayers = [...snapshot.val(), uid];
-          database.ref('/PlayersInGame').set(newPlayers);
+          game.child('/playerPosition').set(newPlayers);
           dispatch({ type: 'JOIN_GAME', newPlayers });
         }
       });
@@ -20,14 +21,14 @@ export const joinGame = uid => (dispatch) => {
 };
 
 export const leaveGame = uid => (dispatch) => {
-  database.ref('/PlayersInGame').once('value', (snapshot) => {
+  game.child('/playerPosition').once('value', (snapshot) => {
     const currentPlayerIndex = snapshot.val().indexOf(uid);
-    console.log(currentPlayerIndex);
+    // console.log(currentPlayerIndex);
     if (currentPlayerIndex !== -1) {
       const playerArr = snapshot.val();
       playerArr.splice(currentPlayerIndex, 1);
-      console.log('currentPlayer', playerArr);
-      database.ref('/PlayersInGame').set(playerArr);
+      // console.log('currentPlayer', playerArr);
+      game.child('/playerPosition').set(playerArr);
       dispatch({ type: 'LEAVE_GAME', playerArr });
     }
   });

@@ -1,7 +1,9 @@
 import { database } from '../firebase';
 import keys from 'lodash/keys';
-
+import filter from 'lodash/filter';
 import market from '../Cards/cards';
+
+const game = database.ref('games/aqwewq334');
 
 const startGameAction = playerArr => ({
   type: 'START_GAME',
@@ -41,13 +43,35 @@ export const startGame = () => (dispatch) => {
       database.ref('playerArr').once('value')
       .then(newPlayerArr => dispatch(startGameAction(newPlayerArr))),
     );
+
+  // Populate the players list with the playerPositionArray
+  game.child('/playerPosition').once('value')
+  .then((playerArray) => {
+    database.ref('/users').once('value')
+    .then((users, obj = {}) => {
+      for (const i in playerArray.val()) {
+        const playerObj = Object.assign({}, users.val()[playerArray.val()[i]], {
+          turnOrder: i,
+          tiggers: {
+            coolAf: true,
+          },
+          hand: {
+            test: 'test',
+          },
+        });
+        obj[playerArray.val()[i]] = playerObj;
+      }
+      game.child('/players').set(obj);
+    });
+  },
+  );
+
+  // set the current player
+  game.child('/playerPosition').once('value')
+  .then(playersArray => playersArray.val()[0]).then((firstPlayer) => {
+    game.child('/players').once('value')
+    .then((players) => {
+      game.child('/chosenOne').set({ uid: players.val()[firstPlayer].uid, displayName: players.val()[firstPlayer].displayName });
+    });
+  });
 };
-
-
-    //   database.ref('playerArr').set(playerArr[0]);
-    // });
-    //       .then(() => database.ref('playerArr').once('value', (snapshot) => {
-    //         dispatch(startGameAction(snapshot.val()));
-    //       }))
-    //       .then(() => database.ref('market').set(market));
-

@@ -1,6 +1,8 @@
 import { database } from '../firebase';
 import groupBy from 'lodash/groupBy';
 
+const game = database.ref('games/aqwewq334');
+
 const diceOptions = {
   1: '1',
   2: '2',
@@ -21,38 +23,35 @@ const updateRollCount = newRollCount => ({
   newRollCount,
 });
 
-const decrementRoll = () => database.ref('/rollCount').once('value', (snapshot) => {
+const decrementRoll = () => game.child('/rollCount').once('value', (snapshot) => {
   const rollCount = snapshot.val();
   return rollCount;
 }).then((rollCount) => {
   const newRollCount = rollCount.val() - 1;
-  database.ref('/rollCount').set(newRollCount);
+  game.child('/rollCount').set(newRollCount);
   console.log('low key fam lmaoi', newRollCount);
   return newRollCount;
 });
 
 export const rollDice = () => (dispatch) => {
   let listOfDice;
-
-
-  database.ref('/diceBox').once('value', (snapshot) => {
+  game.child('/diceBox').once('value', (snapshot) => {
     listOfDice = snapshot.val();
   }).then(() => {
     for (const i in listOfDice) {
       if (listOfDice[i].selected !== true) {
-        database.ref(`/diceBox/${i}`).set({ val: diceOptions[randNum()], selected: false });
+        game.child(`/diceBox/${i}`).set({ val: diceOptions[randNum()], selected: false });
       }
     }
   },
 )
 .then(() => {
-  database.ref('/diceBox').once('value', (snapshot) => {
+  game.child('/diceBox').once('value', (snapshot) => {
     listOfDice = snapshot.val();
   })
   .then(() => {
     dispatch(updateRolls(listOfDice));
     return decrementRoll();
-    // dispatch(updateRollCount(decrementRoll());)
   })
   .then((newRollCount) => {
     dispatch(updateRollCount(newRollCount));
@@ -69,13 +68,13 @@ const selectDie = die => ({
 export const selectDice = die => (dispatch) => {
   let valueOfSelected;
   let valueOfVal;
-  database.ref(`/diceBox/${die}`).once('value', (snapshot) => {
+  game.child(`/diceBox/${die}`).once('value', (snapshot) => {
     valueOfSelected = snapshot.val().selected;
     valueOfVal = snapshot.val().val;
   }).then(() => {
     if (valueOfVal !== '?') {
-      database.ref(`/diceBox/${die}/selected`).set(!valueOfSelected).then(() => {
-        database.ref('/diceBox').once('value', (snapshot) => {
+      game.child(`/diceBox/${die}/selected`).set(!valueOfSelected).then(() => {
+        game.child('/diceBox').once('value', (snapshot) => {
           const other = {};
           for (const i in snapshot.val()) {
             other[i] = snapshot.val()[i];
@@ -91,13 +90,13 @@ export const submitRoll = die => (dispatch) => {
   const submittedRoll = [];
   let currentPlayer = '';
  // When submitRoll is clicked grab the user's dice and apply effects
-  database.ref('/diceBox').once('value', (snapshot) => {
+  game.child('/diceBox').once('value', (snapshot) => {
     for (const i in snapshot.val()) {
       submittedRoll.push(snapshot.val()[i].val);
     }
   })
   .then(() => {
-    database.ref('currentPlayer').once('value', (snapshot) => {
+    game.child('chosenOne').once('value', (snapshot) => {
       currentPlayer = snapshot.val();
       return currentPlayer;
     })
@@ -107,9 +106,9 @@ export const submitRoll = die => (dispatch) => {
 
     // check for heal
     if (objectifiedRolls.health !== undefined && objectifiedRolls.health.length !== 0) {
-      database.ref(`/users/${currentPlayer}/stats/health`).once('value', (snapshot) => {
+      game.child(`/player/${currentPlayer}/stats/health`).once('value', (snapshot) => {
         const health = snapshot.val() + objectifiedRolls.health.length;
-        database.ref(`/users/${currentPlayer}/stats/health`).set(health);
+        game.child(`/player/${currentPlayer}/stats/health`).set(health);
       });
     }
 
@@ -139,7 +138,7 @@ export const submitRoll = die => (dispatch) => {
     {
       if (submittedRoll.indexOf('attack') !== -1) {
       // check to see if there's a king
-        database.ref('/king').once('value', (snapshot) => {
+        game.child('/king').once('value', (snapshot) => {
           if (snapshot.val() === 'none') {
           // if not set this user as the king
             setKing();
@@ -155,7 +154,7 @@ export const submitRoll = die => (dispatch) => {
 
 
 const setKing = () => {
-  database.ref('currentPlayer').once('value', (snapshot) => {
+  game.child('currentPlayer').once('value', (snapshot) => {
     console.log(snapshot.val());
     return snapshot.val();
   }).then((currentPlayer) => {

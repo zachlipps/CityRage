@@ -8,7 +8,7 @@ class CurrentUser extends React.Component {
   }
 
   render() {
-    const { auth, signOut } = this.props;
+    const { auth } = this.props;
     return (
       <div className="CurrentUser">
         {/* <img
@@ -19,7 +19,7 @@ class CurrentUser extends React.Component {
         <div className="CurrentUser--identification">
           <h3 className="CurrentUser--displayName">{ auth.displayName }</h3>
           <p className="CurrentUser--email">{ auth.email }</p>
-          <button className="CurrentUser--signout"onClick={() => { signOut(auth.uid); }}> Sign Out</button>
+          {/* <button className="CurrentUser--signout"onClick={() => { signOut(auth.uid); }}> Sign Out</button>*/}
 
           {this.props.playersOnline.map(user => <div key={user.uid}>{user.displayName}
             <ul>
