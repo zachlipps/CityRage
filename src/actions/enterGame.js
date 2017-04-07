@@ -2,7 +2,7 @@ import { database } from '../firebase';
 
 
 export const joinGame = uid => (dispatch) => {
-  database.ref('/PlayersInGame').once('value', snapshot => snapshot.val())
+  database.ref('/PlayersInGame').once('value')
   .then((PlayersInGame) => {
     if (!PlayersInGame.val()) {
       database.ref('/PlayersInGame').set([uid]);
