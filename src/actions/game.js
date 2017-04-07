@@ -7,7 +7,7 @@ const startGameAction = playerArr => ({
   playerArr,
 });
 
-const initializePlayer = (uid, idx) => database.ref(`/users/${uid}`).once('value', snapshot => snapshot)
+const initializePlayer = (uid, idx) => database.ref(`/users/${uid}`).once('value')
   .then((user) => {
     const playerObj = Object.assign({}, {
       uid,
@@ -24,26 +24,29 @@ const initializePlayer = (uid, idx) => database.ref(`/users/${uid}`).once('value
 
 
 export const startGame = () => (dispatch) => {
-  database.ref('/PlayersInGame').once('value', snapshot => (snapshot.val()))
+  const playerArr = [];
+  database.ref('/PlayersInGame').once('value')
     .then((userIDS) => {
       if (userIDS.val()) {
-        userIDS.val().forEach((userID, idx) => {
-          initializePlayer(userID, idx)
-          .then((playerObj) => {
-            const playerArr = [];
-            playerArr.push(playerObj);
-            return playerArr;
-          })
-          .then((playerArr) => {
-            // eventually this will set at gameID/playerArr
-            database.ref('playerArr').set(playerArr);
-          })
-          .then(() => database.ref('playerArr').once('value', (snapshot) => {
-            dispatch(startGameAction(snapshot.val()));
-          }))
-          .then(() => database.ref('market').set(market));
+        userIDS.val().map((userID, idx) => {
+          playerArr.push(initializePlayer(userID, idx));
         });
+        return playerArr;
       }
-    });
+    })
+    .then(players => Promise.all(players))
+    .then(resolvedPlayerArray => database.ref('playerArr').set(resolvedPlayerArray))
+    .then(
+      database.ref('playerArr').once('value')
+      .then(newPlayerArr => dispatch(startGameAction(newPlayerArr))),
+    );
 };
+
+
+    //   database.ref('playerArr').set(playerArr[0]);
+    // });
+    //       .then(() => database.ref('playerArr').once('value', (snapshot) => {
+    //         dispatch(startGameAction(snapshot.val()));
+    //       }))
+    //       .then(() => database.ref('market').set(market));
 
