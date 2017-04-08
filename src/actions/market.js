@@ -25,18 +25,18 @@ function dealCard(obj) {
   obj.deck.shift();
 }
 
-// add logic that checks whether the player can buy; and substract the energy
-export const buyCard = (card, buyer, roomId) => (dispatch) => {
+export const buyCard = (card, buyerId) => (dispatch) => {
   let market = {};
   gameRef.once('value', (gameData) => {
-    const consumer = gameData.val().players[buyer];
-    market = gameData.val().market;
+    const room = gameData.val();
+    const consumer = room.players[buyerId];
+    market = room.market;
     firebaseFix(market);
     if (consumer.stats.energy >= card.cost) {
       consumer.stats.energy -= card.cost;
       market.face_up = market.face_up.filter(c => c.title !== card.title);
       if (card.type === 'Discard') {
-        fire[card.effect](consumer);
+        fire[card.effect](consumer, room);
         market.discarded.push(card);
       }
       if (card.type === 'Keep') {
@@ -49,7 +49,7 @@ export const buyCard = (card, buyer, roomId) => (dispatch) => {
       regenDeckIfEmpty(market);
     }
     gameRef.child('market').set(market)
-    .then(() => gameRef.child('players').child(buyer).set(consumer));
+    .then(() => gameRef.child('players').set(room.players));
   })
   .then(() => dispatch({ type: 'DEAL_CARD', payload: market }));
 };

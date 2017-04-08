@@ -50,6 +50,11 @@ export const rollDice = () => (dispatch) => {
           dispatch(updateRolls(updatedDice.val()));
           decrementRoll().then(newRollCount => dispatch(updateRollCount(newRollCount)));
         });
+      }).then(() => {
+        if (rollCount.val() == 1) {
+          dispatch(submitRoll());
+          console.log('got here rollDice');
+        }
       });
     }
   });
@@ -82,7 +87,8 @@ export const selectDice = die => (dispatch) => {
   });
 };
 
-export const submitRoll = die => (dispatch) => {
+export const submitRoll = () => (dispatch) => {
+  console.log('got here submitRoll');
   const submittedRoll = [];
   let currentPlayer = '';
  // When submitRoll is clicked grab the user's dice and apply effects
@@ -171,6 +177,7 @@ export const submitRoll = die => (dispatch) => {
     }
   });
   });
+  game.child('/submitted').set(true);
 };
 
 
@@ -180,6 +187,8 @@ const setKing = () => {
     game.child('/king').set(currentPlayer.val());
   });
 };
+
+// change redux state and restart the roll count
 
 
 export const endTurn = () => (dispatch) => {
@@ -197,10 +206,10 @@ export const endTurn = () => (dispatch) => {
     .then((player) => {
       game.child('/chosenOne').set({ uid: player.val().uid, displayName: player.val().displayName });
       game.child('/rollCount').set(3);
+      game.child('/submitted').set(false);
     });
   });
 };
-
 
 const attack = (numAttacks, currentPlayerID) => {
   const king = game.child('king').once('value');
@@ -223,3 +232,4 @@ const attack = (numAttacks, currentPlayerID) => {
     });
   });
 };
+
