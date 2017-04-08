@@ -1,12 +1,14 @@
 import shuffle from 'lodash/shuffle';
 import { database } from '../firebase';
-const marketRef = database.ref('/market');
-const usersRef = database.ref('/users');
+
+// gameRef later will set the game-hash-id dynamically
+const gameId = 'aqwewq334';
+const gameRef = database.ref(`games/${gameId}`);
 
 function firebaseFix(obj) {
-  if (!obj.deck) obj.deck = [];
-  if (!obj.face_up) obj.face_up = [];
-  if (!obj.discarded) obj.discarded = [];
+  obj.deck = obj.deck || [];
+  obj.face_up = obj.face_up || [];
+  obj.discarded = obj.discarded || [];
 }
 
 function regenDeckIfEmpty(obj) {
@@ -23,39 +25,40 @@ function dealCard(obj) {
 }
 
 // add logic that checks whether the player can buy; and substract the energy
-export const buyCard = (card, buyer) => (dispatch) => {
-  marketRef.once('value', (snapshot) => {
-    const copy = snapshot.val();
-    firebaseFix(copy);
-    copy.face_up = copy.face_up.filter(c => c.title !== card.title);
-    if (copy.deck.length > 0) {
-      dealCard(copy);
-      regenDeckIfEmpty(copy);
+export const buyCard = (card, buyer, roomId) => (dispatch) => {
+  let market = {};
+  gameRef.once('value', (gameData) => {
+    const consumer = gameData.val().players[buyer];
+    market = gameData.val().market;
+    firebaseFix(market);
+    if (consumer.stats.energy >= card.cost) {
+      consumer.stats.energy -= card.cost;
+      market.face_up = market.face_up.filter(c => c.title !== card.title);
+      if (!Array.isArray(consumer.hand)) {
+        consumer.hand = [];
+      }
+      consumer.hand.push(card);
+      dealCard(market);
+      regenDeckIfEmpty(market);
     }
-    marketRef.set(copy)
-    // when done: set the line bellow inside the check for energy creds after it
-    .then(() => database.ref(`/users/${buyer}/hand`).push(card))
-    .then(() => usersRef.once('value', (users) => {
-      // users.val()[buyer].stats.energy;
-      const energyLeft = users.val()[buyer].stats.energy - card.cost;
-      database.ref(`/users/${buyer}/stats/energy`).set(energyLeft);
-    }))
-    .then(() => dispatch({ type: 'DEAL_CARD', payload: copy }));
-  });
+    gameRef.child('market').set(market)
+    .then(() => gameRef.child('players').child(buyer).set(consumer));
+  })
+  .then(() => dispatch({ type: 'DEAL_CARD', payload: market }));
 };
 
+// "room" parameter must be dynamically set to gameID - not yet implemented
 export const resetMarket = () => (dispatch) => {
-  marketRef.once('value', (snapshot) => {
-    const copy = snapshot.val();
-    firebaseFix(copy);
-    regenDeckIfEmpty(copy);
-    copy.face_up.forEach(card => copy.discarded.push(card));
-    copy.face_up = [];
+  gameRef.child('market').once('value', (marketData) => {
+    const market = marketData.val();
+    firebaseFix(market);
+    market.face_up.forEach(card => market.discarded.push(card));
+    market.face_up = [];
     for (let i = 0; i < 3; i++) {
-      dealCard(copy);
-      regenDeckIfEmpty(copy);
+      dealCard(market);
+      regenDeckIfEmpty(market);
     }
-    marketRef.set(copy)
-    .then(() => dispatch({ type: 'DEAL_NEW_MARKET', payload: copy }));
+    gameRef.child('market').set(market)
+    .then(() => dispatch({ type: 'DEAL_NEW_MARKET', payload: market }));
   });
 };
