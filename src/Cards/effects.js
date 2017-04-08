@@ -1,14 +1,21 @@
 const fire = {};
 
 // effects of cards with type = 'discard'
-fire.gobbler = (buyer) => {
-  buyer.stats.energy += 4;
+fire.gobbler = (consumer) => {
+  consumer.stats.energy += 4;
 };
-fire.heal = (buyer) => {
-  buyer.stats.health += 2;
+fire.heal = (consumer) => {
+  consumer.stats.health += 2;
 };
-fire.quake = () => {
-  console.log('quake fired, but not implemented!');
+fire.quake = (consumer, room) => {
+  const players = room.players;
+  for (const key in players) {
+    console.log(players[key].displayName, players[key].stats.health);
+    if (players[key].uid !== consumer.uid) {
+      players[key].stats.health -= 1;
+      console.log(players[key].displayName, players[key].stats.health);
+    }
+  }
 };
 fire.savant = () => {
   console.log('savant fired but not implemented!');
