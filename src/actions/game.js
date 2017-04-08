@@ -84,7 +84,7 @@ const setFirstPlayer = () => {
 };
 
 const initalizeOnGameStart = () => {
-  game.child('/rollCount').set(3).then((thing) => { console.log('it worked!', thing); });
+  game.child('/rollCount').set(3);
   game.child('/king').set('none');
   game.child('/diceBox').set({
     one: { val: '?', selected: false },
