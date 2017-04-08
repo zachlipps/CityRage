@@ -1,5 +1,6 @@
 import shuffle from 'lodash/shuffle';
 import { database } from '../firebase';
+import fire from '../Cards/effects';
 
 // gameRef later will set the game-hash-id dynamically
 const gameId = 'aqwewq334';
@@ -35,7 +36,7 @@ export const buyCard = (card, buyer, roomId) => (dispatch) => {
       consumer.stats.energy -= card.cost;
       market.face_up = market.face_up.filter(c => c.title !== card.title);
       if (card.type === 'Discard') {
-        // some function that activates the card's ability here !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        fire[card.effect](consumer);
         market.discarded.push(card);
       }
       if (card.type === 'Keep') {
