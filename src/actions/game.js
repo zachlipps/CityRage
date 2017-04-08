@@ -32,7 +32,6 @@ const initializePlayer = (uid, idx) => database.ref(`/users/${uid}`).once('value
 
 export const startGame = () => (dispatch) => {
   const playerArr = [];
-  game.child('/king').set('none');
   game.child('/playerPosition').once('value')
     .then((userIDS) => {
       if (userIDS.val()) {
@@ -86,6 +85,7 @@ const setFirstPlayer = () => {
 
 const initalizeOnGameStart = () => {
   game.child('/rollCount').set(3).then((thing) => { console.log('it worked!', thing); });
+  game.child('/king').set('none');
   game.child('/diceBox').set({
     one: { val: '?', selected: false },
     two: { val: '?', selected: false },
