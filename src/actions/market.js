@@ -34,10 +34,16 @@ export const buyCard = (card, buyer, roomId) => (dispatch) => {
     if (consumer.stats.energy >= card.cost) {
       consumer.stats.energy -= card.cost;
       market.face_up = market.face_up.filter(c => c.title !== card.title);
-      if (!Array.isArray(consumer.hand)) {
-        consumer.hand = [];
+      if (card.type === 'Discard') {
+        // some function that activates the card's ability here !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        market.discarded.push(card);
       }
-      consumer.hand.push(card);
+      if (card.type === 'Keep') {
+        if (!Array.isArray(consumer.hand)) {
+          consumer.hand = [];
+        }
+        consumer.hand.push(card);
+      }
       dealCard(market);
       regenDeckIfEmpty(market);
     }

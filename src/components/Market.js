@@ -10,6 +10,7 @@ class Deck extends Component {
     return this.props.market.face_up.map(card => (
       <div key={card.title} onClick={() => this.props.buyCard(card, this.props.user)} className="market-card" style={this.cardStyle}>
         <div>{card.title}</div>
+        <div>Type: {card.type}</div>
         <div>Cost: {card.cost}</div>
         <div>Effect: {card.ability}</div>
       </div>
