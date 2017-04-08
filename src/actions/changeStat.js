@@ -13,3 +13,5 @@ export const changeStat = (uid, absChange = 1, stat = 'energy') => (dispatch) =>
     game.child(`players/${uid}/stats/${stat}`).set(currentStat);
   });
 };
+
+// this needs to dispatch to change redux store
