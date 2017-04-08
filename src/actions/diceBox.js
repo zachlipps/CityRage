@@ -1,5 +1,6 @@
 import { database } from '../firebase';
 import groupBy from 'lodash/groupBy';
+import { changeStat } from './changeStat';
 
 const game = database.ref('games/aqwewq334');
 
@@ -106,7 +107,7 @@ export const submitRoll = () => (dispatch) => {
     currentPlayer = currentPlayer.val().uid;
 
     // check for heal
-    if (objectifiedRolls.health !== undefined && objectifiedRolls.health.length !== 0) {
+    if (objectifiedRolls.health) {
       game.child(`/players/${currentPlayer}/stats/health`).once('value', (snapshot) => {
         const health = snapshot.val() + objectifiedRolls.health.length;
         game.child(`/players/${currentPlayer}/stats/health`).set(health);
@@ -114,9 +115,9 @@ export const submitRoll = () => (dispatch) => {
     }
 
     // check power
-    console.log(objectifiedRolls);
-    if (objectifiedRolls.energy !== undefined && objectifiedRolls.energy.length !== 0) {
-      console.log('energy', objectifiedRolls.energy.length);
+    console.log('these are the objectified rolls ', objectifiedRolls);
+    if (objectifiedRolls.energy) {
+      console.log('energy amount ', objectifiedRolls.energy.length);
       game.child(`/players/${currentPlayer}/stats/energy`).once('value', (snapshot) => {
         const energy = snapshot.val() + objectifiedRolls.energy.length;
         game.child(`/players/${currentPlayer}/stats/energy`).set(energy);
@@ -155,6 +156,10 @@ export const submitRoll = () => (dispatch) => {
       });
     }
 
+    if (objectifiedRolls.attack) {
+      const attacks = -objectifiedRolls.attack.length;
+      attack(attacks, currentPlayer);
+    }
 
     // if there are any attacks
     {
@@ -177,11 +182,8 @@ export const submitRoll = () => (dispatch) => {
 
 
 const setKing = () => {
-  game.child('/chosenOne').once('value', (snapshot) => {
-    console.log(snapshot.val());
-    return snapshot.val();
-  }).then((currentPlayer) => {
-    console.log(currentPlayer.val());
+  game.child('/chosenOne').once('value', snapshot => snapshot)
+  .then((currentPlayer) => {
     game.child('/king').set(currentPlayer.val());
   });
 };
@@ -208,3 +210,26 @@ export const endTurn = () => (dispatch) => {
     });
   });
 };
+
+const attack = (numAttacks, currentPlayerID) => {
+  const king = game.child('king').once('value');
+  const playerPos = game.child('/playerPosition').once('value');
+  const requests = [king, playerPos];
+  Promise.all(requests)
+  .then((snapshots) => {
+    const kingID = snapshots[0].val().uid;
+    const playerPosArr = snapshots[1].val();
+    if (kingID === currentPlayerID) {
+      const toAttack = playerPosArr.filter(uid => uid !== kingID);
+      return toAttack;
+    }
+    const toAttack = playerPosArr.filter(uid => uid === kingID);
+    return toAttack;
+  })
+  .then((toAttack) => {
+    toAttack.forEach((uid) => {
+      changeStat(uid, numAttacks, 'health');
+    });
+  });
+};
+
