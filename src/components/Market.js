@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 class Deck extends Component {
   constructor(props) {
     super(props);
-    this.cardStyle = { margin: '10px', width: '100px', height: '100px', border: '1px solid black', float: 'left' };
+    this.cardStyle = { margin: '10px', width: '100px', height: '120px', border: '1px solid black', float: 'left' };
   }
 
   createMarket() {
@@ -19,7 +19,7 @@ class Deck extends Component {
 
   render() {
     return (
-      <div className="market-container" style={{ marginBottom: '25px', margin: '10px', border: '1px solid black', height: '155px', width: '625px' }}>
+      <div className="market-container" style={{ marginBottom: '25px', margin: '10px', border: '1px solid black', height: '165px', width: '625px' }}>
         <button onClick={() => this.props.resetMarket()}> ResetCards </button><br />
         <div style={this.cardStyle}>Deck</div>
         { this.createMarket() }

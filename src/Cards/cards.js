@@ -5,9 +5,9 @@ const cards = [
   // bellow are cards with type='discard'
   {
     title: 'Quake',
-    cost: 1,
+    cost: 3,
     type: 'Discard',
-    ability: 'deal 1 dmg to all players',
+    ability: 'deal 1 dmg to all other players',
     effect: 'quake',
   },
   {
@@ -59,7 +59,7 @@ const cards = [
     cost: 2,
     type: 'Keep',
     ability: 'Add a 1 to your dice on submission',
-    effect: 'brain growth',
+    effect: 'brain_growth',
   },
 ];
 // dummyCards for testing
