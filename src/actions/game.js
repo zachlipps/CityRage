@@ -52,7 +52,7 @@ export const startGame = () => (dispatch) => {
     .then(
       game.child('/playerPosition').once('value')
       .then(newPlayerArr => dispatch(startGameAction(newPlayerArr)))
-      .then(() => database.ref('market').set(market)),
+      .then(() => game.child('market').set(market)),
     );
   setFirstPlayer();
 };
