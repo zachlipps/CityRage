@@ -5,9 +5,9 @@ import market from '../Cards/cards';
 
 const game = database.ref('games/aqwewq334');
 
-const startGameAction = playerArr => ({
+const startGameAction = gameData => ({
   type: 'START_GAME',
-  playerArr,
+  gameData,
 });
 
 const initializePlayer = (uid, idx) => database.ref(`/users/${uid}`).once('value')
@@ -49,14 +49,6 @@ export const startGame = () => (dispatch) => {
       });
       game.child('players').set(playerObj);
     })
-    .then(
-      game.child('/playerPosition').once('value')
-      .then(newPlayerArr => dispatch(startGameAction(newPlayerArr)))
-      .then(() => {
-        // console.log('GAME STARTED - MARKET REFRESH');
-        game.child('market').set(market);
-      }),
-    )
     .then(() => setFirstPlayer());
 
     // init data
@@ -84,6 +76,7 @@ const setFirstPlayer = () => {
 };
 
 const initalizeOnGameStart = () => {
+  game.child('market').set(market);
   game.child('/rollCount').set(3);
   game.child('/king').set('none');
   game.child('/diceBox').set({
@@ -97,3 +90,9 @@ const initalizeOnGameStart = () => {
   );
 };
 
+
+export const startListeningGameChanges = () => (dispatch) => {
+  game.on('value', (snapshot) => {
+    dispatch(startGameAction(snapshot.val()));
+  });
+};
