@@ -10,10 +10,8 @@ fire.heal = (consumer) => {
 fire.quake = (consumer, room) => {
   const players = room.players;
   for (const key in players) {
-    console.log(players[key].displayName, players[key].stats.health);
     if (players[key].uid !== consumer.uid) {
       players[key].stats.health -= 1;
-      console.log(players[key].displayName, players[key].stats.health);
     }
   }
 };

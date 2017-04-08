@@ -37,7 +37,6 @@ export const buyCard = (card, buyerId) => (dispatch) => {
       market.face_up = market.face_up.filter(c => c.title !== card.title);
       if (card.type === 'Discard') {
         fire[card.effect](consumer, room);
-        console.log('all players after quake', room.players);
         market.discarded.push(card);
       }
       if (card.type === 'Keep') {
