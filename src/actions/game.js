@@ -32,6 +32,7 @@ const initializePlayer = (uid, idx) => database.ref(`/users/${uid}`).once('value
 
 export const startGame = () => (dispatch) => {
   const playerArr = [];
+  game.child('/king').set('none');
   game.child('/playerPosition').once('value')
     .then((userIDS) => {
       if (userIDS.val()) {
