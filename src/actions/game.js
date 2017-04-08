@@ -55,7 +55,9 @@ export const startGame = () => (dispatch) => {
       .then(() => game.child('market').set(market)),
     )
     .then(() => setFirstPlayer());
+  game.child('/rollCount').set(3).then((thing) => { console.log('it worked!', thing); });
 };
+
 
 const setFirstPlayer = () => {
   game.child('/playerPosition').once('value')
