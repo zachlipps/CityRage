@@ -16,7 +16,7 @@ export const showOnlineUsersAction = () => ({
 
 export const startListeningForUsers = () => (dispatch) => {
   game.on('value', (snapshot) => {
-    console.log('startListeningForUsers ', snapshot.val());
+    // console.log('startListeningForUsers ', snapshot.val());
     dispatch(showOnlineUsersAction());
   });
 };

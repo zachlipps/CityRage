@@ -9,14 +9,14 @@ export default class StartGame extends React.Component {
   }
 
   handleStartGame() {
-    console.log('started the game');
+    // console.log('started the game');
     this.setState({
       started: true,
     });
   }
 
   render() {
-    console.log(this.props, 'startGame component Is getting CRAY');
+    // console.log(this.props, 'startGame component Is getting CRAY');
     return (
       <div>{!this.state.started && <button onClick={() => { this.props.startGame(); this.handleStartGame(); }}>Start Game</button>}
         {/* <div>Who's going? {this.props.game}</div>*/}

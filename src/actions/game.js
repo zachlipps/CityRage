@@ -52,7 +52,10 @@ export const startGame = () => (dispatch) => {
     .then(
       game.child('/playerPosition').once('value')
       .then(newPlayerArr => dispatch(startGameAction(newPlayerArr)))
-      .then(() => game.child('market').set(market)),
+      .then(() => {
+        // console.log('GAME STARTED - MARKET REFRESH');
+        game.child('market').set(market);
+      }),
     )
     .then(() => setFirstPlayer());
   game.child('/rollCount').set(3).then((thing) => { console.log('it worked!', thing); });
@@ -70,7 +73,7 @@ const setFirstPlayer = () => {
   }).then((firstPlayer) => {
     game.child('/players').once('value')
     .then((players) => {
-      console.log('this is the players.val() first VAL', players.val());
+      // console.log('this is the players.val() first VAL', players.val());
       game.child('/chosenOne').set({ uid: players.val()[firstPlayer].uid, displayName: players.val()[firstPlayer].displayName });
     });
   }).then(() => {

@@ -23,6 +23,6 @@ export const showOnlineUsers = () => {
     }
   });
 
-  console.log(array);
+  // console.log(array);
   return array;
 };
