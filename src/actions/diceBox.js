@@ -166,6 +166,7 @@ export const submitRoll = die => (dispatch) => {
     }
   });
   });
+  game.child('/submitted').set(true);
 };
 
 
@@ -178,6 +179,8 @@ const setKing = () => {
     game.child('/king').set(currentPlayer.val());
   });
 };
+
+// change redux state and restart the roll count
 
 
 export const endTurn = () => (dispatch) => {
@@ -194,12 +197,8 @@ export const endTurn = () => (dispatch) => {
     .then(playerID => game.child(`/players/${playerID.val()}`).once('value'))
     .then((player) => {
       game.child('/chosenOne').set({ uid: player.val().uid, displayName: player.val().displayName });
-      console.log('I am here for YOU');
       game.child('/rollCount').set(3);
+      game.child('/submitted').set(false);
     });
   });
 };
-
-
-// change redux state and restart the roll count
-
