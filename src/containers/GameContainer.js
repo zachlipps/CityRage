@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import StartGame from '../components/StartGame';
-import { startGame } from '../actions/game';
+import { startGame, endTurn } from '../actions/game';
 
 
 const mapStateToProps = state => ({
