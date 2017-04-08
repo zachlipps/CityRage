@@ -194,7 +194,8 @@ export const endTurn = () => (dispatch) => {
     .then(playerID => game.child(`/players/${playerID.val()}`).once('value'))
     .then((player) => {
       game.child('/chosenOne').set({ uid: player.val().uid, displayName: player.val().displayName });
-      game.child('/rollCount').set(0);
+      console.log('I am here for YOU');
+      game.child('/rollCount').set(3);
     });
   });
 };
