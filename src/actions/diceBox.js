@@ -49,6 +49,11 @@ export const rollDice = () => (dispatch) => {
           dispatch(updateRolls(updatedDice.val()));
           decrementRoll().then(newRollCount => dispatch(updateRollCount(newRollCount)));
         });
+      }).then(() => {
+        if (rollCount.val() == 1) {
+          dispatch(submitRoll());
+          console.log('got here rollDice');
+        }
       });
     }
   });
@@ -81,7 +86,8 @@ export const selectDice = die => (dispatch) => {
   });
 };
 
-export const submitRoll = die => (dispatch) => {
+export const submitRoll = () => (dispatch) => {
+  console.log('got here submitRoll');
   const submittedRoll = [];
   let currentPlayer = '';
  // When submitRoll is clicked grab the user's dice and apply effects
