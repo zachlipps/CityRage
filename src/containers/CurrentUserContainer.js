@@ -5,6 +5,7 @@ import { increaseHealth, decreaseHealth } from '../actions/health';
 import { increasePoints, decreasePoints } from '../actions/points';
 import { increaseEnergy, decreaseEnergy } from '../actions/energy';
 import { joinGame, leaveGame } from '../actions/enterGame';
+import { changeStat } from '../actions/changeStat';
 
 const mapStateToProps = state => ({
   playersOnline: state.playersOnline,
@@ -20,5 +21,6 @@ const mapDispatchToProps = dispatch => bindActionCreators({
   decreaseEnergy,
   joinGame,
   leaveGame,
+  changeStat,
 }, dispatch);
 export default connect(mapStateToProps, mapDispatchToProps)(CurrentUser);
