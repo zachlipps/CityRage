@@ -58,15 +58,21 @@ export const startGame = () => (dispatch) => {
 };
 
 const setFirstPlayer = () => {
- // set the first player
   game.child('/playerPosition').once('value')
-  .then(playersArray => playersArray.val()[0]).then((firstPlayer) => {
+  .then((playersArray) => {
+    const gameSize = playersArray.val().length;
+    const firstPlayerIdx = Math.floor(Math.random() * gameSize);
+    game.child('/currentTurn').set(firstPlayerIdx);
+    game.child('/gameSize').set(gameSize);
+    return playersArray.val()[firstPlayerIdx];
+  }).then((firstPlayer) => {
     game.child('/players').once('value')
     .then((players) => {
-      console.log(players.val());
+      console.log('this is the players.val() first VAL', players.val());
       game.child('/chosenOne').set({ uid: players.val()[firstPlayer].uid, displayName: players.val()[firstPlayer].displayName });
     });
   }).then(() => {
     game.child('started').set(true);
   });
 };
+

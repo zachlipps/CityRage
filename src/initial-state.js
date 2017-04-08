@@ -32,76 +32,76 @@ database.ref('/diceBox/six').set({ val: '?', selected: false });
 // set roll count
 database.ref('/rollCount').set(3);
 // set king
-database.ref('/king').set('none');
+
 // set current player
 database.ref('/currentPlayer').set('none');
 
 
-database.ref('games').set(
-  {
-    aqwewq334: {
-      started: false,
-      players: {
-        aslkdja4rf: {
-          name: 'Derek',
-          photoURL: 'pic.png',
-          triggers: { noAttacks: false },
-          online: true,
-          stats: {
-            health: 10,
-            energy: 0,
-            points: 0,
-          },
-          hand: {
-            card1: { test: 'testing' },
-          },
-        },
-        fiod21ces422: {
-          name: 'Jaime',
-          photoURL: 'pic.png',
-          online: true,
-          triggers: { noAttacks: false },
-          stats: {
-            health: 10,
-            energy: 0,
-            points: 0,
-          },
-          hand: {
-            card1: { test: 'testing' },
-          },
-        },
-      },
-      market: { test: 'testing' },
-      king: {
-        uid: 'fiod21ces422',
-        name: 'Jaime',
-      },
-      chosenOne: {
-        uid: 'aslkdja4rf',
-        name: 'Derek',
-      },
-      gameName: 'First Game',
-      rollCount: 3,
-      submitted: false,
-      diceBox: {
-        one: { val: '?', selected: false },
-        two: { val: '?', selected: false },
-        three: { val: '?', selected: false },
-        four: { val: '?', selected: false },
-        five: { val: '?', selected: false },
-        six: { val: '?', selected: false },
-      },
-    },
-  },
-);
+// database.ref('games').set(
+//   {
+//     aqwewq334: {
+//       started: false,
+//       players: {
+//         aslkdja4rf: {
+//           name: 'Derek',
+//           photoURL: 'pic.png',
+//           triggers: { noAttacks: false },
+//           online: true,
+//           stats: {
+//             health: 10,
+//             energy: 0,
+//             points: 0,
+//           },
+//           hand: {
+//             card1: { test: 'testing' },
+//           },
+//         },
+//         fiod21ces422: {
+//           name: 'Jaime',
+//           photoURL: 'pic.png',
+//           online: true,
+//           triggers: { noAttacks: false },
+//           stats: {
+//             health: 10,
+//             energy: 0,
+//             points: 0,
+//           },
+//           hand: {
+//             card1: { test: 'testing' },
+//           },
+//         },
+//       },
+//       market: { test: 'testing' },
+//       king: {
+//         uid: 'fiod21ces422',
+//         name: 'Jaime',
+//       },
+//       chosenOne: {
+//         uid: 'aslkdja4rf',
+//         name: 'Derek',
+//       },
+//       gameName: 'First Game',
+//       rollCount: 3,
+//       submitted: false,
+//       diceBox: {
+//         one: { val: '?', selected: false },
+//         two: { val: '?', selected: false },
+//         three: { val: '?', selected: false },
+//         four: { val: '?', selected: false },
+//         five: { val: '?', selected: false },
+//         six: { val: '?', selected: false },
+//       },
+//     },
+//   },
+// );
 
 
 // set roll count
-database.ref('games/aqwewq334/rollCount').set(3);
+// database.ref('games/aqwewq334/rollCount').set(3);
 // set king
-database.ref('games/aqwewq334/king').set('none');
+// database.ref('games/aqwewq334/king').set('none');
 // set current player
-database.ref('games/aqwewq334/chosenOne').set('none');
+// database.ref('games/aqwewq334/chosenOne').set('none');
 
 
 export default initialState;

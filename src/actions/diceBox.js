@@ -183,3 +183,27 @@ const setKing = () => {
     game.child('/king').set(currentPlayer.val());
   });
 };
+
+
+export const endTurn = () => (dispatch) => {
+  const currentTurn = game.child('/currentTurn').once('value');
+  const gameSize = game.child('/gameSize').once('value');
+  Promise.all([currentTurn, gameSize])
+  .then((array) => {
+    const nextTurn = (array[0].val() + 1) % array[1].val();
+    game.child('/currentTurn').set(nextTurn);
+    return nextTurn;
+  })
+  .then((nextTurn) => {
+    game.child(`/playerPosition/${nextTurn}`).once('value')
+    .then(playerID => game.child(`/players/${playerID.val()}`).once('value'))
+    .then((player) => {
+      game.child('/chosenOne').set({ uid: player.val().uid, displayName: player.val().displayName });
+      game.child('/rollCount').set(0);
+    });
+  });
+};
+
+
+// change redux state and restart the roll count
+
