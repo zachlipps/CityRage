@@ -25,7 +25,6 @@ function dealCard(obj) {
   obj.deck.shift();
 }
 
-// add logic that checks whether the player can buy; and substract the energy
 export const buyCard = (card, buyer, roomId) => (dispatch) => {
   let market = {};
   gameRef.once('value', (gameData) => {
