@@ -59,6 +59,15 @@ export const startGame = () => (dispatch) => {
     )
     .then(() => setFirstPlayer());
   game.child('/rollCount').set(3).then((thing) => { console.log('it worked!', thing); });
+  game.child('/diceBox').set({
+    one: { val: '?', selected: false },
+    two: { val: '?', selected: false },
+    three: { val: '?', selected: false },
+    four: { val: '?', selected: false },
+    five: { val: '?', selected: false },
+    six: { val: '?', selected: false },
+  },
+  );
 };
 
 
