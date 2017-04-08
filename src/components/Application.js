@@ -24,12 +24,6 @@ const Application = ({ auth, signIn, signOut, game }) => (
   </main>
 );
 
-Application.propTypes = {
-  auth: PropTypes.object.isRequired,
-  signIn: PropTypes.func.isRequired,
-  signOut: PropTypes.func.isRequired,
-  game: PropTypes.array.isRequired,
-};
 
 export default Application;
 

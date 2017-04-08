@@ -21,7 +21,12 @@ class DiceBox extends Component {
           </div>
 
         </div>
-        <button onClick={() => { console.log('implement me!'); }}>End Turn</button>
+        <button
+          onClick={() => {
+            console.log('implement me!');
+            this.props.endTurn();
+          }}
+        >End Turn</button>
       </div>
     );
   }
