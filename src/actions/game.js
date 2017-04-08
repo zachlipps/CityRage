@@ -49,10 +49,10 @@ export const startGame = () => (dispatch) => {
       });
       game.child('players').set(playerObj);
     })
-    .then(() => setFirstPlayer());
-
-    // init data
-  initalizeOnGameStart();
+    .then(() => {
+      initalizeOnGameStart();
+      setFirstPlayer();
+    });
 };
 
 
@@ -96,3 +96,4 @@ export const startListeningGameChanges = () => (dispatch) => {
     dispatch(startGameAction(snapshot.val()));
   });
 };
+
