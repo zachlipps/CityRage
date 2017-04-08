@@ -23,10 +23,8 @@ const updateRollCount = newRollCount => ({
   newRollCount,
 });
 
-const decrementRoll = () => game.child('/rollCount').once('value', (snapshot) => {
-  const rollCount = snapshot.val();
-  return rollCount;
-}).then((rollCount) => {
+const decrementRoll = () => game.child('/rollCount').once('value')
+.then((rollCount) => {
   const newRollCount = rollCount.val() - 1;
   game.child('/rollCount').set(newRollCount);
   console.log('low key fam lmaoi', newRollCount);
@@ -34,29 +32,26 @@ const decrementRoll = () => game.child('/rollCount').once('value', (snapshot) =>
 });
 
 export const rollDice = () => (dispatch) => {
-  let listOfDice;
-  game.child('/diceBox').once('value', (snapshot) => {
-    listOfDice = snapshot.val();
-  }).then(() => {
-    for (const i in listOfDice) {
-      if (listOfDice[i].selected !== true) {
-        game.child(`/diceBox/${i}`).set({ val: diceOptions[randNum()], selected: false });
-      }
+  // if rollCount greater than 1, {decrement} else {submit}
+  game.child('/rollCount').once('value').then((rollCount) => {
+    if (rollCount.val() > 0) {
+      // gets the dice and changes each value
+      game.child('/diceBox').once('value')
+      .then((listOfDiceSnap) => {
+        const listOfDice = listOfDiceSnap.val();
+        for (const i in listOfDice) {
+          if (listOfDice[i].selected !== true) {
+            game.child(`/diceBox/${i}`).set({ val: diceOptions[randNum()], selected: false });
+          }
+        }
+      }).then(() => {
+        game.child('/diceBox').once('value').then((updatedDice) => {
+          dispatch(updateRolls(updatedDice.val()));
+          decrementRoll().then(newRollCount => dispatch(updateRollCount(newRollCount)));
+        });
+      });
     }
-  },
-)
-.then(() => {
-  game.child('/diceBox').once('value', (snapshot) => {
-    listOfDice = snapshot.val();
-  })
-  .then(() => {
-    dispatch(updateRolls(listOfDice));
-    return decrementRoll();
-  })
-  .then((newRollCount) => {
-    dispatch(updateRollCount(newRollCount));
   });
-});
 };
 
 
