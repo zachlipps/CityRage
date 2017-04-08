@@ -31,9 +31,8 @@ export const buyCard = (card, buyer, roomId) => (dispatch) => {
     const consumer = gameData.val().players[buyer];
     market = gameData.val().market;
     firebaseFix(market);
-    // must later turn to if energy >= card.cost
-    if (consumer.stats.energy === 0) {
-      // consumer.stats.energy -= card.cost;
+    if (consumer.stats.energy >= card.cost) {
+      consumer.stats.energy -= card.cost;
       market.face_up = market.face_up.filter(c => c.title !== card.title);
       if (!Array.isArray(consumer.hand)) {
         consumer.hand = [];
