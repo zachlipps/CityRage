@@ -44,14 +44,13 @@ class CurrentUser extends React.Component {
   }
 }
 
-CurrentUser.propTypes = {
-  auth: PropTypes.shape({
-    displayName: PropTypes.string,
-    email: PropTypes.string.isRequired,
-    photoURL: PropTypes.string,
-    uid: PropTypes.string.isRequired,
-  }),
-  signOut: PropTypes.func.isRequired,
-};
+// CurrentUser.propTypes = {
+//   auth: PropTypes.shape({
+//     displayName: PropTypes.string,
+//     email: PropTypes.string.isRequired,
+//     photoURL: PropTypes.string,
+//     uid: PropTypes.string.isRequired,
+//   }),
+// };
 
 export default CurrentUser;

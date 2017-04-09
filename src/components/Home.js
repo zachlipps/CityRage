@@ -1,8 +1,6 @@
 import React from 'react';
 import Game from '../containers/GameContainer';
-import CurrentUser from '../containers/CurrentUserContainer';
-import DiceBox from '../containers/DiceBoxContainer';
-import Market from '../containers/MarketContainer';
+
 
 class Home extends React.Component {
   constructor(props) {
@@ -33,7 +31,7 @@ class Home extends React.Component {
           </div>
           }
 
-        {this.state.joined ? <div><Game /><Market /><CurrentUser auth={this.props.auth} signOut={this.props.signOut} /><DiceBox /></div> : <div />}
+        {this.state.joined ? <div><Game /></div> : <div />}
 
 
         <p><button onClick={() => { this.props.signOut(this.props.auth.uid); }}> Sign Out</button></p>
