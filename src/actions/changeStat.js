@@ -2,7 +2,7 @@ import { database } from '../firebase';
 
 const game = database.ref('games/aqwewq334');
 
-export const changeStat = (uid, absChange = 1, stat = 'energy') => (dispatch) => {
+export const changeStat = (uid, absChange = 1, stat = 'energy') => {
   game.child(`players/${uid}`).once('value')
   .then((snapshot) => {
     const currentStat = snapshot.val().stats[stat];
@@ -13,5 +13,3 @@ export const changeStat = (uid, absChange = 1, stat = 'energy') => (dispatch) =>
     game.child(`players/${uid}/stats/${stat}`).set(currentStat);
   });
 };
-
-// this needs to dispatch to change redux store
