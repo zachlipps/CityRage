@@ -96,4 +96,3 @@ export const startListeningGameChanges = () => (dispatch) => {
     dispatch(startGameAction(snapshot.val()));
   });
 };
-
