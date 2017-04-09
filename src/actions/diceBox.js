@@ -86,7 +86,6 @@ export const selectDice = die => (dispatch) => {
 };
 
 export const submitRoll = () => (dispatch) => {
-  console.log('got here submitRoll');
   const submittedRoll = [];
   let currentPlayer = '';
  // When submitRoll is clicked grab the user's dice and apply effects
