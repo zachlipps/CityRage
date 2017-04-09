@@ -47,3 +47,24 @@ export const startListeningToAuthChanges = () => (dispatch) => {
     }
   });
 };
+
+
+export const createNewGame = (name, numPlayers) => {
+  database.ref('games').push(
+    {
+      numPlayers,
+      name,
+      rollCount: 3,
+      started: false,
+      submitted: false,
+      diceBox: {
+        one: { val: '?', selected: false },
+        two: { val: '?', selected: false },
+        three: { val: '?', selected: false },
+        four: { val: '?', selected: false },
+        five: { val: '?', selected: false },
+        six: { val: '?', selected: false },
+      },
+    });
+}
+;

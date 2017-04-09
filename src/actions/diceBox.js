@@ -224,10 +224,8 @@ const attack = (numAttacks, currentPlayerID) => {
     return toAttack;
   })
   .then((toAttack) => {
-    console.log('TO ATTACK FUCK YOU', toAttack);
     console.log('numATTACKS', numAttacks);
     toAttack.forEach((uid) => {
-      console.log(typeof uid);
       changeStat(uid, numAttacks, 'health');
     });
   });
