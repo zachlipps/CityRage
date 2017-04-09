@@ -28,7 +28,6 @@ const decrementRoll = () => game.child('/rollCount').once('value')
 .then((rollCount) => {
   const newRollCount = rollCount.val() - 1;
   game.child('/rollCount').set(newRollCount);
-  console.log('low key fam lmaoi', newRollCount);
   return newRollCount;
 });
 
@@ -53,7 +52,6 @@ export const rollDice = () => (dispatch) => {
       }).then(() => {
         if (rollCount.val() == 1) {
           dispatch(submitRoll());
-          console.log('got here rollDice');
         }
       });
     }

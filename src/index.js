@@ -11,6 +11,7 @@ import { startListeningToAuthChanges } from './actions/auth';
 import { startListeningForUsers } from './actions/users';
 import { showOnlineUsersAction } from './actions/users';
 import { startListeningGameChanges } from './actions/game';
+import { startListeningForPlayers } from './actions/win';
 
 
 const middleware = [thunk];
@@ -31,6 +32,7 @@ store.dispatch(startListeningToAuthChanges());
 store.dispatch(startListeningForUsers());
 store.dispatch(showOnlineUsersAction());
 store.dispatch(startListeningGameChanges());
+store.dispatch(startListeningForPlayers());
 
 ReactDOM.render(
   <Provider store={store}>
