@@ -7,7 +7,7 @@ class DiceBox extends Component {
 
   render() {
     const rolled = this.props.diceBox.one.val;
-    console.log('dicebox component', this.props);
+    // console.log('dicebox component', this.props);
     return (
       <div>
         <div style={{ display: 'flex', border: '1px solid black' }}>

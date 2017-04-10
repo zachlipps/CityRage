@@ -224,10 +224,24 @@ const attack = (numAttacks, currentPlayerID) => {
     return toAttack;
   })
   .then((toAttack) => {
-    console.log('numATTACKS', numAttacks);
+    // console.log('numATTACKS', numAttacks);
     toAttack.forEach((uid) => {
       changeStat(uid, numAttacks, 'health');
     });
+  }).then(() => {
+    console.log('does this happen?');
+    kickKing();
   });
 };
 
+export const kickKing = () => {
+  // check to see if the current user is king
+  game.once('value', (theGame) => {
+    if (theGame.val().king.uid !== theGame.val().chosenOne.uid) {
+      console.log('Does the king want to leave?');
+    }
+  });
+    // if not then display message to king asking if they want to leave
+      // if true
+        // set current user to king
+};
