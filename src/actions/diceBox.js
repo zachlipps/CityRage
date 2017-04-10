@@ -177,8 +177,14 @@ export const submitRoll = () => (dispatch, getState) => {
       }
     }
   });
-  });
-  game.child('/submitted').set(true);
+  })
+  .then(()=>{
+  game.child('/submitted').set(true)
+  .then(()=>{
+    const setSubmittedTrueAction = { type: 'SET_SUBMITTED', hasBeenSubmitted: true}
+    dispatch(setSubmittedTrueAction)
+  })
+  })
 };
 
 

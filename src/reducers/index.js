@@ -9,6 +9,7 @@ import rollCountReducer from './rollCount';
 import enterGameReducer from './enterGame';
 import gamesListReducer from './gamesList';
 import lobbyReducer from './lobby';
+import submitted from './submittedDiceRoll'
 
 const reducer = combineReducers({
   auth: authReducer,
@@ -21,6 +22,7 @@ const reducer = combineReducers({
   market: marketReducer,
   rollCount: rollCountReducer,
   PlayersInGame: enterGameReducer,
+  submitted: submitted
 });
 
 export default reducer;
