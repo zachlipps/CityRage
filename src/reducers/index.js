@@ -8,10 +8,12 @@ import marketReducer from './market';
 import rollCountReducer from './rollCount';
 import enterGameReducer from './enterGame';
 import gamesListReducer from './gamesList';
+import lobbyReducer from './lobby';
 
 const reducer = combineReducers({
   auth: authReducer,
   users: usersReducer,
+  lobby: lobbyReducer,
   playersOnline: playersOnlineReducer,
   diceBox: diceBoxReducer,
   game: gameReducer,

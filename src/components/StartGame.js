@@ -22,7 +22,8 @@ export default class StartGame extends React.Component {
       <div>{!this.state.started && <button onClick={() => { this.props.startGame(); this.handleStartGame(); }}>Start Game</button>}
         {/* <div>Who's going? {this.props.game}</div>*/}
 
-        {this.state.joined ? <div><Game /></div> : <div />}
+        {/* {this.state.joined ? <div><Game /></div> : <div />}*/}
+        <div><Game /></div>
 
 
       </div>

@@ -1,5 +1,6 @@
 import React from 'react';
 import GamesList from '../containers/GamesListContainer';
+import NewGame from '../containers/NewGameContainer';
 
 class Home extends React.Component {
   constructor(props) {
@@ -29,6 +30,8 @@ class Home extends React.Component {
             <p><button>New Game</button> </p>
           </div>
           }
+
+        <NewGame />
 
         <GamesList />
 

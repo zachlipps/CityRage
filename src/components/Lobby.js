@@ -1,0 +1,22 @@
+import React from 'react';
+import StartGame from './StartGame';
+
+export default class Lobby extends React.Component {
+  render() {
+    console.log(this.props);
+    return (
+      <div>
+        Lobby!
+        <button onClick={() => this.props.playersInLobby(this.props.gid)} >show me whos here!</button>
+
+        {/* show a list of players in the game */}
+        {this.props.lobby.map(person => <div>{person}</div>)}
+        {/* StartGame button in here*/}
+        {/* <button onClick={() => this.props.startGame()}>Start Game</button>*/}
+
+        <StartGame startGame={this.props.startGame} />
+      </div>
+    );
+  }
+}
+
