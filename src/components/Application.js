@@ -7,21 +7,26 @@ import Game from '../containers/GameContainer';
 import Market from '../containers/MarketContainer';
 import Home from './Home';
 
+import { BrowserRouter as Router, Link, Route } from 'react-router-dom';
+
 const Application = ({ auth, signIn, signOut, game }) => (
-  <main className="Application">
-    <div className="Application--sidebar">
-      {/* {auth.status == 'ANONYMOUS' ? <SignIn signIn={signIn}  /> : <div />}*/}
-      { auth.status === 'ANONYMOUS' && <SignIn signIn={signIn} /> }
-      { auth.status === 'AWAITING_AUTH_RESPONSE' && <Loading /> }
+  <Router>
+    <main className="Application">
+      <div className="Application--sidebar">
+        {/* {auth.status == 'ANONYMOUS' ? <SignIn signIn={signIn}  /> : <div />}*/}
+        { auth.status === 'ANONYMOUS' && <SignIn signIn={signIn} /> }
+        { auth.status === 'AWAITING_AUTH_RESPONSE' && <Loading /> }
 
-      { auth.status === 'SIGNED_IN' && <Home auth={auth} signOut={signOut} />}
+        { auth.status === 'SIGNED_IN' && <Home auth={auth} signOut={signOut} />}
 
-      {/* { auth.status === 'SIGNED_IN' && <CurrentUser auth={auth} signOut={signOut} />}
+
+        {/* { auth.status === 'SIGNED_IN' && <CurrentUser auth={auth} signOut={signOut} />}
       { auth.status !== 'ANONYMOUS' && <div><Game /><DiceBox /> <Market /></div>}*/}
 
 
-    </div>
-  </main>
+      </div>
+    </main>
+  </Router>
 );
 
 

@@ -34,11 +34,7 @@ export const startListeningToAuthChanges = () => (dispatch) => {
 
       const obj = Object.assign({}, pick(user, ['displayName', 'photoURL', 'email', 'uid']), {
         currentlyOn: true,
-        stats: {
-          energy: 0,
-          health: 10,
-          points: 0,
-        },
+        currentGame: '',
       });
 
       usersRef.child(user.uid).set(obj);
@@ -47,3 +43,4 @@ export const startListeningToAuthChanges = () => (dispatch) => {
     }
   });
 };
+
