@@ -85,9 +85,13 @@ export const selectDice = die => (dispatch) => {
   });
 };
 
-export const submitRoll = () => (dispatch) => {
+export const submitRoll = () => (dispatch, getState) => {
   const submittedRoll = [];
   let currentPlayer = '';
+
+  // const { game } = getState();
+
+  // console.log(game);
  // When submitRoll is clicked grab the user's dice and apply effects
   game.child('/diceBox').once('value', (snapshot) => {
     for (const i in snapshot.val()) {

@@ -32,12 +32,21 @@ export const startListeningToAuthChanges = () => (dispatch) => {
     if (user) {
       dispatch(signedIn(user));
 
-      const obj = Object.assign({}, pick(user, ['displayName', 'photoURL', 'email', 'uid']), {
-        currentlyOn: true,
-        currentGame: '',
+      // get the game id
+      const gameIdVal = '';
+      const obj = '';
+      database.ref(`users/${user.uid}/currentGame`).once('value', (gameId) => {
+        if (gameId.val() !== undefined || gameId.val() !== '') {
+          gameIdVal = gameId.val();
+        }
+      }).then(() => {
+        obj = Object.assign({}, pick(user, ['displayName', 'photoURL', 'email', 'uid']), {
+          currentlyOn: true,
+          currentGame: gameIdVal,
+        });
+        usersRef.child(user.uid).set(obj);
+        dispatch(signedIn(obj));
       });
-
-      usersRef.child(user.uid).set(obj);
     } else {
       dispatch(signedOut());
     }

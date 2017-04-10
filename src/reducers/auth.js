@@ -22,6 +22,11 @@ export default function authReducer(state = initialState.auth, action) {
         photoURL: action.photoURL,
         uid: action.uid,
       };
+    case 'ADD_GID':
+      return {
+        ...state,
+        gid: action.gid,
+      };
     default:
       return state;
   }
