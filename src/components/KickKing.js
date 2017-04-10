@@ -14,7 +14,7 @@ export default class KickKing extends React.Component {
 
         <div>
         Leave?
-        <button>Yes</button>
+        <button onClick={() => this.props.setKing()}>Yes</button>
           <button>No</button>
         </div>
 

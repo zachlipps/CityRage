@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import KickKing from '../components/KickKing';
 import { kickKing } from '../actions/diceBox';
+import { setKing } from '../actions/kickKing';
 import { bindActionCreators } from 'redux';
 
 const mapStateToProps = state => ({
@@ -12,6 +13,7 @@ function matchDispatchToProps(dispatch) {
   return bindActionCreators(
     {
       kickKing,
+      setKing,
     },
    dispatch);
 }
