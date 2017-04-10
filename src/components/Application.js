@@ -6,7 +6,6 @@ import NewGame from '../containers/NewGameContainer';
 import { BrowserRouter as Router, Link, Route } from 'react-router-dom';
 import GamesList from '../containers/GamesListContainer';
 import '../Assets/App.css';
-import SignOut from './SignOut';
 
 const Application = ({ auth, signIn, signOut, game }) => (
   <Router>
