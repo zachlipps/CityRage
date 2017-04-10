@@ -14,14 +14,16 @@ class Home extends React.Component {
     this.setState({ joined: true });
   }
 
+
   render() {
+    console.log('HOME PORPS', this.props);
     const test = (this.state.joined === false && this.state.cont === false && this.state.new === false);
     return (
 
       <div>
         <h1> Hi Player! </h1>
 
-        <p><button onClick={() => { this.props.signOut(this.props.auth.uid); }}> Sign Out</button></p>
+        <p><button onClick={() => { this.props.auth ? this.props.signOut(this.props.auth.uid) : null; }}> Sign Out</button></p>
       </div>
     );
   }

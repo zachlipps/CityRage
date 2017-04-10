@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import SignIn from './SignIn';
 import Loading from './Loading';
-import Home from './Home';
+import Home from '../containers/HomeContainer';
 import NewGame from '../containers/NewGameContainer';
 import { BrowserRouter as Router, Link, Route } from 'react-router-dom';
 import GamesList from '../containers/GamesListContainer';
