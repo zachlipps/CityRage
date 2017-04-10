@@ -7,6 +7,12 @@ const updateGamesList = gamesList => ({
   gamesList,
 });
 
+const setGidtoAuth = gid => ({
+  type: 'ADD_GID',
+  gid,
+});
+
+
 export const grabListOfGames = () => (dispatch) => {
   database.ref('games').once('value').then((games) => {
     // go thru each game and grab its id, name, and number of players,
@@ -24,6 +30,10 @@ export const grabListOfGames = () => (dispatch) => {
 };
 
 export const joinGame = (uid, gid) => (dispatch) => {
+  database.ref(`users/${uid}/currentGame`).set(gid);
+// set in redux this value
+  dispatch(setGidtoAuth(gid));
+
   const game = database.ref(`games/${gid}`);
   game.child('/playerPosition').once('value')
   .then((PlayersInGame) => {
@@ -41,3 +51,17 @@ export const joinGame = (uid, gid) => (dispatch) => {
     }
   });
 };
+
+
+export const leaveGame = uid => (dispatch) => {
+  game.child('/playerPosition').once('value', (snapshot) => {
+    const currentPlayerIndex = snapshot.val().indexOf(uid);
+    if (currentPlayerIndex !== -1) {
+      const playerArr = snapshot.val();
+      playerArr.splice(currentPlayerIndex, 1);
+      game.child('/playerPosition').set(playerArr);
+      dispatch({ type: 'LEAVE_GAME', playerArr });
+    }
+  });
+};
+
