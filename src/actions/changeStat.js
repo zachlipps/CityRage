@@ -33,5 +33,15 @@ export const killPlayer = (uid) => {
     } else {
       game.child('/gameSize').set(newPlayerPos.length);
     }
+  })
+  .then(() => {
+    game.child('/deadPlayers').once('value', (snapshot) => {
+      if (!snapshot.val()) {
+        game.child('/deadPlayers').set([uid]);
+      } else {
+        const newDeadPlayerArr = [...snapshot.val(), uid];
+        game.child('/deadPlayers').set(newDeadPlayerArr);
+      }
+    });
   });
 };
