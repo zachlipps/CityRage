@@ -2,7 +2,7 @@ import React from 'react';
 
 export default class KickKing extends React.Component {
   render() {
-    console.log('kick king props', this.props);
+    // console.log('kick king props', this.props);
     return (
       <div>
         {/* {this.props.game.king.uid === this.props.auth.uid ?
