@@ -2,7 +2,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 import Home from '../components/Home';
-import { signIn, signOut } from '../actions/auth';
+import { signOut } from '../actions/auth';
 
 
 function mapStateToProps(state) {
@@ -14,7 +14,6 @@ function mapStateToProps(state) {
 function matchDispatchToProps(dispatch) {
   return bindActionCreators(
     {
-      signIn,
       signOut,
     },
     dispatch);

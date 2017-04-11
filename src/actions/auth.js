@@ -1,6 +1,7 @@
 import { auth, database, googleAuthProvider } from '../firebase';
 // import {addUser} from './users';
 import pick from 'lodash/pick';
+import { startListeningGameChanges } from './game';
 
 const usersRef = database.ref('users');
 
@@ -21,6 +22,7 @@ const signedIn = user => ({
   displayName: user.displayName,
   photoURL: user.photoURL,
   uid: user.uid,
+  gid: user.currentGame,
 });
 
 const signedOut = () => ({
@@ -46,6 +48,8 @@ export const startListeningToAuthChanges = () => (dispatch) => {
         });
         usersRef.child(user.uid).set(obj);
         dispatch(signedIn(obj));
+        console.log('GAME ID VAL', gameIdVal);
+        dispatch(startListeningGameChanges());
       });
     } else {
       dispatch(signedOut());

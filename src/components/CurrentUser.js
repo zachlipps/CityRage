@@ -29,7 +29,9 @@ class CurrentUser extends React.Component {
             </ul>
           </div>)}
 
-          {<div><button onClick={() => { this.props.increaseHealth(auth.uid); }} >up health</button>
+
+          {<button onClick={() => { this.props.increaseHealth(auth.uid); }} >up health</button>
+          <button onClick={() => { this.props.increaseHealth(auth.uid); }} >up health</button>
           <button onClick={() => { this.props.decreaseHealth(auth.uid); }}>down health</button>
           <button onClick={() => { this.props.increasePoints(auth.uid); }} >up Points</button>
           <button onClick={() => { this.props.decreasePoints(auth.uid); }}>down Points</button>
@@ -37,7 +39,7 @@ class CurrentUser extends React.Component {
           <button onClick={() => { this.props.decreaseEnergy(auth.uid); }}>down Energy</button>
           <button onClick={() => { this.props.joinGame(auth.uid); }}> JOIN GAME </button>
           <button onClick={() => { this.props.leaveGame(auth.uid); }}> LEAVE GAME </button>
-          <button onClick={() => { this.props.changeStat(auth.uid); }}> CHANGE STAT </button></div>}
+          <button onClick={() => { this.props.changeStat(auth.uid); }}> CHANGE STAT </button>}
         </div>
       </div>
     );

@@ -53,15 +53,20 @@ export const joinGame = (uid, gid) => (dispatch) => {
 };
 
 
-export const leaveGame = uid => (dispatch) => {
+export const leaveGame = uid => (dispatch, storeState) => {
+  const gid = storeState().auth.gid;
+  const game = database.ref(`games/${gid}`);
+
   game.child('/playerPosition').once('value', (snapshot) => {
     const currentPlayerIndex = snapshot.val().indexOf(uid);
     if (currentPlayerIndex !== -1) {
       const playerArr = snapshot.val();
       playerArr.splice(currentPlayerIndex, 1);
+
       game.child('/playerPosition').set(playerArr);
       dispatch({ type: 'LEAVE_GAME', playerArr });
     }
+    database.ref(`users/${uid}/currentGame`).set('');
   });
 };
 

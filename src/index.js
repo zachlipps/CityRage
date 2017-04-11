@@ -30,7 +30,7 @@ const store = createStore(
 store.dispatch(startListeningToAuthChanges());
 store.dispatch(startListeningForUsers());
 store.dispatch(showOnlineUsersAction());
-store.dispatch(startListeningGameChanges());
+// store.dispatch(startListeningGameChanges());
 
 ReactDOM.render(
   <Provider store={store}>
