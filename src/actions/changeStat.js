@@ -2,6 +2,7 @@ import { database } from '../firebase';
 
 const game = database.ref('games/aqwewq334');
 
+
 export const changeStat = (uid, absChange = -2, stat = 'health') => {
   game.child(`players/${uid}`).once('value')
   .then((snapshot) => {

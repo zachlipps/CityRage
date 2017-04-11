@@ -25,3 +25,4 @@ export const decreaseEnergy = uid =>
      energy -= 1;
      game.child(`players/${uid}/stats/energy`).set(energy);
    };
+
