@@ -1,14 +1,7 @@
 import React, { PropTypes } from 'react';
 
 const SignIn = ({ signIn }) => (
-  <div className="SignIn">
-    <button
-      className="block"
-      onClick={signIn}
-    >
-        Sign In
-      </button>
-  </div>
+  <div className="nav-link" onClick={signIn}>Sign In</div>
   );
 
 SignIn.propTypes = {
