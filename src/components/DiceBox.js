@@ -6,8 +6,13 @@ class DiceBox extends Component {
 
 
   render() {
+
+  let endTurnButton = (this.props.game.chosenOne && this.props.game.chosenOne.uid===this.props.auth.uid) ?
+    <button onClick={() => { this.props.endTurn(); }}> End Turn</button> : undefined;
+    
+  let 
+
     const rolled = this.props.diceBox.one.val;
-    // console.log('dicebox component', this.props);
     return (
       <div>
         <div style={{ display: 'flex', border: '1px solid black' }}>
@@ -26,7 +31,7 @@ class DiceBox extends Component {
           </div>
 
         </div>
-        <button onClick={() => { this.props.endTurn(); }}> End Turn</button>
+        {endTurnButton}
       </div>
     );
   }

@@ -6,6 +6,7 @@ const mapStateToProps = state => ({
   diceBox: state.diceBox,
   rollCount: state.rollCount,
   game: state.game,
+  auth: state.auth
 });
 
 
