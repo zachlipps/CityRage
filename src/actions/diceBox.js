@@ -20,7 +20,7 @@ const defaultDice = {
   four: { val: '?', selected: false },
   five: { val: '?', selected: false },
   six: { val: '?', selected: false },
-}
+};
 
 const randNum = () => Math.floor((Math.random() * 6) + 1);
 
@@ -126,9 +126,9 @@ export const submitRoll = () => (dispatch, getState) => {
     }
 
     // check power
-    console.log('these are the objectified rolls ', objectifiedRolls);
+    // console.log('these are the objectified rolls ', objectifiedRolls);
     if (objectifiedRolls.energy) {
-      console.log('energy amount ', objectifiedRolls.energy.length);
+     // console.log('energy amount ', objectifiedRolls.energy.length);
       game.child(`/players/${currentPlayer}/stats/energy`).once('value', (snapshot) => {
         const energy = snapshot.val() + objectifiedRolls.energy.length;
         game.child(`/players/${currentPlayer}/stats/energy`).set(energy);
@@ -188,13 +188,13 @@ export const submitRoll = () => (dispatch, getState) => {
     }
   });
   })
-  .then(()=>{
-  game.child('/submitted').set(true)
-  .then(()=>{
-    const setSubmittedTrueAction = { type: 'SET_SUBMITTED', hasBeenSubmitted: true}
-    dispatch(setSubmittedTrueAction)
-  })
-  })
+  .then(() => {
+    game.child('/submitted').set(true)
+  .then(() => {
+    const setSubmittedTrueAction = { type: 'SET_SUBMITTED', hasBeenSubmitted: true };
+    dispatch(setSubmittedTrueAction);
+  });
+  });
 };
 
 
@@ -224,7 +224,7 @@ export const endTurn = () => (dispatch) => {
       const updateChosenOne = game.child('/chosenOne').set({ uid: player.val().uid, displayName: player.val().displayName });
       const updateRollCount = game.child('/rollCount').set(3);
       const submitted = game.child('/submitted').set(false);
-      const resetDice = game.child('/diceBox').set(defaultDice)
+      const resetDice = game.child('/diceBox').set(defaultDice);
       // dispatch({ type: 'UPDATE_CHOSEN_ONE', newChosenOne: updateChosenOne})
       // dispatch({ type: 'UPDATE_ROLLCOUNT', newRollCount: 3})
       // dispatch({ type: 'SET_SUBMITTED', hasBeenSubmitted: false})
@@ -232,8 +232,6 @@ export const endTurn = () => (dispatch) => {
     });
   });
 };
-
-
 
 
 const attack = (numAttacks, currentPlayerID) => {
@@ -252,12 +250,10 @@ const attack = (numAttacks, currentPlayerID) => {
     return toAttack;
   })
   .then((toAttack) => {
-    // console.log('numATTACKS', numAttacks);
     toAttack.forEach((uid) => {
       changeStat(uid, numAttacks, 'health');
     });
   }).then(() => {
-    console.log('does this happen?');
     kickKing();
   });
 };

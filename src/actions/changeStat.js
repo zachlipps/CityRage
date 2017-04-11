@@ -3,7 +3,7 @@ import { database } from '../firebase';
 const game = database.ref('games/aqwewq334');
 
 
-export const changeStat = (uid, absChange = -2, stat = 'health') => {
+export const changeStat = (uid, absChange = -5, stat = 'health') => (dispatch) => {
   game.child(`players/${uid}`).once('value')
   .then((snapshot) => {
     let currentStat = snapshot.val().stats[stat];
@@ -18,21 +18,22 @@ export const changeStat = (uid, absChange = -2, stat = 'health') => {
     if (stat === 'points' && currentStat > 20) {
       console.log(displayName, 'wins!');
     } else if (stat === 'health' && currentStat <= 0) {
-      console.log('this player is hecka dead right now', displayName, uid);
-      killPlayer(uid);
+      console.log('this player is heLLA dead right now:', displayName, uid);
+      dispatch(killPlayer(uid));
     }
   });
 };
 
-export const killPlayer = (uid) => {
+export const killPlayer = uid => (dispatch) => {
   // this also needs to let the player know that they are dead
   game.child('/playerPosition').once('value')
   .then((playerArr) => {
     const newPlayerPos = playerArr.val().filter(playerID => playerID !== uid);
+    game.child('/playerPosition').set(newPlayerPos);
+    game.child('/gameSize').set(newPlayerPos.length);
+    dispatch({ type: 'UPDATE_DEAD', payload: 'YOYOYO' });
     if (newPlayerPos.length === 1) {
-      // make the last person in the array win the game
-    } else {
-      game.child('/gameSize').set(newPlayerPos.length);
+      console.log('SOMEONE WON THE GAME');
     }
   })
   .then(() => {
