@@ -26,6 +26,7 @@ class DiceBox extends Component {
           </div>
 
         </div>
+        {(this.props.auth.uid===this.props.game.chosenOne.uid) ? <button onClick={() => { this.props.endTurn(); }}> End Turn</button> : undefined}
         <button onClick={() => { this.props.endTurn(); }}> End Turn</button>
       </div>
     );
