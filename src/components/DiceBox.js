@@ -21,7 +21,7 @@ class DiceBox extends Component {
 
           <div style={{ flexDirection: 'column', flex: 4, border: '1px solid orange', display: 'flex' }}>
             <div style={{ border: '1px solid purple', flexFlow: 'row-wrap', flex: 1, justifyContent: 'space-around' }}>
-              {map(this.props.game.diceBox, (item, key) => <div onClick={() => this.props.selectDice(key)} key={key}>{item.val}</div>)}
+              {map(this.props.game.diceBox, (item, key) => <div className={item.selected ? 'dice-toggled' : 'dice'}onClick={() => this.props.selectDice(key)} key={key}>{item.val}</div>)}
             </div>
           </div>
 

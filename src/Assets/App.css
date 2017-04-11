@@ -16,8 +16,17 @@
   color: grey;
   text-align: center;
 }
+.nav-right {
+  float: right;
+}
 .nav-link:hover {
   background-color: darkcyan;
   color: white;
   border-color: darkcyan;
+}
+
+.dice-toggled {
+  width: 100px;
+  background-color: #cdddf7;
+  border-radius: 3px;
 }
