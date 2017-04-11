@@ -13,7 +13,7 @@ export default class Lobby extends React.Component {
         {this.props.lobby.map(person => <div>{person}</div>)}
         {/* StartGame button in here*/}
         {/* <button onClick={() => this.props.startGame()}>Start Game</button>*/}
-
+        <button onClick={() => { this.props.leaveGame(this.props.auth.uid); }}>Leave</button>
         <StartGame startGame={this.props.startGame} />
       </div>
     );

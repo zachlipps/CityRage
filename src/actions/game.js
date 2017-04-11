@@ -3,12 +3,11 @@ import keys from 'lodash/keys';
 import filter from 'lodash/filter';
 import market from '../Cards/cards';
 
-const game = database.ref('games/aqwewq334');
-
 const startGameAction = gameData => ({
   type: 'START_GAME',
   gameData,
 });
+
 
 const initializePlayer = (uid, idx) => database.ref(`/users/${uid}`).once('value')
   .then((user) => {
@@ -30,7 +29,10 @@ const initializePlayer = (uid, idx) => database.ref(`/users/${uid}`).once('value
   });
 
 
-export const startGame = () => (dispatch) => {
+export const startGame = () => (dispatch, storeState) => {
+  const gid = storeState().auth.gid;
+  const game = database.ref(`games/${gid}`);
+
   const playerArr = [];
   game.child('/playerPosition').once('value')
     .then((userIDS) => {
@@ -50,13 +52,16 @@ export const startGame = () => (dispatch) => {
       game.child('players').set(playerObj);
     })
     .then(() => {
-      initalizeOnGameStart();
-      setFirstPlayer();
+      dispatch(initalizeOnGameStart());
+      dispatch(setFirstPlayer());
     });
 };
 
 
-const setFirstPlayer = () => {
+const setFirstPlayer = () => (dispatch, storeState) => {
+  const gid = storeState().auth.gid;
+  const game = database.ref(`games/${gid}`);
+
   game.child('/playerPosition').once('value')
   .then((playersArray) => {
     const gameSize = playersArray.val().length;
@@ -75,7 +80,11 @@ const setFirstPlayer = () => {
   });
 };
 
-const initalizeOnGameStart = () => {
+const initalizeOnGameStart = () => (dispatch, storeState) => {
+  const gid = storeState().auth.gid;
+  console.log(gid);
+  const game = database.ref(`games/${gid}`);
+
   game.child('market').set(market);
   game.child('/rollCount').set(3);
   game.child('/king').set('none');
@@ -91,7 +100,10 @@ const initalizeOnGameStart = () => {
 };
 
 
-export const startListeningGameChanges = () => (dispatch) => {
+export const startListeningGameChanges = () => (dispatch, storeState) => {
+  const gid = storeState().auth.gid;
+  const game = database.ref(`games/${gid}`);
+
   game.on('value', (snapshot) => {
     dispatch(startGameAction(snapshot.val()));
   });
