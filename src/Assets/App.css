@@ -24,3 +24,9 @@
   color: white;
   border-color: darkcyan;
 }
+
+.dice-toggled {
+  width: 100px;
+  background-color: #cdddf7;
+  border-radius: 3px;
+}
