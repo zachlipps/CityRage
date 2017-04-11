@@ -12,6 +12,16 @@ const diceOptions = {
   5: 'health',
   6: 'attack',
 };
+
+const defaultDice = {
+  one: { val: '?', selected: false },
+  two: { val: '?', selected: false },
+  three: { val: '?', selected: false },
+  four: { val: '?', selected: false },
+  five: { val: '?', selected: false },
+  six: { val: '?', selected: false },
+}
+
 const randNum = () => Math.floor((Math.random() * 6) + 1);
 
 const updateRolls = listOfDice => ({
@@ -214,9 +224,11 @@ export const endTurn = () => (dispatch) => {
       const updateChosenOne = game.child('/chosenOne').set({ uid: player.val().uid, displayName: player.val().displayName });
       const updateRollCount = game.child('/rollCount').set(3);
       const submitted = game.child('/submitted').set(false);
-      dispatch({ type: 'UPDATE_CHOSEN_ONE', newChosenOne: updateChosenOne})
-      dispatch({ type: 'UPDATE_ROLLCOUNT', newRollCount: 0})
-      dispatch({ type: 'SET_SUBMITTED', hasBeenSubmitted: false})
+      const resetDice = game.child('/diceBox').set(defaultDice)
+      // dispatch({ type: 'UPDATE_CHOSEN_ONE', newChosenOne: updateChosenOne})
+      // dispatch({ type: 'UPDATE_ROLLCOUNT', newRollCount: 3})
+      // dispatch({ type: 'SET_SUBMITTED', hasBeenSubmitted: false})
+      // dispatch({ type: 'DEFAULT_DICE', payload: defaultDice})
     });
   });
 };
