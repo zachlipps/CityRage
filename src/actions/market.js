@@ -3,8 +3,6 @@ import { database } from '../firebase';
 import fire from '../Cards/effects';
 
 // gameRef later will set the game-hash-id dynamically
-const gameId = 'aqwewq334';
-const gameRef = database.ref(`games/${gameId}`);
 
 function firebaseFix(obj) {
   obj.deck = obj.deck || [];
@@ -25,9 +23,13 @@ function dealCard(obj) {
   obj.deck.shift();
 }
 
-export const buyCard = (card, buyerId) => (dispatch) => {
+export const buyCard = (card, buyerId) => (dispatch, storeState) => {
+  const gid = storeState().auth.gid;
+  const game = database.ref(`games/${gid}`);
+
+
   let market = {};
-  gameRef.once('value', (gameData) => {
+  game.once('value', (gameData) => {
     const room = gameData.val();
     const consumer = room.players[buyerId];
     market = room.market;
@@ -48,15 +50,18 @@ export const buyCard = (card, buyerId) => (dispatch) => {
       dealCard(market);
       regenDeckIfEmpty(market);
     }
-    gameRef.child('market').set(market)
-    .then(() => gameRef.child('players').set(room.players));
+    game.child('market').set(market)
+    .then(() => game.child('players').set(room.players));
   })
   .then(() => dispatch({ type: 'DEAL_CARD', payload: market }));
 };
 
 // "room" parameter must be dynamically set to gameID - not yet implemented
-export const resetMarket = () => (dispatch) => {
-  gameRef.child('market').once('value', (marketData) => {
+export const resetMarket = () => (dispatch, storeState) => {
+  const gid = storeState().auth.gid;
+  const game = database.ref(`games/${gid}`);
+
+  game.child('market').once('value', (marketData) => {
     const market = marketData.val();
     firebaseFix(market);
     market.face_up.forEach(card => market.discarded.push(card));
@@ -65,7 +70,7 @@ export const resetMarket = () => (dispatch) => {
       dealCard(market);
       regenDeckIfEmpty(market);
     }
-    gameRef.child('market').set(market)
+    game.child('market').set(market)
     .then(() => dispatch({ type: 'DEAL_NEW_MARKET', payload: market }));
   });
 };
