@@ -16,6 +16,9 @@
   color: grey;
   text-align: center;
 }
+.nav-right {
+  float: right;
+}
 .nav-link:hover {
   background-color: darkcyan;
   color: white;
