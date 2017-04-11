@@ -211,12 +211,18 @@ export const endTurn = () => (dispatch) => {
     game.child(`/playerPosition/${nextTurn}`).once('value')
     .then(playerID => game.child(`/players/${playerID.val()}`).once('value'))
     .then((player) => {
-      game.child('/chosenOne').set({ uid: player.val().uid, displayName: player.val().displayName });
-      game.child('/rollCount').set(3);
-      game.child('/submitted').set(false);
+      const updateChosenOne = game.child('/chosenOne').set({ uid: player.val().uid, displayName: player.val().displayName });
+      const updateRollCount = game.child('/rollCount').set(3);
+      const submitted = game.child('/submitted').set(false);
+      dispatch({ type: 'UPDATE_CHOSEN_ONE', newChosenOne: updateChosenOne})
+      dispatch({ type: 'UPDATE_ROLLCOUNT', newRollCount: 0})
+      dispatch({ type: 'SET_SUBMITTED', hasBeenSubmitted: false})
     });
   });
 };
+
+
+
 
 const attack = (numAttacks, currentPlayerID) => {
   const king = game.child('king').once('value');

@@ -16,7 +16,7 @@ class DiceBox extends Component {
 
             {/* {this.props.auth.uid === this.props.game.chosenOne.uid ? <button onClick={() => { this.props.rollDice(); }}>Roll {this.props.game.rollCount}</button> : <div>waiting...</div>}*/}
             <button onClick={() => { this.props.rollDice(); }}>Roll {this.props.game.rollCount}</button>
-            {rolled !== '?' ? <div><div style={{ flex: 1 }}> <hr /> </div><button onClick={() => { this.props.submitRoll(); console.log('hide button after pressing'); }}>Submit</button></div> : <div />}
+            {rolled !== '?' ? <div><div style={{ flex: 1 }}> <hr /> </div><button onClick={this.props.game.submitted ? ()=>{ console.log('already called') } : () => { this.props.submitRoll() }}>{this.props.game.submitted ? 'already submitted' : 'submit'}</button></div> : <div />}
           </div>
 
           <div style={{ flexDirection: 'column', flex: 4, border: '1px solid orange', display: 'flex' }}>
