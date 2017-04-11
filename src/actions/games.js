@@ -1,6 +1,6 @@
 import { database } from '../firebase';
 
-const game = database.ref('games/aqwewq334');
+// const game = database.ref('games/aqwewq334');
 
 const updateGamesList = gamesList => ({
   type: 'UPDATE_GAMESLIST',
