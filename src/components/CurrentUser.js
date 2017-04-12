@@ -22,7 +22,14 @@ class CurrentUser extends React.Component {
           <p className="CurrentUser--email">{ auth.email }</p>
           {/* <button className="CurrentUser--signout"onClick={() => { signOut(auth.uid); }}> Sign Out</button>*/}
 
-          {map(this.props.playersOnline, (item, key) => <div key={item.uid}>{item.displayName} {item.stats.health} {item.stats.energy} {item.stats.points}</div>)}
+          {
+            map(this.props.playersOnline, item =>
+              <div key={item.uid} style={{ border: '1px solid black', margin: '5px', padding: '2px', width: '155px' }}>
+                Name: {item.displayName}<br />
+                Health: {item.stats.health}<br />
+                Energy: {item.stats.energy}<br />
+                Points: {item.stats.points}
+              </div>)}
           {/* {map(this.props.game.diceBox, (item, key) => <div className={item.selected ? 'dice-toggled' : 'dice'}onClick={() => this.props.selectDice(key)} key={key}>{item.val}</div>)}*/}
 
           {/* {this.props.playersOnline.map(user => <div key={user.uid}>{user.displayName}*/}
