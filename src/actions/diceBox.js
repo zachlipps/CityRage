@@ -131,9 +131,14 @@ export const submitRoll = () => (dispatch, storeState) => {
       const objectifiedRolls = groupBy(submittedRoll);
     // check for heal
       if (objectifiedRolls.health) {
-        game.child(`/players/${currentPlayer}/stats/health`).once('value', (snapshot) => {
-          const health = snapshot.val() + objectifiedRolls.health.length;
-          game.child(`/players/${currentPlayer}/stats/health`).set(health);
+        game.child('/king').once('value', (kingSpot) => {
+          // check to see if current player is king
+          if (kingSpot.val().uid !== currentPlayer) {
+            game.child(`/players/${currentPlayer}/stats/health`).once('value', (snapshot) => {
+              const health = snapshot.val() + objectifiedRolls.health.length;
+              game.child(`/players/${currentPlayer}/stats/health`).set(health);
+            });
+          }
         });
       }
 
