@@ -7,6 +7,20 @@ class CurrentUser extends React.Component {
     super(props);
   }
 
+
+
+  /*
+  *   this is just returning a style object, 
+  *   but it could just as easily return a className
+  *   for styling in the css file
+  */
+  generatePlayerStyle(playerObj, gameData) {
+    let playerStyle = {};
+    if (playerObj.stats.health <= 0) playerStyle.textDecoration = 'line-through'
+    return playerStyle
+  }
+
+
   render() {
     const { auth } = this.props;
     // console.log(this.props.playersOnline);
@@ -22,7 +36,7 @@ class CurrentUser extends React.Component {
           <p className="CurrentUser--email">{ auth.email }</p>
           {/* <button className="CurrentUser--signout"onClick={() => { signOut(auth.uid); }}> Sign Out</button>*/}
 
-          {map(this.props.playersOnline, (item, key) => <div key={item.uid}>{item.displayName} {item.stats.health} {item.stats.energy} {item.stats.points}</div>)}
+          {map(this.props.playersOnline, (item, key) => <div style = {this.generatePlayerStyle(item)} key={item.uid}>{item.displayName} {item.stats.health} {item.stats.energy} {item.stats.points}</div>)}
           {/* {map(this.props.game.diceBox, (item, key) => <div className={item.selected ? 'dice-toggled' : 'dice'}onClick={() => this.props.selectDice(key)} key={key}>{item.val}</div>)}*/}
 
           {/* {this.props.playersOnline.map(user => <div key={user.uid}>{user.displayName}*/}
