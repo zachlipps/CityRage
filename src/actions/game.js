@@ -5,7 +5,7 @@ import market from '../Cards/cards';
 import { startListeningForUsers } from './users';
 
 const startGameAction = gameData => ({
-  type: 'START_GAME',
+  type: 'UPDATE_GAME_DATA',
   gameData,
 });
 
@@ -56,12 +56,18 @@ export const startGame = () => (dispatch, storeState) => {
       dispatch(initalizeOnGameStart());
       dispatch(setFirstPlayer());
       dispatch(startListeningForUsers());
+    })
+    .then(() => {
+      game.once('value').then((data) => {
+        dispatch(startGameAction(data.val()));
+      });
     });
 };
 
 
 export const heyListen = () => (dispatch) => {
   dispatch(startListeningForUsers());
+  dispatch(startListeningGameChanges());
 };
 
 
@@ -113,7 +119,7 @@ export const startListeningGameChanges = () => (dispatch, storeState) => {
   const game = database.ref(`games/${gid}`);
 
   game.on('value', (snapshot) => {
-    console.log('Listening for changes on startListeningGameChanges', snapshot.val());
+    // console.log('Listening for changes on startListeningGameChanges', snapshot.val());
     dispatch(startGameAction(snapshot.val()));
   });
 };
