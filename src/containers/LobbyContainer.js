@@ -8,6 +8,7 @@ import { leaveGame } from '../actions/games';
 const mapStateToProps = state => ({
   lobby: state.lobby,
   auth: state.auth,
+  game: state.game,
 
 });
 
