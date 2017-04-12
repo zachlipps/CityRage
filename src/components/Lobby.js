@@ -15,7 +15,7 @@ export default class Lobby extends React.Component {
         {/* StartGame button in here*/}
         {/* <button onClick={() => this.props.startGame()}>Start Game</button>*/}
         <button onClick={() => { this.props.leaveGame(this.props.auth.uid); }}>Leave</button>
-        <StartGame heyListen={this.props.heyListen} game={this.props.game} startGame={this.props.startGame} />
+        <StartGame marketListener={this.props.marketListener} heyListen={this.props.heyListen} game={this.props.game} startGame={this.props.startGame} />
       </div>
     );
   }
