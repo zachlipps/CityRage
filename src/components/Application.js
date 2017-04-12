@@ -1,9 +1,10 @@
 import React, { PropTypes } from 'react';
+import { BrowserRouter as Router, Link, Route } from 'react-router-dom';
 import SignIn from './SignIn';
 import Loading from './Loading';
+import Lobby from '../containers/LobbyContainer';
 import Home from '../containers/HomeContainer';
 import NewGame from '../containers/NewGameContainer';
-import { BrowserRouter as Router, Link, Route } from 'react-router-dom';
 import GamesList from '../containers/GamesListContainer';
 import '../Assets/App.css';
 
@@ -20,8 +21,9 @@ const Application = ({ auth, signIn, signOut, game }) => (
         { auth.status === 'AWAITING_AUTH_RESPONSE' && <Loading /> }
 
         <Route exact path="/" component={Home} />
-        { auth.status === 'SIGNED_IN' && <Route path="/newgame" component={NewGame} /> }
-        { auth.status === 'SIGNED_IN' && <Route path="/gamesList" component={GamesList} /> }
+        <Route path="/newgame" component={NewGame} />
+        <Route path="/gamesList" component={GamesList} />
+        <Route path="/gamesList/lobby/:game" component={Lobby} />
       </div>
     </main>
   </Router>
