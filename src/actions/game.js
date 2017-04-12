@@ -61,7 +61,6 @@ export const startGame = () => (dispatch, storeState) => {
     .then(() => {
       game.once('value').then((data) => {
         dispatch(startGameAction(data.val()));
-        dispatch(marketListener());
       });
     });
 };
