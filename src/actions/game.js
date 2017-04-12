@@ -119,7 +119,7 @@ export const startListeningGameChanges = () => (dispatch, storeState) => {
   const game = database.ref(`games/${gid}`);
 
   game.on('value', (snapshot) => {
-    console.log('Listening for changes on startListeningGameChanges', snapshot.val());
+    // console.log('Listening for changes on startListeningGameChanges', snapshot.val());
     dispatch(startGameAction(snapshot.val()));
   });
 };

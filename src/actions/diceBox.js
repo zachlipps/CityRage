@@ -112,7 +112,7 @@ export const submitRoll = () => (dispatch, storeState) => {
   const game = database.ref(`games/${gid}`);
 
   const submittedRoll = [];
-  let currentPlayer = '';
+  // currentPlayer = '';
 
   // const { game } = getState();
 
@@ -125,83 +125,73 @@ export const submitRoll = () => (dispatch, storeState) => {
   })
   .then(() => {
     game.child('chosenOne').once('value', (snapshot) => {
-      currentPlayer = snapshot.val();
-      return currentPlayer;
-    })
-  .then((currentPlayer) => {
-    const objectifiedRolls = groupBy(submittedRoll);
-    currentPlayer = currentPlayer.val().uid;
+      const currentPlayer = snapshot.val().uid;
 
+      console.log(currentPlayer);
+      const objectifiedRolls = groupBy(submittedRoll);
     // check for heal
-    if (objectifiedRolls.health) {
-      game.child(`/players/${currentPlayer}/stats/health`).once('value', (snapshot) => {
-        const health = snapshot.val() + objectifiedRolls.health.length;
-        game.child(`/players/${currentPlayer}/stats/health`).set(health);
-      });
-    }
+      if (objectifiedRolls.health) {
+        game.child(`/players/${currentPlayer}/stats/health`).once('value', (snapshot) => {
+          const health = snapshot.val() + objectifiedRolls.health.length;
+          game.child(`/players/${currentPlayer}/stats/health`).set(health);
+        });
+      }
 
     // check power
     // console.log('these are the objectified rolls ', objectifiedRolls);
-    if (objectifiedRolls.energy) {
+      if (objectifiedRolls.energy) {
      // console.log('energy amount ', objectifiedRolls.energy.length);
-      game.child(`/players/${currentPlayer}/stats/energy`).once('value', (snapshot) => {
-        const energy = snapshot.val() + objectifiedRolls.energy.length;
-        game.child(`/players/${currentPlayer}/stats/energy`).set(energy);
-      });
-    }
+        game.child(`/players/${currentPlayer}/stats/energy`).once('value', (snapshot) => {
+          const energy = snapshot.val() + objectifiedRolls.energy.length;
+          game.child(`/players/${currentPlayer}/stats/energy`).set(energy);
+        });
+      }
 
 
     // check for numbers 3
-    if (objectifiedRolls[3] && objectifiedRolls[3].length >= 3) {
+      if (objectifiedRolls[3] && objectifiedRolls[3].length >= 3) {
       //
-      const bonus = objectifiedRolls[3].length - 3;
-      game.child(`/players/${currentPlayer}/stats/points`).once('value', (snapshot) => {
-        const points = snapshot.val() + bonus + 3;
-        game.child(`/players/${currentPlayer}/stats/points`).set(points);
-      });
-    }
+        const bonus = objectifiedRolls[3].length - 3;
+        game.child(`/players/${currentPlayer}/stats/points`).once('value', (snapshot) => {
+          const points = snapshot.val() + bonus + 3;
+          game.child(`/players/${currentPlayer}/stats/points`).set(points);
+        });
+      }
 
      // check for numbers 2
-    if (objectifiedRolls[2] && objectifiedRolls[2].length >= 3) {
+      if (objectifiedRolls[2] && objectifiedRolls[2].length >= 3) {
       //
-      const bonus = objectifiedRolls[2].length - 3;
-      game.child(`/players/${currentPlayer}/stats/points`).once('value', (snapshot) => {
-        const points = snapshot.val() + bonus + 2;
-        game.child(`/players/${currentPlayer}/stats/points`).set(points);
-      });
-    }
+        const bonus = objectifiedRolls[2].length - 3;
+        game.child(`/players/${currentPlayer}/stats/points`).once('value', (snapshot) => {
+          const points = snapshot.val() + bonus + 2;
+          game.child(`/players/${currentPlayer}/stats/points`).set(points);
+        });
+      }
 
 
      // check for numbers 1
-    if (objectifiedRolls[1] && objectifiedRolls[1].length >= 3) {
+      if (objectifiedRolls[1] && objectifiedRolls[1].length >= 3) {
       //
-      const bonus = objectifiedRolls[1].length - 3;
-      game.child(`/players/${currentPlayer}/stats/points`).once('value', (snapshot) => {
-        const points = snapshot.val() + bonus + 1;
-        game.child(`/players/${currentPlayer}/stats/points`).set(points);
-      });
-    }
-
-    if (objectifiedRolls.attack) {
-      const attacks = -objectifiedRolls.attack.length;
-      dispatch(attack(attacks, currentPlayer));
-    }
-
-    // if there are any attacks
-    {
-      if (submittedRoll.indexOf('attack') !== -1) {
-      // check to see if there's a king
-        game.child('/king').once('value', (snapshot) => {
-          if (snapshot.val() === 'none') {
-          // if not set this user as the king
-            setKing();
-          } else {
-          // else ask the other king if they want to leave
-          }
+        const bonus = objectifiedRolls[1].length - 3;
+        game.child(`/players/${currentPlayer}/stats/points`).once('value', (snapshot) => {
+          const points = snapshot.val() + bonus + 1;
+          game.child(`/players/${currentPlayer}/stats/points`).set(points);
         });
       }
-    }
-  });
+
+      if (objectifiedRolls.attack) {
+        const attacks = -objectifiedRolls.attack.length;
+        dispatch(attack(attacks, currentPlayer));
+      }
+
+
+      game.child('/king').once('value', (kingSpot) => {
+        if (kingSpot.val() === 'none') {
+          // if not set this user as the king
+          dispatch(setKing());
+        }
+      });
+    });
   })
   .then(() => {
     game.child('/submitted').set(true)
@@ -217,7 +207,9 @@ const setKing = () => (dispatch, storeState) => {
   const gid = storeState().auth.gid;
   const game = database.ref(`games/${gid}`);
 
-  game.child('/chosenOne').once('value', snapshot => snapshot)
+  console.log('in setKing');
+
+  game.child('/chosenOne').once('value')
   .then((currentPlayer) => {
     console.log(currentPlayer.val());
     game.child('/king').set(currentPlayer.val());
@@ -276,8 +268,9 @@ const attack = (numAttacks, currentPlayerID) => (dispatch, storeState) => {
     return toAttack;
   })
   .then((toAttack) => {
+    console.log(toAttack);
     toAttack.forEach((uid) => {
-      changeStat(uid, numAttacks, 'health');
+      dispatch(changeStat(uid, numAttacks, 'health'));
     });
   }).then(() => {
     dispatch(kickKing());

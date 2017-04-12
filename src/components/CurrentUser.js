@@ -9,7 +9,7 @@ class CurrentUser extends React.Component {
 
   render() {
     const { auth } = this.props;
-    console.log(this.props.playersOnline);
+    // console.log(this.props.playersOnline);
     return (
       <div className="CurrentUser">
         {/* <img
