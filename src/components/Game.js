@@ -5,6 +5,11 @@ import Market from '../containers/MarketContainer';
 import KickKing from '../containers/kickKingContainer';
 
 export default class Game extends React.Component {
+
+  // componentWillMount() {
+  //   this.props.marketListener();
+  // }
+
   render() {
     // console.log(this.props);
     return (
