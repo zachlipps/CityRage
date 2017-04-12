@@ -10,7 +10,7 @@ export default class GamesList extends React.Component {
 
     this.changeGid = this.changeGid.bind(this);
   }
-  componentDidMount() {
+  componentWillMount() {
     this.props.grabListOfGames();
   }
 
