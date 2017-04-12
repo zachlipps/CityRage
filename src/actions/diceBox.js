@@ -254,16 +254,13 @@ export const endTurn = () => (dispatch, storeState) => {
     game.child(`/playerPosition/${nextTurn}`).once('value')
     .then(playerID => game.child(`/players/${playerID.val()}`).once('value'))
     .then((player) => {
-      const updateChosenOne = game.child('/chosenOne').set({ uid: player.val().uid, displayName: player.val().displayName });
       const updateRollCount = game.child('/rollCount').set(3);
       const submitted = game.child('/submitted').set(false);
       const resetDice = game.child('/diceBox').set(defaultDice);
       game.child('attackedOnTurn').set(false);
 
-      // dispatch({ type: 'UPDATE_CHOSEN_ONE', newChosenOne: updateChosenOne})
-      // dispatch({ type: 'UPDATE_ROLLCOUNT', newRollCount: 3})
-      // dispatch({ type: 'SET_SUBMITTED', hasBeenSubmitted: false})
-      // dispatch({ type: 'DEFAULT_DICE', payload: defaultDice})
+      const updateChosenOne = game.child('/chosenOne').set({ uid: player.val().uid, displayName: player.val().displayName });
+      console.log('king on turn start', player.val().kingOnTurnStart, player.val().displayName);
     });
   });
 };

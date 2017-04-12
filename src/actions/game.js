@@ -15,6 +15,7 @@ const initializePlayer = (uid, idx) => database.ref(`/users/${uid}`).once('value
   .then((user) => {
     const playerObj = Object.assign({}, user.val(), {
       turnOrder: idx,
+      kingOnTurnStart: false,
       stats: {
         energy: 0,
         health: 10,
