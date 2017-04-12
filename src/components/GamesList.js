@@ -12,13 +12,11 @@ export default class GamesList extends React.Component {
   }
 
   changeGid(gid) {
-    console.log('i was changed!', gid);
     this.setState({
       gid,
     });
   }
   render() {
-    console.log(this.props);
     return (
       <div>
         <button onClick={() => this.props.grabListOfGames()}>get the games</button>

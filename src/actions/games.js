@@ -35,33 +35,31 @@ const updateGameData = gameData => ({
 });
 
 export const joinGame = (uid, gid) => (dispatch) => {
-  console.log('i as called');
-  database.ref(`users/${uid}/currentGame`).set(gid).then(() => {
-    dispatch(setGidtoAuth(gid));
+  // const game = database.ref(`games/${gid}`);
+  let game = '';
 
-    const game = database.ref(`games/${gid}`);
-    game.child('/playerPosition').once('value')
-  .then((PlayersInGame) => {
-    if (!PlayersInGame.val()) {
-      game.child('/playerPosition').set([uid]);
-      dispatch({ type: 'JOIN_GAME', newPlayers: [uid] });
-    } else {
-      game.child('/playerPosition').once('value', (snapshot) => {
-        if (snapshot.val().indexOf(uid) === -1) {
-          const newPlayers = [...snapshot.val(), uid];
-          game.child('/playerPosition').set(newPlayers);
-          dispatch({ type: 'JOIN_GAME', newPlayers });
-        }
-      });
-    }
+  // set gid on user
+  database.ref(`users/${uid}/currentGame`).set(gid).then(() => {
+    dispatch(setGidtoAuth(gid));// works
   });
-    return game;
-  }).then((game) => {
-    game.once('value').then((gameData) => {
-      console.log('Join Game', gameData.val());
-      const data = gameData.val();
-      dispatch(updateGameData(data));
-    });
+
+  database.ref(`games/${gid}`).once('value').then((gameData) => {
+    game = database.ref(`games/${gameData.val().gid}`);
+  }).then(() => {
+    game.child('/playerPosition').once('value')
+      .then((PlayersInGame) => {
+        if (!PlayersInGame.val()) {
+          game.child('/playerPosition').set([uid]);
+        } else if (PlayersInGame.val().indexOf(uid) === -1) {
+          const newPlayers = [...PlayersInGame.val(), uid];
+          game.child('/playerPosition').set(newPlayers);
+        }
+      }).then(() => {
+        game.once('value').then((gameData) => {
+          const data = gameData.val();
+          dispatch(updateGameData(data));
+        });
+      });
   });
 };
 

@@ -42,7 +42,7 @@ const decrementRoll = () => (dispatch, storeState) => {
 .then((rollCount) => {
   const newRollCount = rollCount.val() - 1;
   game.child('/rollCount').set(newRollCount);
-  return newRollCount;
+  dispatch(updateRollCount(newRollCount));
 });
 };
 
@@ -65,7 +65,8 @@ export const rollDice = () => (dispatch, storeState) => {
       }).then(() => {
         game.child('/diceBox').once('value').then((updatedDice) => {
           dispatch(updateRolls(updatedDice.val()));
-          dispatch(decrementRoll().then(newRollCount => dispatch(updateRollCount(newRollCount))));
+          // dispatch(decrementRoll().then(newRollCount => dispatch(updateRollCount(newRollCount))));
+          dispatch(decrementRoll());
         });
       }).then(() => {
         if (rollCount.val() == 1) {

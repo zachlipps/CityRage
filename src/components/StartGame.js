@@ -8,7 +8,9 @@ export default class StartGame extends React.Component {
       started: false,
     };
   }
-
+  componentDidMount() {
+    this.props.heyListen();
+  }
   handleStartGame() {
     // console.log('started the game');
     this.setState({
@@ -21,7 +23,7 @@ export default class StartGame extends React.Component {
     return (
       <div>{!this.props.game.started && <button onClick={() => { this.props.startGame(); this.handleStartGame(); }}>Start Game</button>}
         {/* <div>Who's going? {this.props.game}</div>*/}
-        {this.props.game.started ? this.props.heyListen() : null}
+        {/* {this.props.game.started ?  : <div />}*/}
         {this.props.game.started ? <div><Game /></div> : <div />}
         {/* <div><Game /></div>*/}
 
