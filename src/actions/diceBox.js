@@ -131,9 +131,14 @@ export const submitRoll = () => (dispatch, storeState) => {
       const objectifiedRolls = groupBy(submittedRoll);
     // check for heal
       if (objectifiedRolls.health) {
-        game.child(`/players/${currentPlayer}/stats/health`).once('value', (snapshot) => {
-          const health = snapshot.val() + objectifiedRolls.health.length;
-          game.child(`/players/${currentPlayer}/stats/health`).set(health);
+        game.child('/king').once('value', (kingSpot) => {
+          // check to see if current player is king
+          if (kingSpot.val().uid !== currentPlayer) {
+            game.child(`/players/${currentPlayer}/stats/health`).once('value', (snapshot) => {
+              const health = snapshot.val() + objectifiedRolls.health.length;
+              game.child(`/players/${currentPlayer}/stats/health`).set(health);
+            });
+          }
         });
       }
 
@@ -183,17 +188,15 @@ export const submitRoll = () => (dispatch, storeState) => {
         const attacks = -objectifiedRolls.attack.length;
         dispatch(attack(attacks, currentPlayer));
       }
-
-
-      game.child('/king').once('value', (kingSpot) => {
-        if (kingSpot.val() === 'none') {
-          // if not set this user as the king
-          dispatch(setKing());
-        }
-      });
     });
   })
   .then(() => {
+    game.child('/king').once('value', (kingSpot) => {
+      if (kingSpot.val() === 'none') {
+          // if not set this user as the king
+        dispatch(setKing());
+      }
+    });
     game.child('/submitted').set(true)
   .then(() => {
     const setSubmittedTrueAction = { type: 'SET_SUBMITTED', hasBeenSubmitted: true };
