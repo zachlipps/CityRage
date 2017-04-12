@@ -20,6 +20,7 @@ export default class Lobby extends React.Component {
         <button onClick={() => this.props.playersInLobby(this.props.gid)} >show me whos here!</button>
         {/* StartGame button in here*/}
         {/* <button onClick={() => this.props.startGame()}>Start Game</button>*/}
+
         <Link to="/games-list">
           <button
             onClick={() => {

@@ -3,6 +3,7 @@ import keys from 'lodash/keys';
 import filter from 'lodash/filter';
 import market from '../Cards/cards';
 import { startListeningForUsers } from './users';
+import { marketListener } from './market.js';
 
 const startGameAction = gameData => ({
   type: 'UPDATE_GAME_DATA',
@@ -60,6 +61,7 @@ export const startGame = () => (dispatch, storeState) => {
     .then(() => {
       game.once('value').then((data) => {
         dispatch(startGameAction(data.val()));
+        dispatch(marketListener());
       });
     });
 };
