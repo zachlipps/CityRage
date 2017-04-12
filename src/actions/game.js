@@ -2,7 +2,6 @@ import { database } from '../firebase';
 import keys from 'lodash/keys';
 import filter from 'lodash/filter';
 import market from '../Cards/cards';
-
 import { startListeningForUsers } from './users';
 
 const startGameAction = gameData => ({
@@ -61,6 +60,11 @@ export const startGame = () => (dispatch, storeState) => {
 };
 
 
+export const heyListen = () => (dispatch) => {
+  dispatch(startListeningForUsers());
+};
+
+
 const setFirstPlayer = () => (dispatch, storeState) => {
   const gid = storeState().auth.gid;
   const game = database.ref(`games/${gid}`);
@@ -85,7 +89,6 @@ const setFirstPlayer = () => (dispatch, storeState) => {
 
 const initalizeOnGameStart = () => (dispatch, storeState) => {
   const gid = storeState().auth.gid;
-  console.log(gid);
   const game = database.ref(`games/${gid}`);
 
   game.child('market').set(market);
