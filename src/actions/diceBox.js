@@ -188,17 +188,15 @@ export const submitRoll = () => (dispatch, storeState) => {
         const attacks = -objectifiedRolls.attack.length;
         dispatch(attack(attacks, currentPlayer));
       }
-
-
-      game.child('/king').once('value', (kingSpot) => {
-        if (kingSpot.val() === 'none') {
-          // if not set this user as the king
-          dispatch(setKing());
-        }
-      });
     });
   })
   .then(() => {
+    game.child('/king').once('value', (kingSpot) => {
+      if (kingSpot.val() === 'none') {
+          // if not set this user as the king
+        dispatch(setKing());
+      }
+    });
     game.child('/submitted').set(true)
   .then(() => {
     const setSubmittedTrueAction = { type: 'SET_SUBMITTED', hasBeenSubmitted: true };
