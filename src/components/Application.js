@@ -16,14 +16,14 @@ const Application = ({ auth, signIn, signOut, game }) => (
           <div><Link className="nav-link" to="/">Home</Link></div>
           { auth.status === 'ANONYMOUS' && <div><SignIn signIn={signIn} /></div> }
           { auth.status === 'SIGNED_IN' && <div><Link className="nav-link" to="/newgame">New Game</Link></div> }
-          { auth.status === 'SIGNED_IN' && <div><Link className="nav-link" to="/gamesList">Games List</Link></div> }
+          { auth.status === 'SIGNED_IN' && <div><Link className="nav-link" to="/games-list">Games List</Link></div> }
         </div>
         { auth.status === 'AWAITING_AUTH_RESPONSE' && <Loading /> }
 
         <Route exact path="/" component={Home} />
         <Route path="/newgame" component={NewGame} />
-        <Route path="/gamesList" component={GamesList} />
-        <Route path="/gamesList/lobby/:game" component={Lobby} />
+        <Route exact path="/games-list" component={GamesList} />
+        <Route path="/games-list/lobby/:game" component={Lobby} />
       </div>
     </main>
   </Router>
