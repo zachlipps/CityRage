@@ -12,8 +12,8 @@ const Application = ({ auth, signIn, signOut, game }) => (
     <main className="Application">
       <div>
         <div className="nav-container">
-          { auth.status === 'ANONYMOUS' && <div><SignIn signIn={signIn} /></div> }
           <div><Link className="nav-link" to="/">Home</Link></div>
+          { auth.status === 'ANONYMOUS' && <div><SignIn signIn={signIn} /></div> }
           { auth.status === 'SIGNED_IN' && <div><Link className="nav-link" to="/newgame">New Game</Link></div> }
           { auth.status === 'SIGNED_IN' && <div><Link className="nav-link" to="/gamesList">Games List</Link></div> }
         </div>
