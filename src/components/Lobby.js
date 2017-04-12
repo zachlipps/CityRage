@@ -5,12 +5,12 @@ import StartGame from './StartGame';
 
 export default class Lobby extends React.Component {
 
-  componentWillMount() {
-    this.props.playersInLobby(this.props.gid);
-  }
+  // componentWillMount() {
+  //   this.props.playersInLobby(this.props.gid);
+  // }
 
   render() {
-    // console.log(this.props);
+    console.log(this.props);
     return (
       <div>
         <h3>Lobby</h3>
