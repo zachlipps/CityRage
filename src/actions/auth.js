@@ -49,7 +49,6 @@ export const startListeningToAuthChanges = () => (dispatch) => {
         });
         usersRef.child(user.uid).set(obj);
         dispatch(signedIn(obj));
-        console.log('GAME ID VAL', gameIdVal);
         dispatch(startListeningGameChanges());
       });
     } else {

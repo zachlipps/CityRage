@@ -9,10 +9,6 @@ export default class StartGame extends React.Component {
     };
   }
 
-  startListening() {
-    this.props.heyListen();
-  }
-
   handleStartGame() {
     // console.log('started the game');
     this.setState({
