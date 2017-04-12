@@ -1,9 +1,9 @@
 import { database } from '../firebase';
 
-const game = database.ref('games/aqwewq334');
+export const changeStat = (uid, absChange = -5, stat = 'health') => (dispatch, storeState) => {
+  const gid = storeState().auth.gid;
+  const game = database.ref(`games/${gid}`);
 
-
-export const changeStat = (uid, absChange = -5, stat = 'health') => (dispatch) => {
   game.child(`players/${uid}`).once('value')
   .then((snapshot) => {
     let currentStat = snapshot.val().stats[stat];
@@ -24,7 +24,9 @@ export const changeStat = (uid, absChange = -5, stat = 'health') => (dispatch) =
   });
 };
 
-export const killPlayer = uid => (dispatch) => {
+export const killPlayer = uid => (dispatch, storeState) => {
+  const gid = storeState().auth.gid;
+  const game = database.ref(`games/${gid}`);
   // this also needs to let the player know that they are dead
   game.child('/playerPosition').once('value')
   .then((playerArr) => {
