@@ -222,12 +222,12 @@ export const submitRoll = () => (dispatch, storeState) => {
 //     game.child('/king').set(currentPlayer.val());
 //   });
 // };
-//   game.child('/chosenOne').once('value')
-//   .then((currentPlayer) => {
-//     game.child('/king').set(currentPlayer.val())
-//     .then(() => dispatch(changeStat(currentPlayer.val().uid, 1, 'points')));
-//     game.child(`/players/${currentPlayer.val().uid}/kingOnTurnStart`).set(true);
-//   });
+  // game.child('/chosenOne').once('value')
+  // .then((currentPlayer) => {
+  //   game.child('/king').set(currentPlayer.val())
+  //   .then(() => dispatch(changeStat(currentPlayer.val().uid, 1, 'points')));
+  //   game.child(`/players/${currentPlayer.val().uid}/kingOnTurnStart`).set(true);
+  // });
 // };
 
 // change redux state and restart the roll count
@@ -239,16 +239,16 @@ export const endTurn = () => (dispatch, storeState) => {
 
 
   // check to see if they are king if so give them points
-  game.child('king').once('value').then((king) => {
-    game.child('chosenOne').once('value').then((chosenOne) => {
-      if (king.val().uid === chosenOne.val().uid) {
-        game.child(`/players/${chosenOne.val().uid}/stats/points`).once('value').then((points) => {
-          const p = points.val() + 1;
-          game.child(`/players/${chosenOne.val().uid}/stats/points`).set(p);
-        });
-      }
-    });
-  });
+  // game.child('king').once('value').then((king) => {
+  //   game.child('chosenOne').once('value').then((chosenOne) => {
+  //     if (king.val().uid === chosenOne.val().uid) {
+  //       game.child(`/players/${chosenOne.val().uid}/stats/points`).once('value').then((points) => {
+  //         const p = points.val() + 1;
+  //         game.child(`/players/${chosenOne.val().uid}/stats/points`).set(p);
+  //       });
+  //     }
+  //   });
+  // });
 
   const currentTurn = game.child('/currentTurn').once('value');
   const gameSize = game.child('/gameSize').once('value');
@@ -268,9 +268,8 @@ export const endTurn = () => (dispatch, storeState) => {
       game.child('attackedOnTurn').set(false);
 
       const updateChosenOne = game.child('/chosenOne').set({ uid: player.val().uid, displayName: player.val().displayName });
-      // console.log('king on turn start', player.val().kingOnTurnStart, player.val().displayName);
       if (player.val().kingOnTurnStart) {
-        // console.log('should get points for being king on start turn');
+        // console.log('should get 2 points for being king on start turn');
         dispatch(changeStat(player.val().uid, 2, 'points'));
       }
     });
@@ -297,12 +296,9 @@ const attack = (numAttacks, currentPlayerID) => (dispatch, storeState) => {
     return toAttack;
   })
   .then((toAttack) => {
-<<<<<<< HEAD
     game.child('attackedOnTurn').set(true);
     console.log(toAttack);
-=======
-    // console.log(toAttack);
->>>>>>> king will now get victory points
+
     toAttack.forEach((uid) => {
       dispatch(changeStat(uid, numAttacks, 'health'));
     });
