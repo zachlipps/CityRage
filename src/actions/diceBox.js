@@ -2,6 +2,7 @@ import { database } from '../firebase';
 import groupBy from 'lodash/groupBy';
 import { changeStat } from './changeStat';
 import { setKing } from './kickKing';
+import fire from '../Cards/effects';
 
 const game = database.ref('games/aqwewq334');
 
@@ -237,6 +238,20 @@ export const endTurn = () => (dispatch, storeState) => {
   const gid = storeState().auth.gid;
   const game = database.ref(`games/${gid}`);
 
+  // start: end_turn card effects: effects must be self-inflicted
+  game.child('chosenOne').once('value', (chosenOne) => {
+    game.child('players').once('value', (players) => {
+      const allPlayers = players.val();
+      const cardOwner = allPlayers[chosenOne.val().uid];
+      cardOwner.hand.forEach((card) => {
+        if (card.window === 'end_turn') {
+          fire[card.effect](cardOwner);
+        }
+        game.child('players').set(allPlayers);
+      });
+    });
+  });
+  // end: end_turn card effects
 
   // check to see if they are king if so give them points
   // game.child('king').once('value').then((king) => {
