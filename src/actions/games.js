@@ -76,6 +76,11 @@ export const leaveGame = uid => (dispatch, storeState) => {
 
       game.child('/playerPosition').set(playerArr);
       dispatch({ type: 'LEAVE_GAME', playerArr });
+
+      dispatch({ type: 'REMOVE_GAME' });
+
+      // user.once('value').then(gameData => {
+      // })
     }
     database.ref(`users/${uid}/currentGame`).set('');
   });
