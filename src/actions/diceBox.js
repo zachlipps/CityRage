@@ -194,7 +194,8 @@ export const submitRoll = () => (dispatch, storeState) => {
     });
   })
   .then(() => {
-    game.child('/king').once('value', (kingSpot) => {
+    game.child('/king').once('value')
+    .then((kingSpot) => {
       if (kingSpot.val() === 'none') {
           // if not set this user as the king
         dispatch(setKing());
@@ -219,6 +220,13 @@ export const submitRoll = () => (dispatch, storeState) => {
 //   .then((currentPlayer) => {
 //     console.log(currentPlayer.val());
 //     game.child('/king').set(currentPlayer.val());
+//   });
+// };
+//   game.child('/chosenOne').once('value')
+//   .then((currentPlayer) => {
+//     game.child('/king').set(currentPlayer.val())
+//     .then(() => dispatch(changeStat(currentPlayer.val().uid, 1, 'points')));
+//     game.child(`/players/${currentPlayer.val().uid}/kingOnTurnStart`).set(true);
 //   });
 // };
 
@@ -260,7 +268,11 @@ export const endTurn = () => (dispatch, storeState) => {
       game.child('attackedOnTurn').set(false);
 
       const updateChosenOne = game.child('/chosenOne').set({ uid: player.val().uid, displayName: player.val().displayName });
-      console.log('king on turn start', player.val().kingOnTurnStart, player.val().displayName);
+      // console.log('king on turn start', player.val().kingOnTurnStart, player.val().displayName);
+      if (player.val().kingOnTurnStart) {
+        // console.log('should get points for being king on start turn');
+        dispatch(changeStat(player.val().uid, 2, 'points'));
+      }
     });
   });
 };
@@ -285,8 +297,12 @@ const attack = (numAttacks, currentPlayerID) => (dispatch, storeState) => {
     return toAttack;
   })
   .then((toAttack) => {
+<<<<<<< HEAD
     game.child('attackedOnTurn').set(true);
     console.log(toAttack);
+=======
+    // console.log(toAttack);
+>>>>>>> king will now get victory points
     toAttack.forEach((uid) => {
       dispatch(changeStat(uid, numAttacks, 'health'));
     });
