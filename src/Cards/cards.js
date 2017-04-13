@@ -11,6 +11,13 @@ const cards = [
     effect: 'quake',
   },
   {
+    title: 'Apocalypse',
+    cost: 6,
+    type: 'Discard',
+    ability: 'deal 3 dmg to all other players',
+    effect: 'apocalypse',
+  },
+  {
     title: 'Gobbler',
     cost: 3,
     type: 'Discard',
@@ -18,11 +25,32 @@ const cards = [
     effect: 'gobbler',
   },
   {
+    title: 'PowerUp!',
+    cost: 6,
+    type: 'Discard',
+    ability: '+8 energy',
+    effect: 'power_up',
+  },
+  {
+    title: 'Super Saiyan!',
+    cost: 8,
+    type: 'Discard',
+    ability: '+12 energy',
+    effect: 'super_saiyan',
+  },
+  {
     title: 'Heal',
     cost: 2,
     type: 'Discard',
     ability: 'Gain 2 health',
     effect: 'heal',
+  },
+  {
+    title: 'Miracle',
+    cost: 6,
+    type: 'Discard',
+    ability: 'Gain 5 health',
+    effect: 'miracle',
   },
   {
     title: 'Savant',

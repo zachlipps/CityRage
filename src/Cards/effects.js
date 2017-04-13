@@ -4,14 +4,31 @@ const fire = {};
 fire.gobbler = (consumer) => {
   consumer.stats.energy += 4;
 };
+fire.power_up = (consumer) => {
+  consumer.stats.energy += 8;
+};
+fire.super_saiyan = (consumer) => {
+  consumer.stats.energy += 12;
+};
 fire.heal = (consumer) => {
   consumer.stats.health += 2;
+};
+fire.miracle = (consumer) => {
+  consumer.stats.health += 5;
 };
 fire.quake = (consumer, room) => {
   const players = room.players;
   for (const key in players) {
     if (players[key].uid !== consumer.uid) {
       players[key].stats.health -= 1;
+    }
+  }
+};
+fire.apocalypse = (consumer, room) => {
+  const players = room.players;
+  for (const key in players) {
+    if (players[key].uid !== consumer.uid) {
+      players[key].stats.health -= 3;
     }
   }
 };
