@@ -7,6 +7,16 @@ class CurrentUser extends React.Component {
     super(props);
   }
 
+  generatePlayerIcon(playerObj, gameData) {
+    let icon = '';
+    if (playerObj.stats.health <= 0) icon += '☠'
+    if (gameData){
+      if (gameData.king && playerObj.uid===gameData.king.uid) icon += '👑';
+      if (gameData.chosenOne && playerObj.uid===gameData.chosenOne.uid) icon += '👈';
+    }
+    return icon
+  }
+
   render() {
     const { auth } = this.props;
     // console.log(this.props.playersOnline);
@@ -24,8 +34,8 @@ class CurrentUser extends React.Component {
 
           {
             map(this.props.playersOnline, item =>
-              <div key={item.uid} style={{ border: '1px solid black', margin: '5px', padding: '2px', width: '155px' }}>
-                Name: {item.displayName}<br />
+              <div key={item.uid} style={{ border: '1px solid black', margin: '5px', padding: '2px', width: '185px' }}>
+                Name: {item.displayName} {this.generatePlayerIcon(item, this.props.game)}<br />
                 Health: {item.stats.health}<br />
                 Energy: {item.stats.energy}<br />
                 Points: {item.stats.points}
