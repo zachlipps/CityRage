@@ -10,7 +10,7 @@ export default class Lobby extends React.Component {
   // }
 
   render() {
-    console.log(this.props);
+    // console.log(this.props);
     return (
       <div>
         <h3>Lobby</h3>

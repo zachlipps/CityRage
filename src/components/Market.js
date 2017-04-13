@@ -23,7 +23,7 @@ class Market extends Component {
   }
 
   render() {
-    console.log(this.props);
+    // console.log(this.props);
     return (
       <div className="market-container" style={{ marginBottom: '25px', margin: '10px', border: '1px solid black', height: '165px', width: '625px' }}>
         <button onClick={() => this.props.resetMarket()}> ResetCards </button><br />
