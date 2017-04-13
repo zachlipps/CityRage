@@ -6,22 +6,18 @@ import KickKing from '../containers/kickKingContainer';
 
 export default class Game extends React.Component {
 
-  // componentWillMount() {
-  //   this.props.marketListener();
-  // }
-
-//   didAttack() {
-
-// }
-
   render() {
-    // console.log(this.props);
-    console.log('fix: make the NO button when asking the king if they want to leave do something ;) ');
+    console.log('Game Component', this.props, this.props.game.chosenOne !== this.props.auth.uid);
+    // console.log('fix: make the NO button when asking the king if they want to leave do something ;) ');
     return (
       <div>
         <div />
 
-        {(this.props.auth.uid === this.props.game.king.uid && this.props.game.attackedOnTurn === true && this.props.game.king !== null) && <KickKing />}
+        {(this.props.auth.uid === this.props.game.king.uid &&
+        this.props.game.attackedOnTurn === true &&
+        this.props.game.king !== null &&
+        this.props.game.chosenOne.uid !== this.props.auth.uid) && <KickKing />}
+
         <CurrentUser auth={this.props.auth} />
         <DiceBox auth={this.props.auth} />
         <Market />

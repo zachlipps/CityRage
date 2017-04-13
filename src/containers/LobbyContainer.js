@@ -7,7 +7,6 @@ import { leaveGame } from '../actions/games';
 import { heyListen } from '../actions/game';
 import { marketListener } from '../actions/market';
 
-
 const mapStateToProps = state => ({
   lobby: state.lobby,
   auth: state.auth,

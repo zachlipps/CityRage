@@ -57,7 +57,7 @@ export const startGame = () => (dispatch, storeState) => {
     .then(() => {
       dispatch(initalizeOnGameStart());
       dispatch(setFirstPlayer());
-      dispatch(startListeningForUsers());
+      // dispatch(startListeningForUsers());
     })
     .then(() => {
       game.once('value').then((data) => {
