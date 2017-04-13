@@ -243,6 +243,8 @@ export const endTurn = () => (dispatch, storeState) => {
       const updateRollCount = game.child('/rollCount').set(3);
       const submitted = game.child('/submitted').set(false);
       const resetDice = game.child('/diceBox').set(defaultDice);
+      game.child('attackedOnTurn').set(false);
+
       // dispatch({ type: 'UPDATE_CHOSEN_ONE', newChosenOne: updateChosenOne})
       // dispatch({ type: 'UPDATE_ROLLCOUNT', newRollCount: 3})
       // dispatch({ type: 'SET_SUBMITTED', hasBeenSubmitted: false})
@@ -271,6 +273,7 @@ const attack = (numAttacks, currentPlayerID) => (dispatch, storeState) => {
     return toAttack;
   })
   .then((toAttack) => {
+    game.child('attackedOnTurn').set(true);
     console.log(toAttack);
     toAttack.forEach((uid) => {
       dispatch(changeStat(uid, numAttacks, 'health'));
