@@ -2,8 +2,6 @@ import shuffle from 'lodash/shuffle';
 import { database } from '../firebase';
 import fire from '../Cards/effects';
 
-// gameRef later will set the game-hash-id dynamically
-
 function firebaseFix(obj) {
   console.log('firebaseFix');
   obj.deck = obj.deck || [];
@@ -59,8 +57,8 @@ export const buyCard = (card, buyerId) => (dispatch, storeState) => {
   .then(() => dispatch({ type: 'DEAL_CARD', payload: market }));
 };
 
-// "room" parameter must be dynamically set to gameID - not yet implemented
 export const resetMarket = () => (dispatch, storeState) => {
+  console.log('fired before the user payed');
   const gid = storeState().auth.gid;
   const game = database.ref(`games/${gid}`);
 
@@ -77,6 +75,24 @@ export const resetMarket = () => (dispatch, storeState) => {
     .then(() => dispatch({ type: 'DEAL_NEW_MARKET', payload: market }));
   });
 };
+
+// reset market reset with energy check
+export const userResetMarket = uid => (dispatch, storeState) => {
+  const gid = storeState().auth.gid;
+  const game = database.ref(`games/${gid}`);
+
+  game.child('players').once('value', (players) => {
+    const allPlayers = players.val();
+    const player = allPlayers[uid];
+    if (player.stats.energy >= 2) {
+      player.stats.energy -= 2;
+      dispatch(resetMarket());
+    }
+    console.log('userResetMarket fired on button click');
+    game.child('players').set(allPlayers);
+  });
+};
+// end market reset with energy check
 
 export const marketListener = () => (dispatch, storeState) => {
   const gid = storeState().auth.gid;
