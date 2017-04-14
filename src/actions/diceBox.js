@@ -60,11 +60,13 @@ export const rollDice = (uid, chosenId) => (dispatch, storeState) => {
         game.child('/diceBox').once('value')
       .then((listOfDiceSnap) => {
         const listOfDice = listOfDiceSnap.val();
+        const pArray = [];
         for (const i in listOfDice) {
           if (listOfDice[i].selected !== true) {
-            game.child(`/diceBox/${i}`).set({ val: diceOptions[randNum()], selected: false });
+            pArray.push(game.child(`/diceBox/${i}`).set({ val: diceOptions[randNum()], selected: false }))
           }
         }
+        // Promise.all(pArray)
       }).then(() => {
         game.child('/diceBox').once('value').then((updatedDice) => {
           dispatch(updateRolls(updatedDice.val()));

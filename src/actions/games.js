@@ -83,6 +83,7 @@ export const leaveGame = uid => (dispatch, storeState) => {
       }).then(() => {
         game.child('/players').off();
         game.off();
+        game.child('/market').off()
         database.ref(`users/${uid}/currentGame`).set('');
       });
 
