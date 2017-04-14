@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
 
 class Market extends Component {
-
-  componentWillMount() {
-    this.props.marketListener();
-  }
-
   constructor(props) {
     super(props);
     this.cardStyle = { margin: '10px', width: '100px', height: '120px', border: '1px solid black', float: 'left' };
+  }
+
+  componentWillMount() {
+    this.props.marketListener();
   }
 
   createMarket() {
@@ -23,7 +22,6 @@ class Market extends Component {
   }
 
   render() {
-    // console.log(this.props);
     return (
       <div className="market-container" style={{ marginBottom: '25px', margin: '10px', border: '1px solid black', height: '165px', width: '625px' }}>
         <button onClick={() => this.props.userResetMarket(this.props.user)}> ResetCards </button><br />

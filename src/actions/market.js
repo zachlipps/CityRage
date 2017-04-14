@@ -3,14 +3,12 @@ import { database } from '../firebase';
 import fire from '../Cards/effects';
 
 function firebaseFix(obj) {
-  console.log('firebaseFix');
   obj.deck = obj.deck || [];
   obj.face_up = obj.face_up || [];
   obj.discarded = obj.discarded || [];
 }
 
 function regenDeckIfEmpty(obj) {
-  console.log('regenDeckIfEmpty');
   if (!obj.deck || obj.deck.length === 0) {
     obj.deck = [];
     obj.deck = shuffle(obj.discarded);
@@ -19,7 +17,6 @@ function regenDeckIfEmpty(obj) {
 }
 
 function dealCard(obj) {
-  console.log('dealCard');
   obj.face_up.push(obj.deck[0]);
   obj.deck.shift();
 }
@@ -58,7 +55,6 @@ export const buyCard = (card, buyerId) => (dispatch, storeState) => {
 };
 
 export const resetMarket = () => (dispatch, storeState) => {
-  console.log('fired before the user payed');
   const gid = storeState().auth.gid;
   const game = database.ref(`games/${gid}`);
 
@@ -88,7 +84,6 @@ export const userResetMarket = uid => (dispatch, storeState) => {
       player.stats.energy -= 2;
       dispatch(resetMarket());
     }
-    console.log('userResetMarket fired on button click');
     game.child('players').set(allPlayers);
   });
 };
@@ -97,9 +92,6 @@ export const userResetMarket = uid => (dispatch, storeState) => {
 export const marketListener = () => (dispatch, storeState) => {
   const gid = storeState().auth.gid;
   const game = database.ref(`games/${gid}`);
-
-  console.log(' in marketListener');
-
   game.child('/market').on('value', (newMarket) => {
     dispatch({ type: 'DEAL_NEW_MARKET', payload: newMarket.val() });
   });
