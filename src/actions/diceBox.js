@@ -152,8 +152,8 @@ export const submitRoll = () => (dispatch, storeState) => {
       if (objectifiedRolls.energy) {
      // console.log('energy amount ', objectifiedRolls.energy.length);
         game.child(`/players/${currentPlayer}/stats/energy`).once('value', (snapshot) => {
-          const energy = snapshot.val() + objectifiedRolls.energy.length;
-          game.child(`/players/${currentPlayer}/stats/energy`).set(energy);
+          const energyIncrease = objectifiedRolls.energy.length;
+          dispatch(changeStat(currentPlayer, energyIncrease, 'energy'));
         });
       }
 
