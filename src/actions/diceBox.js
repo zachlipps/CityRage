@@ -63,7 +63,7 @@ export const rollDice = (uid, chosenId) => (dispatch, storeState) => {
         const pArray = [];
         for (const i in listOfDice) {
           if (listOfDice[i].selected !== true) {
-            pArray.push(game.child(`/diceBox/${i}`).set({ val: diceOptions[randNum()], selected: false }))
+            pArray.push(game.child(`/diceBox/${i}`).set({ val: diceOptions[randNum()], selected: false }));
           }
         }
         // Promise.all(pArray)
@@ -94,25 +94,25 @@ export const selectDice = (die, uid, chosenId) => (dispatch, storeState) => {
   const game = database.ref(`games/${gid}`);
 
   if (uid == chosenId) {
-  let valueOfSelected;
-  let valueOfVal;
-  game.child(`/diceBox/${die}`).once('value', (snapshot) => {
-    valueOfSelected = snapshot.val().selected;
-    valueOfVal = snapshot.val().val;
-  }).then(() => {
-    if (valueOfVal !== '?') {
-      game.child(`/diceBox/${die}/selected`).set(!valueOfSelected).then(() => {
-        game.child('/diceBox').once('value', (snapshot) => {
-          const other = {};
-          for (const i in snapshot.val()) {
-            other[i] = snapshot.val()[i];
-          }
-          dispatch(selectDie(other));
+    let valueOfSelected;
+    let valueOfVal;
+    game.child(`/diceBox/${die}`).once('value', (snapshot) => {
+      valueOfSelected = snapshot.val().selected;
+      valueOfVal = snapshot.val().val;
+    }).then(() => {
+      if (valueOfVal !== '?') {
+        game.child(`/diceBox/${die}/selected`).set(!valueOfSelected).then(() => {
+          game.child('/diceBox').once('value', (snapshot) => {
+            const other = {};
+            for (const i in snapshot.val()) {
+              other[i] = snapshot.val()[i];
+            }
+            dispatch(selectDie(other));
+          });
         });
-      });
-    }
-  });
-}
+      }
+    });
+  }
 };
 
 export const submitRoll = () => (dispatch, storeState) => {
@@ -135,17 +135,14 @@ export const submitRoll = () => (dispatch, storeState) => {
     game.child('chosenOne').once('value', (snapshot) => {
       const currentPlayer = snapshot.val().uid;
 
-      console.log(currentPlayer);
+      console.log('currentPlayer', currentPlayer);
       const objectifiedRolls = groupBy(submittedRoll);
     // check for heal
       if (objectifiedRolls.health) {
         game.child('/king').once('value', (kingSpot) => {
-          // check to see if current player is king
           if (kingSpot.val().uid !== currentPlayer) {
-            game.child(`/players/${currentPlayer}/stats/health`).once('value', (snapshot) => {
-              const health = snapshot.val() + objectifiedRolls.health.length;
-              game.child(`/players/${currentPlayer}/stats/health`).set(health);
-            });
+            const healthIncrease = objectifiedRolls.health.length;
+            dispatch(changeStat(currentPlayer, healthIncrease, 'health'));
           }
         });
       }
@@ -321,8 +318,6 @@ const attack = (numAttacks, currentPlayerID) => (dispatch, storeState) => {
     toAttack.forEach((uid) => {
       dispatch(changeStat(uid, numAttacks, 'health'));
     });
-  }).then(() => {
-    // dispatch(kickKing());
   });
 };
 

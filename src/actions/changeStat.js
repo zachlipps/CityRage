@@ -6,11 +6,13 @@ export const changeStat = (uid, absChange = -5, stat = 'health') => (dispatch, s
 
   game.child(`players/${uid}`).once('value')
   .then((snapshot) => {
-    let currentStat = snapshot.val().stats[stat];
     const displayName = snapshot.val().displayName;
+    let currentStat = snapshot.val().stats[stat];
+
     currentStat += absChange;
-    game.child(`players/${uid}/stats/${stat}`).set(currentStat);
-    return [currentStat, displayName];
-  });
+    console.log('here is current stat', currentStat);
+    if (stat === 'health') { currentStat = Math.min(currentStat, 10); }
+    return currentStat;
+  }).then(currentStat => game.child(`players/${uid}/stats/${stat}`).set(currentStat));
 };
 
