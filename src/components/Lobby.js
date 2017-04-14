@@ -19,13 +19,11 @@ export default class Lobby extends React.Component {
 
         <Link to="/games-list">
           <button
-            onClick={() => {
-              this.props.leaveGame(this.props.auth.uid);
-            }}
+            onClick={() => { this.props.leaveGame(this.props.auth.uid); }}
           >Leave</button>
         </Link>
 
-        <StartGame />
+        { this.props.game.gid === this.props.auth.gid && <StartGame />}
       </div>
     );
   }
