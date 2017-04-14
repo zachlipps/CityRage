@@ -87,10 +87,11 @@ const selectDie = die => ({
   die,
 });
 
-export const selectDice = die => (dispatch, storeState) => {
+export const selectDice = (die, uid, chosenId) => (dispatch, storeState) => {
   const gid = storeState().auth.gid;
   const game = database.ref(`games/${gid}`);
 
+  if (uid == chosenId) {
   let valueOfSelected;
   let valueOfVal;
   game.child(`/diceBox/${die}`).once('value', (snapshot) => {
@@ -109,6 +110,7 @@ export const selectDice = die => (dispatch, storeState) => {
       });
     }
   });
+}
 };
 
 export const submitRoll = () => (dispatch, storeState) => {
