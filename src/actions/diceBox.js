@@ -134,10 +134,8 @@ export const submitRoll = () => (dispatch, storeState) => {
   .then(() => {
     game.child('chosenOne').once('value', (snapshot) => {
       const currentPlayer = snapshot.val().uid;
-
-      console.log('currentPlayer', currentPlayer);
       const objectifiedRolls = groupBy(submittedRoll);
-    // check for heal
+
       if (objectifiedRolls.health) {
         game.child('/king').once('value', (kingSpot) => {
           if (kingSpot.val().uid !== currentPlayer) {
@@ -147,46 +145,26 @@ export const submitRoll = () => (dispatch, storeState) => {
         });
       }
 
-    // check power
-    // console.log('these are the objectified rolls ', objectifiedRolls);
       if (objectifiedRolls.energy) {
-     // console.log('energy amount ', objectifiedRolls.energy.length);
         game.child(`/players/${currentPlayer}/stats/energy`).once('value', (snapshot) => {
           const energyIncrease = objectifiedRolls.energy.length;
           dispatch(changeStat(currentPlayer, energyIncrease, 'energy'));
         });
       }
 
-
-    // check for numbers 3
       if (objectifiedRolls[3] && objectifiedRolls[3].length >= 3) {
-      //
-        const bonus = objectifiedRolls[3].length - 3;
-        game.child(`/players/${currentPlayer}/stats/points`).once('value', (snapshot) => {
-          const points = snapshot.val() + bonus + 3;
-          game.child(`/players/${currentPlayer}/stats/points`).set(points);
-        });
+        const pointsIncrease = objectifiedRolls[3].length;
+        dispatch(changeStat(currentPlayer, pointsIncrease, 'points'));
       }
 
-     // check for numbers 2
       if (objectifiedRolls[2] && objectifiedRolls[2].length >= 3) {
-      //
-        const bonus = objectifiedRolls[2].length - 3;
-        game.child(`/players/${currentPlayer}/stats/points`).once('value', (snapshot) => {
-          const points = snapshot.val() + bonus + 2;
-          game.child(`/players/${currentPlayer}/stats/points`).set(points);
-        });
+        const pointsIncrease = objectifiedRolls[2].length - 1;
+        dispatch(changeStat(currentPlayer, pointsIncrease, 'points'));
       }
 
-
-     // check for numbers 1
       if (objectifiedRolls[1] && objectifiedRolls[1].length >= 3) {
-      //
-        const bonus = objectifiedRolls[1].length - 3;
-        game.child(`/players/${currentPlayer}/stats/points`).once('value', (snapshot) => {
-          const points = snapshot.val() + bonus + 1;
-          game.child(`/players/${currentPlayer}/stats/points`).set(points);
-        });
+        const pointsIncrease = objectifiedRolls[1].length - 2;
+        dispatch(changeStat(currentPlayer, pointsIncrease, 'points'));
       }
 
       if (objectifiedRolls.attack) {
