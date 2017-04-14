@@ -1,6 +1,12 @@
 const fire = {};
 
 // effects of cards with type = 'discard'
+fire.golden_goose = (consumer) => {
+  consumer.stats.points += 2;
+};
+fire.demolished_treasury = (consumer) => {
+  consumer.stats.points += 3;
+};
 fire.gobbler = (consumer) => {
   consumer.stats.energy += 4;
 };

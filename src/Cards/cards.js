@@ -6,6 +6,20 @@ const cards = [
   // note: these cards do not need a 'window' key
   // since their effect is immediately implemented after being bought
   {
+    title: 'Golden Goose',
+    cost: 4,
+    type: 'Discard',
+    ability: 'Gain 2 pts',
+    effect: 'golden_goose',
+  },
+  {
+    title: 'Demolished Treasury',
+    cost: 6,
+    type: 'Discard',
+    ability: 'Gain 3 pts',
+    effect: 'demolished_treasury',
+  },
+  {
     title: 'Quake',
     cost: 3,
     type: 'Discard',
