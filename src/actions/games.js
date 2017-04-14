@@ -75,12 +75,23 @@ export const leaveGame = uid => (dispatch, storeState) => {
       playerArr.splice(currentPlayerIndex, 1);
 
       game.child('/playerPosition').set(playerArr);
+
+      // set player array without user
       dispatch({ type: 'LEAVE_GAME', playerArr });
 
+      //
       dispatch({ type: 'REMOVE_GAME' });
 
-      // user.once('value').then(gameData => {
-      // })
+      // set playersOnline to  []
+      dispatch({ type: 'UPDATE_PLAYERS', players: [] });
+      // set game to null
+      dispatch({ type: 'UPDATE_GAME_DATA', gameData: null });
+      // set gamelist?
+
+
+      game.child('/players').off();
+      game.off();
+      // off(listener)
     }
     database.ref(`users/${uid}/currentGame`).set('');
   });
