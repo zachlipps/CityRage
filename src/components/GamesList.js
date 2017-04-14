@@ -1,6 +1,7 @@
 import React from 'react';
 import Lobby from '../containers/LobbyContainer';
 
+
 export default class GamesList extends React.Component {
   constructor(props) {
     super(props);
