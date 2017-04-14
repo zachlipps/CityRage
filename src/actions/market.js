@@ -2,17 +2,13 @@ import shuffle from 'lodash/shuffle';
 import { database } from '../firebase';
 import fire from '../Cards/effects';
 
-// gameRef later will set the game-hash-id dynamically
-
 function firebaseFix(obj) {
-  console.log('firebaseFix');
   obj.deck = obj.deck || [];
   obj.face_up = obj.face_up || [];
   obj.discarded = obj.discarded || [];
 }
 
 function regenDeckIfEmpty(obj) {
-  console.log('regenDeckIfEmpty');
   if (!obj.deck || obj.deck.length === 0) {
     obj.deck = [];
     obj.deck = shuffle(obj.discarded);
@@ -21,7 +17,6 @@ function regenDeckIfEmpty(obj) {
 }
 
 function dealCard(obj) {
-  console.log('dealCard');
   obj.face_up.push(obj.deck[0]);
   obj.deck.shift();
 }
@@ -59,7 +54,6 @@ export const buyCard = (card, buyerId) => (dispatch, storeState) => {
   .then(() => dispatch({ type: 'DEAL_CARD', payload: market }));
 };
 
-// "room" parameter must be dynamically set to gameID - not yet implemented
 export const resetMarket = () => (dispatch, storeState) => {
   const gid = storeState().auth.gid;
   const game = database.ref(`games/${gid}`);
@@ -78,12 +72,26 @@ export const resetMarket = () => (dispatch, storeState) => {
   });
 };
 
-export const marketListener = () => (dispatch, storeState) => {
+// reset market reset with energy check
+export const userResetMarket = uid => (dispatch, storeState) => {
   const gid = storeState().auth.gid;
   const game = database.ref(`games/${gid}`);
 
-  console.log(' in marketListener');
+  game.child('players').once('value', (players) => {
+    const allPlayers = players.val();
+    const player = allPlayers[uid];
+    if (player.stats.energy >= 2) {
+      player.stats.energy -= 2;
+      dispatch(resetMarket());
+    }
+    game.child('players').set(allPlayers);
+  });
+};
+// end market reset with energy check
 
+export const marketListener = () => (dispatch, storeState) => {
+  const gid = storeState().auth.gid;
+  const game = database.ref(`games/${gid}`);
   game.child('/market').on('value', (newMarket) => {
     dispatch({ type: 'DEAL_NEW_MARKET', payload: newMarket.val() });
   });
