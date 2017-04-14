@@ -76,10 +76,20 @@ export const leaveGame = uid => (dispatch, storeState) => {
 
       game.child('/playerPosition').set(playerArr);
 
+      game.child('players').once('value').then((players) => {
+        const playersData = players.val();
+        delete playersData[uid];
+        game.child('players').set(playersData);
+      }).then(() => {
+        game.child('/players').off();
+        game.off();
+        database.ref(`users/${uid}/currentGame`).set('');
+      });
+
+
+      // off(listener)
       // set player array without user
       dispatch({ type: 'LEAVE_GAME', playerArr });
-
-      //
       dispatch({ type: 'REMOVE_GAME' });
 
       // set playersOnline to  []
@@ -87,13 +97,7 @@ export const leaveGame = uid => (dispatch, storeState) => {
       // set game to null
       dispatch({ type: 'UPDATE_GAME_DATA', gameData: null });
       // set gamelist?
-
-
-      game.child('/players').off();
-      game.off();
-      // off(listener)
     }
-    database.ref(`users/${uid}/currentGame`).set('');
   });
 };
 
