@@ -36,9 +36,9 @@ class CurrentUser extends React.Component {
           <p className="CurrentUser--email">{auth.email}</p>
           {/* <button className="CurrentUser--signout"onClick={() => { signOut(auth.uid); }}> Sign Out</button>*/}
 
-          <div style={{ display: 'flex', flex: 1, flexDirection: 'row' }}>
+          <div style={{ display: 'flex', flex: 1, flexDirection: 'column' }}>
             {map(this.props.playersOnline, item => <div>
-              <div key={item.uid} style={{ display: 'flex', flex: 1, flexDirection: 'row', backgroundColor: '#F0F7FF', alignItems: 'center', boxShadow: 'grey -1px 3px 12px', borderTopLeftRadius: 10, borderTopRightRadius: 10, borderBottomLeftRadius: 10, borderBottomRightRadius: 10, paddingLeft: '10px', paddingRight: '10px' }}>
+              <div key={item.uid} style={{ display: 'flex', flex: 1, maxWidth: '400px', flexDirection: 'row', backgroundColor: '#F0F7FF', alignItems: 'center', boxShadow: 'grey -1px 3px 12px', borderTopLeftRadius: 10, borderTopRightRadius: 10, borderBottomLeftRadius: 10, borderBottomRightRadius: 10, paddingLeft: '10px', paddingRight: '10px' }}>
                 <div style={{ flex: 1 }}><img style={{ margin: '10px', width: '100px', height: '100px', borderRadius: 100 }} src={item.photoURL} alt={item.photoURL} /></div>
                 <div style={{ flex: 3 }}>
                   <div style={{ flex: 1, flexDirection: 'column', alignSelf: 'center', margin: '10px' }}>
