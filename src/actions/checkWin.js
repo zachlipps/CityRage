@@ -10,6 +10,7 @@ export const checkWin = players => (dispatch, storeState) => {
     }
     if (players[i].stats.points >= 20) {
       console.log(players[i].displayName, ' won the game');
+      game.child('winner').set(players[i]);
     }
   }
 };
@@ -18,15 +19,18 @@ export const checkWin = players => (dispatch, storeState) => {
 export const killPlayer = uid => (dispatch, storeState) => {
   const gid = storeState().auth.gid;
   const game = database.ref(`games/${gid}`);
-  // this also needs to let the player know that they are dead
+
   game.child('/playerPosition').once('value')
   .then((playerArr) => {
     const newPlayerPos = playerArr.val().filter(playerID => playerID !== uid);
+
     game.child('/playerPosition').set(newPlayerPos);
     game.child('/gameSize').set(newPlayerPos.length);
     dispatch({ type: 'UPDATE_DEAD', payload: 'YOYOYO' });
+
     if (newPlayerPos.length === 1) {
-      console.log('SOMEONE WON THE GAME');
+      game.child(`/players/${newPlayerPos[0]}`).once('value')
+      .then(winner => game.child('winner').set(winner.val()));
     }
   })
   .then(() => {
