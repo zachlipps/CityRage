@@ -63,7 +63,7 @@ export const rollDice = (uid, chosenId) => (dispatch, storeState) => {
         const pArray = [];
         for (const i in listOfDice) {
           if (listOfDice[i].selected !== true) {
-            pArray.push(game.child(`/diceBox/${i}`).set({ val: diceOptions[randNum()], selected: false }))
+            pArray.push(game.child(`/diceBox/${i}`).set({ val: diceOptions[randNum()], selected: false }));
           }
         }
         // Promise.all(pArray)
@@ -94,25 +94,25 @@ export const selectDice = (die, uid, chosenId) => (dispatch, storeState) => {
   const game = database.ref(`games/${gid}`);
 
   if (uid == chosenId) {
-  let valueOfSelected;
-  let valueOfVal;
-  game.child(`/diceBox/${die}`).once('value', (snapshot) => {
-    valueOfSelected = snapshot.val().selected;
-    valueOfVal = snapshot.val().val;
-  }).then(() => {
-    if (valueOfVal !== '?') {
-      game.child(`/diceBox/${die}/selected`).set(!valueOfSelected).then(() => {
-        game.child('/diceBox').once('value', (snapshot) => {
-          const other = {};
-          for (const i in snapshot.val()) {
-            other[i] = snapshot.val()[i];
-          }
-          dispatch(selectDie(other));
+    let valueOfSelected;
+    let valueOfVal;
+    game.child(`/diceBox/${die}`).once('value', (snapshot) => {
+      valueOfSelected = snapshot.val().selected;
+      valueOfVal = snapshot.val().val;
+    }).then(() => {
+      if (valueOfVal !== '?') {
+        game.child(`/diceBox/${die}/selected`).set(!valueOfSelected).then(() => {
+          game.child('/diceBox').once('value', (snapshot) => {
+            const other = {};
+            for (const i in snapshot.val()) {
+              other[i] = snapshot.val()[i];
+            }
+            dispatch(selectDie(other));
+          });
         });
-      });
-    }
-  });
-}
+      }
+    });
+  }
 };
 
 export const submitRoll = () => (dispatch, storeState) => {
@@ -134,62 +134,37 @@ export const submitRoll = () => (dispatch, storeState) => {
   .then(() => {
     game.child('chosenOne').once('value', (snapshot) => {
       const currentPlayer = snapshot.val().uid;
-
-      console.log(currentPlayer);
       const objectifiedRolls = groupBy(submittedRoll);
-    // check for heal
+
       if (objectifiedRolls.health) {
         game.child('/king').once('value', (kingSpot) => {
-          // check to see if current player is king
           if (kingSpot.val().uid !== currentPlayer) {
-            game.child(`/players/${currentPlayer}/stats/health`).once('value', (snapshot) => {
-              const health = snapshot.val() + objectifiedRolls.health.length;
-              game.child(`/players/${currentPlayer}/stats/health`).set(health);
-            });
+            const healthIncrease = objectifiedRolls.health.length;
+            dispatch(changeStat(currentPlayer, healthIncrease, 'health'));
           }
         });
       }
 
-    // check power
-    // console.log('these are the objectified rolls ', objectifiedRolls);
       if (objectifiedRolls.energy) {
-     // console.log('energy amount ', objectifiedRolls.energy.length);
         game.child(`/players/${currentPlayer}/stats/energy`).once('value', (snapshot) => {
-          const energy = snapshot.val() + objectifiedRolls.energy.length;
-          game.child(`/players/${currentPlayer}/stats/energy`).set(energy);
+          const energyIncrease = objectifiedRolls.energy.length;
+          dispatch(changeStat(currentPlayer, energyIncrease, 'energy'));
         });
       }
 
-
-    // check for numbers 3
       if (objectifiedRolls[3] && objectifiedRolls[3].length >= 3) {
-      //
-        const bonus = objectifiedRolls[3].length - 3;
-        game.child(`/players/${currentPlayer}/stats/points`).once('value', (snapshot) => {
-          const points = snapshot.val() + bonus + 3;
-          game.child(`/players/${currentPlayer}/stats/points`).set(points);
-        });
+        const pointsIncrease = objectifiedRolls[3].length;
+        dispatch(changeStat(currentPlayer, pointsIncrease, 'points'));
       }
 
-     // check for numbers 2
       if (objectifiedRolls[2] && objectifiedRolls[2].length >= 3) {
-      //
-        const bonus = objectifiedRolls[2].length - 3;
-        game.child(`/players/${currentPlayer}/stats/points`).once('value', (snapshot) => {
-          const points = snapshot.val() + bonus + 2;
-          game.child(`/players/${currentPlayer}/stats/points`).set(points);
-        });
+        const pointsIncrease = objectifiedRolls[2].length - 1;
+        dispatch(changeStat(currentPlayer, pointsIncrease, 'points'));
       }
 
-
-     // check for numbers 1
       if (objectifiedRolls[1] && objectifiedRolls[1].length >= 3) {
-      //
-        const bonus = objectifiedRolls[1].length - 3;
-        game.child(`/players/${currentPlayer}/stats/points`).once('value', (snapshot) => {
-          const points = snapshot.val() + bonus + 1;
-          game.child(`/players/${currentPlayer}/stats/points`).set(points);
-        });
+        const pointsIncrease = objectifiedRolls[1].length - 2;
+        dispatch(changeStat(currentPlayer, pointsIncrease, 'points'));
       }
 
       if (objectifiedRolls.attack) {
@@ -202,40 +177,16 @@ export const submitRoll = () => (dispatch, storeState) => {
     game.child('/king').once('value')
     .then((kingSpot) => {
       if (kingSpot.val() === 'none') {
-          // if not set this user as the king
         dispatch(setKing());
       }
     });
     game.child('/submitted').set(true)
-  .then(() => {
-    const setSubmittedTrueAction = { type: 'SET_SUBMITTED', hasBeenSubmitted: true };
-    dispatch(setSubmittedTrueAction);
-  });
+    .then(() => {
+      const setSubmittedTrueAction = { type: 'SET_SUBMITTED', hasBeenSubmitted: true };
+      dispatch(setSubmittedTrueAction);
+    });
   });
 };
-
-
-// const setKing = () => (dispatch, storeState) => {
-//   const gid = storeState().auth.gid;
-//   const game = database.ref(`games/${gid}`);
-
-//   console.log('in setKing');
-
-//   game.child('/chosenOne').once('value')
-//   .then((currentPlayer) => {
-//     console.log(currentPlayer.val());
-//     game.child('/king').set(currentPlayer.val());
-//   });
-// };
-  // game.child('/chosenOne').once('value')
-  // .then((currentPlayer) => {
-  //   game.child('/king').set(currentPlayer.val())
-  //   .then(() => dispatch(changeStat(currentPlayer.val().uid, 1, 'points')));
-  //   game.child(`/players/${currentPlayer.val().uid}/kingOnTurnStart`).set(true);
-  // });
-// };
-
-// change redux state and restart the roll count
 
 
 export const endTurn = () => (dispatch, storeState) => {
@@ -257,18 +208,6 @@ export const endTurn = () => (dispatch, storeState) => {
   });
   // end: end_turn card effects
 
-  // check to see if they are king if so give them points
-  // game.child('king').once('value').then((king) => {
-  //   game.child('chosenOne').once('value').then((chosenOne) => {
-  //     if (king.val().uid === chosenOne.val().uid) {
-  //       game.child(`/players/${chosenOne.val().uid}/stats/points`).once('value').then((points) => {
-  //         const p = points.val() + 1;
-  //         game.child(`/players/${chosenOne.val().uid}/stats/points`).set(p);
-  //       });
-  //     }
-  //   });
-  // });
-
   const currentTurn = game.child('/currentTurn').once('value');
   const gameSize = game.child('/gameSize').once('value');
   Promise.all([currentTurn, gameSize])
@@ -288,7 +227,6 @@ export const endTurn = () => (dispatch, storeState) => {
 
       const updateChosenOne = game.child('/chosenOne').set({ uid: player.val().uid, displayName: player.val().displayName });
       if (player.val().kingOnTurnStart) {
-        // console.log('should get 2 points for being king on start turn');
         dispatch(changeStat(player.val().uid, 2, 'points'));
       }
     });
@@ -321,22 +259,5 @@ const attack = (numAttacks, currentPlayerID) => (dispatch, storeState) => {
     toAttack.forEach((uid) => {
       dispatch(changeStat(uid, numAttacks, 'health'));
     });
-  }).then(() => {
-    // dispatch(kickKing());
   });
 };
-
-// export const kickKing = () => (dispatch, storeState) => {
-//   const gid = storeState().auth.gid;
-//   const game = database.ref(`games/${gid}`);
-
-//   // check to see if the current user is king
-//   game.once('value', (theGame) => {
-//     if (theGame.val().king.uid !== theGame.val().chosenOne.uid) {
-//       console.log('Does the king want to leave?');
-//     }
-//   });
-//     // if not then display message to king asking if they want to leave
-//       // if true
-//         // set current user to king
-// };
