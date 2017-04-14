@@ -16,7 +16,6 @@ export const setKing = () => (dispatch, storeState) => {
   }
 
   if (kingUid) {
-    console.log(kingUid, 'I am the KINGUID in setKING');
     game.child(`/players/${kingUid}/kingOnTurnStart`).set(false)
     .then(setNewKing());
   } else {
