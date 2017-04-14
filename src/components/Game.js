@@ -9,15 +9,23 @@ export default class Game extends React.Component {
     super(props);
     this.checkKing = this.checkKing.bind(this);
   }
+
+
+
+
   checkKing() {
-    return (this.props.auth.uid === this.props.game.king.uid &&
+    let kingAttack = false;
+    if (this.props.game.king !== undefined) {
+      kingAttack = this.props.auth.uid === this.props.game.king.uid &&
         this.props.game.attackedOnTurn === true &&
         this.props.game.king !== null &&
-        this.props.game.chosenOne.uid !== this.props.auth.uid);
+        this.props.game.chosenOne.uid !== this.props.auth.uid
+    }
+    return kingAttack;
   }
 
   render() {
-    console.log('Game Component', this.props, this.props.game.chosenOne !== this.props.auth.uid);
+    // console.log('Game Component', this.props, this.props.game.chosenOne !== this.props.auth.uid);
     // console.log('fix: make the NO button when asking the king if they want to leave do something ;) ');
     return (
       <div>

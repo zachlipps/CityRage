@@ -6,7 +6,7 @@ import Lobby from '../containers/LobbyContainer';
 import Home from '../containers/HomeContainer';
 import NewGame from '../containers/NewGameContainer';
 import GamesList from '../containers/GamesListContainer';
-import '../Assets/App.css';
+import '../assets/App.css';
 
 const Application = ({ auth, signIn, signOut, game }) => (
   <Router>

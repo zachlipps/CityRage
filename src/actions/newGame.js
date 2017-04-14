@@ -1,6 +1,6 @@
 import { database } from '../firebase';
 
-export const createNewGame = (name, numPlayers = 4) => {
+export const createNewGame = (name, numPlayers = 4) => (dispatch)=> {
   const gid = database.ref('games').push().key;
   database.ref(`games/${gid}`).set(
     {
@@ -19,5 +19,5 @@ export const createNewGame = (name, numPlayers = 4) => {
         six: { val: '?', selected: false },
       },
     });
-}
-;
+    dispatch({type:'ADD_USER',type:'poop'})
+};
