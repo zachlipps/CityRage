@@ -128,41 +128,41 @@ export const submitRoll = () => (dispatch, storeState) => {
   .then(() => {
     game.child('chosenOne').once('value', (snapshot) => {
       const currentPlayer = snapshot.val().uid;
-      const objectifiedRolls = groupBy(submittedRoll);
+      const currentRoll = groupBy(submittedRoll);
 
-      if (objectifiedRolls.health) {
+      if (currentRoll.health) {
         game.child('/king').once('value', (kingSpot) => {
           if (kingSpot.val().uid !== currentPlayer) {
-            const healthIncrease = objectifiedRolls.health.length;
+            const healthIncrease = currentRoll.health.length;
             dispatch(changeStat(currentPlayer, healthIncrease, 'health'));
           }
         });
       }
 
-      if (objectifiedRolls.energy) {
+      if (currentRoll.energy) {
         game.child(`/players/${currentPlayer}/stats/energy`).once('value', (snapshot) => {
-          const energyIncrease = objectifiedRolls.energy.length;
+          const energyIncrease = currentRoll.energy.length;
           dispatch(changeStat(currentPlayer, energyIncrease, 'energy'));
         });
       }
 
-      if (objectifiedRolls[3] && objectifiedRolls[3].length >= 3) {
-        const pointsIncrease = objectifiedRolls[3].length;
+      if (currentRoll[3] && currentRoll[3].length >= 3) {
+        const pointsIncrease = currentRoll[3].length;
         dispatch(changeStat(currentPlayer, pointsIncrease, 'points'));
       }
 
-      if (objectifiedRolls[2] && objectifiedRolls[2].length >= 3) {
-        const pointsIncrease = objectifiedRolls[2].length - 1;
+      if (currentRoll[2] && currentRoll[2].length >= 3) {
+        const pointsIncrease = currentRoll[2].length - 1;
         dispatch(changeStat(currentPlayer, pointsIncrease, 'points'));
       }
 
-      if (objectifiedRolls[1] && objectifiedRolls[1].length >= 3) {
-        const pointsIncrease = objectifiedRolls[1].length - 2;
+      if (currentRoll[1] && currentRoll[1].length >= 3) {
+        const pointsIncrease = currentRoll[1].length - 2;
         dispatch(changeStat(currentPlayer, pointsIncrease, 'points'));
       }
 
-      if (objectifiedRolls.attack) {
-        const attacks = -objectifiedRolls.attack.length;
+      if (currentRoll.attack) {
+        const attacks = -currentRoll.attack.length;
         dispatch(attack(attacks, currentPlayer));
       }
     });
