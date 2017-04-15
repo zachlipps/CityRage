@@ -220,7 +220,7 @@ export const endTurn = () => (dispatch, storeState) => {
       game.child('/submitted').set(false);
       game.child('/diceBox').set(defaultDice);
       game.child('/chosenOne').set({ uid: player.val().uid, displayName: player.val().displayName });
-      game.child('attackedOnTurn').set(false);
+      game.child('kingAttackedOnTurn').set(false);
 
       if (player.val().kingOnTurnStart) {
         dispatch(changeStat(player.val().uid, 2, 'points'));
@@ -245,14 +245,17 @@ const attack = (numAttacks, currentPlayerID) => (dispatch, storeState) => {
     if (kingID === currentPlayerID) {
       const toAttack = playerPosArr.filter(uid => uid !== kingID);
       return toAttack;
+    } else if (kingID) {
+      const toAttack = playerPosArr.filter(uid => uid === kingID);
+      game.child('kingAttackedOnTurn').set(true);
+      return toAttack;
     }
-    const toAttack = playerPosArr.filter(uid => uid === kingID);
-    return toAttack;
   })
   .then((toAttack) => {
-    game.child('attackedOnTurn').set(true);
-    toAttack.forEach((uid) => {
-      dispatch(changeStat(uid, numAttacks, 'health'));
-    });
+    if (toAttack) {
+      toAttack.forEach((uid) => {
+        dispatch(changeStat(uid, numAttacks, 'health'));
+      });
+    }
   });
 };
