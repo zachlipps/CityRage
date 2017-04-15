@@ -6,9 +6,14 @@ import energy from '../assets/media/energy.png';
 import health from '../assets/media/health.png';
 import points from '../assets/media/points.png';
 
+import PlayerHand from './PlayerHand';
+
 class CurrentUser extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      showHand: true,
+    };
   }
 
   generatePlayerIcon(playerObj, gameData) {
@@ -20,6 +25,12 @@ class CurrentUser extends React.Component {
     }
     return icon;
   }
+  revealHand() {
+    this.setState({
+      showHand: !this.state.showHand,
+    });
+  }
+
 
   render() {
     const { auth } = this.props;
@@ -62,23 +73,20 @@ class CurrentUser extends React.Component {
                   </div>
                 </div>
               </div>
-              <div style={{ display: 'flex', flex: 1, flexDirection: 'row' }} />,
-              </div>,
+
+              {this.state.showHand && Array.isArray(item.hand) && <PlayerHand cards={item.hand} />}
+              <div style={{ display: 'flex', flex: 1, flexDirection: 'row' }} />
+            </div>,
             )
             }
           </div>
 
-
-          <button onClick={() => { this.props.increaseHealth(auth.uid); }} >up health</button>
           <button onClick={() => { this.props.increaseHealth(auth.uid); }} >up health</button>
           <button onClick={() => { this.props.decreaseHealth(auth.uid); }}>down health</button>
           <button onClick={() => { this.props.increasePoints(auth.uid); }} >up Points</button>
           <button onClick={() => { this.props.decreasePoints(auth.uid); }}>down Points</button>
           <button onClick={() => { this.props.increaseEnergy(auth.uid); }} >up Energy</button>
           <button onClick={() => { this.props.decreaseEnergy(auth.uid); }}>down Energy</button>
-          <button onClick={() => { this.props.joinGame(auth.uid); }}> JOIN GAME </button>
-          <button onClick={() => { this.props.leaveGame(auth.uid); }}> LEAVE GAME </button>
-          <button onClick={() => { this.props.changeStat(auth.uid); }}> CHANGE STAT </button>
         </div>
       </div >
     );
@@ -95,3 +103,4 @@ class CurrentUser extends React.Component {
 // };
 
 export default CurrentUser;
+{ /* <button onClick={() => this.revealHand()}>{this.state.showHand ? 'HideCards' : 'ShowCards'}</button>*/ }
