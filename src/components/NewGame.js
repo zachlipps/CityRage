@@ -12,7 +12,7 @@ export default class NewGame extends React.Component {
   }
 
   handleName(e) {
-    e.preventDefault();
+    // e.preventDefault();
     this.setState({
       name: e.target.value,
     });
@@ -20,7 +20,6 @@ export default class NewGame extends React.Component {
 
   submitInput(e) {
     e.preventDefault();
-
     if (this.state.name !== '') {
       // console.log(this.state.name);
       this.props.createNewGame(this.state.name);

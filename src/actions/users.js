@@ -1,4 +1,5 @@
 import { database } from '../firebase';
+import { checkWin } from './checkWin';
 // import {bindActionCreators}
 
 export const addUser = user => ({
@@ -19,5 +20,6 @@ export const startListeningForUsers = () => (dispatch, storeState) => {
 
   game.child('/players').on('value', (players) => {
     dispatch(showOnlineUsersAction(players.val()));
+    dispatch(checkWin(players.val()));
   });
 };
