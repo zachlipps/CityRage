@@ -39,10 +39,13 @@ class Market extends Component {
             <button
               id="reset-bttn"
               onClick={() => this.props.userResetMarket(this.props.user, this.props.chosenOne_uid)}
-            ><div>ResetCards</div>
-              <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
-                <div className="cost-logo"> —2 </div>
-                <div><img className="cost-logo" src={energy} alt="E" /></div>
+            >
+              <div className="in-bttn">
+                <div>ResetCards</div>
+                <div className="card-cost">
+                  <div style={{ fontSize: '15px' }}> —2 </div>
+                  <div><img className="cost-logo" src={energy} alt="E" /></div>
+                </div>
               </div>
             </button>
           </div>

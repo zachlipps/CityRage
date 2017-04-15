@@ -79,6 +79,16 @@
   width: 75px;
   background-color: lightseagreen;
 }
+.in-bttn {
+  display: flex;
+  flex-direction: column;
+}
+.in-bttn > div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+}
 #reset-bttn:hover {
   background-color: lightgreen;
 }
