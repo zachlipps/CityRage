@@ -15,10 +15,19 @@ class DiceBox extends Component {
           <div style={{ display: 'flex', flexDirection: 'column', border: '1px solid green', flex: 1 }}>
             <div style={{ flex: 1 }}> DICEBOX </div>
 
-            {/* {this.props.auth.uid === this.props.game.chosenOne.uid ? <button onClick={() => { this.props.rollDice(); }}>Roll {this.props.game.rollCount}</button> : <div>waiting...</div>}*/}
-            <button onClick={() => { this.props.rollDice(this.props.auth.uid, this.props.game.chosenOne.uid); }}>Roll {this.props.game.rollCount}</button>
+            <div onClick={() => { this.props.rollDice(this.props.auth.uid, this.props.game.chosenOne.uid); }} style={{ flex: 1, flexDirection: 'column', width: '60px', height: '110px', backgroundColor: '#4990E2', alignItems: 'center', justifyContent: 'center', borderRadius: '6px', boxShadow: 'grey -1px 3px 12px' }}>
+              <div style={{ flex: 1, textAlign: 'center', color: 'white', fontSize: '36px', fontWeight: 'bold' }}>{this.props.game.rollCount}</div>
+              <div style={{ flex: 1, textAlign: 'center', color: 'white', fontSize: '16px' }} >ROLL</div>
+            </div>
 
-            {(rolled !== '?' && this.props.auth.uid === this.props.game.chosenOne.uid) ? <div><div style={{ flex: 1 }}> <hr /> </div><button onClick={this.props.game.submitted ? () => { console.log('already called'); } : () => { this.props.submitRoll(); }}>{this.props.game.submitted ? 'already submitted' : 'submit'}</button></div> : <div />}
+
+            {
+              (rolled !== '?' && this.props.auth.uid === this.props.game.chosenOne.uid) ?
+                <div style={{ width: '60px', backgroundColor: '#73C217', alignItems: 'center', justifyContent: 'center', borderRadius: '6px', boxShadow: 'grey -1px 3px 12px' }}>
+                  <div style={{ textAlign: 'center', color: 'white', height: '25px', fontSize: '14px', alignSelf: 'center', alignItems: 'center', marginTop: '6px' }} onClick={this.props.game.submitted ? () => { console.log('already called'); } : () => { this.props.submitRoll(); }}>{this.props.game.submitted ? 'already submitted' : 'SUBMIT'}</div>
+                </div>
+              : <div />
+              }
 
           </div>
 
