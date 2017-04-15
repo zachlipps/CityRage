@@ -1,4 +1,5 @@
 import { database } from '../firebase';
+import { gameSettings } from '../initial-state';
 
 export const checkWin = players => (dispatch, storeState) => {
   const gid = storeState().auth.gid;
@@ -8,7 +9,7 @@ export const checkWin = players => (dispatch, storeState) => {
     if (players[i].stats.health <= 0) {
       dispatch(killPlayer(players[i].uid));
     }
-    if (players[i].stats.points >= 20) {
+    if (players[i].stats.points >= gameSettings.pointsToWin) {
       console.log(players[i].displayName, ' won the game');
       game.child('winner').set(players[i]);
     }

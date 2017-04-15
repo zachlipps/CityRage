@@ -20,6 +20,13 @@ const initialState = {
   rollCount: 3,
 };
 
+export const gameSettings = {
+  pointsToWin: 20,
+  maxHealth: 10,
+  startTurnKing: 2,
+  becomeKing: 1,
+  initialRolls: 3,
+};
 
 // set the dicebox
 // database.ref('/diceBox/one').set({ val: '?', selected: false });
