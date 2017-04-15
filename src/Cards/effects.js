@@ -1,4 +1,5 @@
 const fire = {};
+import { gameSettings } from '../initial-state';
 
 // effects of cards with type = 'discard'
 fire.golden_goose = (consumer) => {
@@ -23,12 +24,12 @@ fire.super_saiyan = (consumer) => {
 
 // heal cards need to max health at 10
 fire.heal = (consumer) => {
-  const newHealth = Math.min(consumer.stats.health + 2, 10);
+  const newHealth = Math.min(consumer.stats.health + 2, gameSettings.maxHealth);
   consumer.stats.health = newHealth;
 };
 
 fire.miracle = (consumer) => {
-  const newHealth = Math.min(consumer.stats.health + 5, 10);
+  const newHealth = Math.min(consumer.stats.health + 5, gameSettings.maxHealth);
   consumer.stats.health = newHealth;
 };
 
@@ -80,8 +81,10 @@ fire.symbiosis_x = (consumer) => {
 };
 
 fire.symbiosis_z = (consumer) => {
-  consumer.stats.energy -= 1;
-  consumer.stats.health += 1;
+  if (consumer.stats.energy > 0 && consumer.stats.health < gameSettings.maxHealth) {
+    consumer.stats.energy -= 1;
+    consumer.stats.health += 1;
+  }
 };
 
 fire.symbiosis_super = (consumer) => {
