@@ -25,10 +25,12 @@ export const gameSettings = {
   initialHealth: 10,
   maxHealth: 10,
   startTurnKing: 2,
-  becomeKing: 1,
+  becomeKingPoints: 1,
   initialRolls: 3,
   initialEnergy: 0,
   initialPoints: 0,
+  maxPlayers: 5,
+  resetMarketCost: 2,
 };
 
 // set the dicebox
