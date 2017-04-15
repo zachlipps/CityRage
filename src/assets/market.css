@@ -13,8 +13,7 @@
   border-radius: 10px;
   width: 150px;
   height: 150px;
-  border-bottom: 2px solid grey;
-  border-right: 2px solid grey;
+  box-shadow: grey -1px 3px 12px;
   padding: 4px;
 }
 .deck-disc {
