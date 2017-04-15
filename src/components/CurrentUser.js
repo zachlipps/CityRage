@@ -12,7 +12,7 @@ class CurrentUser extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      showHand: false,
+      showHand: true,
     };
   }
 
@@ -33,8 +33,6 @@ class CurrentUser extends React.Component {
 
 
   render() {
-    const user = this.props.auth.uid;
-    const usercards = this.props.game.players[user].hand;
     const { auth } = this.props;
     // console.log(this.props.playersOnline);
     return (
@@ -75,13 +73,13 @@ class CurrentUser extends React.Component {
                   </div>
                 </div>
               </div>
-              <button onClick={() => this.revealHand()}>ShowCards</button>
+
+              {this.state.showHand && Array.isArray(item.hand) && <PlayerHand cards={item.hand} />}
               <div style={{ display: 'flex', flex: 1, flexDirection: 'row' }} />
             </div>,
             )
             }
           </div>
-          {this.state.showHand && <PlayerHand cards={usercards} />}
 
           <button onClick={() => { this.props.increaseHealth(auth.uid); }} >up health</button>
           <button onClick={() => { this.props.decreaseHealth(auth.uid); }}>down health</button>
@@ -105,3 +103,4 @@ class CurrentUser extends React.Component {
 // };
 
 export default CurrentUser;
+{ /* <button onClick={() => this.revealHand()}>{this.state.showHand ? 'HideCards' : 'ShowCards'}</button>*/ }

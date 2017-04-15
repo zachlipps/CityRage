@@ -21,10 +21,6 @@ class PlayerHand extends React.Component {
       </div>
       ),
     );
-
-    // return (
-    //   <div>test create hand</div>
-    // );
   }
 
   render() {
