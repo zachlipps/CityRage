@@ -6,9 +6,14 @@ import energy from '../assets/media/energy.png';
 import health from '../assets/media/health.png';
 import points from '../assets/media/points.png';
 
+import PlayerHand from './PlayerHand';
+
 class CurrentUser extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      showHand: false,
+    };
   }
 
   generatePlayerIcon(playerObj, gameData) {
@@ -20,8 +25,16 @@ class CurrentUser extends React.Component {
     }
     return icon;
   }
+  revealHand() {
+    this.setState({
+      showHand: !this.state.showHand,
+    });
+  }
+
 
   render() {
+    const user = this.props.auth.uid;
+    const usercards = this.props.game.players[user].hand;
     const { auth } = this.props;
     // console.log(this.props.playersOnline);
     return (
@@ -62,23 +75,20 @@ class CurrentUser extends React.Component {
                   </div>
                 </div>
               </div>
-              <div style={{ display: 'flex', flex: 1, flexDirection: 'row' }} />,
-              </div>,
+              <button onClick={() => this.revealHand()}>ShowCards</button>
+              <div style={{ display: 'flex', flex: 1, flexDirection: 'row' }} />
+            </div>,
             )
             }
           </div>
+          {this.state.showHand && <PlayerHand cards={usercards} />}
 
-
-          <button onClick={() => { this.props.increaseHealth(auth.uid); }} >up health</button>
           <button onClick={() => { this.props.increaseHealth(auth.uid); }} >up health</button>
           <button onClick={() => { this.props.decreaseHealth(auth.uid); }}>down health</button>
           <button onClick={() => { this.props.increasePoints(auth.uid); }} >up Points</button>
           <button onClick={() => { this.props.decreasePoints(auth.uid); }}>down Points</button>
           <button onClick={() => { this.props.increaseEnergy(auth.uid); }} >up Energy</button>
           <button onClick={() => { this.props.decreaseEnergy(auth.uid); }}>down Energy</button>
-          <button onClick={() => { this.props.joinGame(auth.uid); }}> JOIN GAME </button>
-          <button onClick={() => { this.props.leaveGame(auth.uid); }}> LEAVE GAME </button>
-          <button onClick={() => { this.props.changeStat(auth.uid); }}> CHANGE STAT </button>
         </div>
       </div >
     );
