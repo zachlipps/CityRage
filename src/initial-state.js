@@ -22,10 +22,13 @@ const initialState = {
 
 export const gameSettings = {
   pointsToWin: 20,
+  initialHealth: 10,
   maxHealth: 10,
   startTurnKing: 2,
   becomeKing: 1,
   initialRolls: 3,
+  initialEnergy: 0,
+  initialPoints: 0,
 };
 
 // set the dicebox

@@ -4,6 +4,7 @@ import filter from 'lodash/filter';
 import market from '../Cards/cards';
 import { startListeningForUsers } from './users';
 import { marketListener } from './market.js';
+import { gameSettings } from '../initial-state';
 
 const startGameAction = gameData => ({
   type: 'UPDATE_GAME_DATA',
@@ -17,9 +18,9 @@ const initializePlayer = (uid, idx) => database.ref(`/users/${uid}`).once('value
       turnOrder: idx,
       kingOnTurnStart: false,
       stats: {
-        energy: 0,
-        health: 10,
-        points: 0,
+        energy: gameSettings.initialEnergy,
+        health: gameSettings.initialHealth,
+        points: gameSettings.initialPoints,
       },
       triggers: {
         coolAf: true,

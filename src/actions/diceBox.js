@@ -217,14 +217,14 @@ export const endTurn = () => (dispatch, storeState) => {
     game.child(`/playerPosition/${nextTurn}`).once('value')
     .then(playerID => game.child(`/players/${playerID.val()}`).once('value'))
     .then((player) => {
-      game.child('/rollCount').set(3);
+      game.child('/rollCount').set(gameSettings.initialRolls);
       game.child('/submitted').set(false);
       game.child('/diceBox').set(defaultDice);
       game.child('/chosenOne').set({ uid: player.val().uid, displayName: player.val().displayName });
       game.child('kingAttackedOnTurn').set(false);
 
       if (player.val().kingOnTurnStart) {
-        dispatch(changeStat(player.val().uid, 2, 'points'));
+        dispatch(changeStat(player.val().uid, gameSettings.startTurnKing, 'points'));
       }
     });
   });
