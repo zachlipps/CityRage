@@ -4,9 +4,8 @@ import groupBy from 'lodash/groupBy';
 
 class DiceBox extends Component {
 
-
   render() {
-    const endTurnButton = (this.props.game.chosenOne && this.props.game.chosenOne.uid === this.props.auth.uid && this.props.game.submitted) ?
+    const endTurnButton = (this.props.game.chosenOne && this.props.game.chosenOne.uid === this.props.auth.uid && this.props.game.submitted && !this.props.game.kingAttackedOnTurn) ?
       <button onClick={() => { this.props.endTurn(); }}> End Turn</button> : <div />;
 
     const rolled = this.props.diceBox.one.val;

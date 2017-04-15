@@ -12,6 +12,7 @@ export const setKing = () => (dispatch, storeState) => {
       game.child('/king').set(currentPlayer.val())
       .then(() => dispatch(changeStat(currentPlayer.val().uid, 1, 'points')));
       game.child(`/players/${currentPlayer.val().uid}/kingOnTurnStart`).set(true);
+      game.child('kingAttackedOnTurn').set(false);
     });
   }
 
@@ -21,4 +22,11 @@ export const setKing = () => (dispatch, storeState) => {
   } else {
     setNewKing();
   }
+};
+
+export const stayOnHill = () => (dispatch, storeState) => {
+  const gid = storeState().auth.gid;
+  const game = database.ref(`games/${gid}`);
+
+  game.child('kingAttackedOnTurn').set(false);
 };

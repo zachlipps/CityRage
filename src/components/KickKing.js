@@ -9,9 +9,8 @@ export default class KickKing extends React.Component {
         <div>
         You are being attack do you want to leave the city?
         <button onClick={() => this.props.setKing()}>Yes</button>
-          <button>No</button>
+          <button onClick={() => this.props.stayOnHill()}>No</button>
         </div>
-
 
       </div>
     );
