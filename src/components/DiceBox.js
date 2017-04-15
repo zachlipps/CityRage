@@ -11,11 +11,11 @@ class DiceBox extends Component {
     const rolled = this.props.diceBox.one.val;
     return (
       <div>
-        <div style={{ display: 'flex', border: '1px solid black' }}>
-          <div style={{ display: 'flex', flexDirection: 'column', border: '1px solid green', flex: 1 }}>
-            <div style={{ flex: 1 }}> DICEBOX </div>
+        <div style={{ display: 'flex' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', border: '1px solid white', flex: 1, justifyContent: 'center', alignItems: 'center' }}>
 
-            <div onClick={() => { this.props.rollDice(this.props.auth.uid, this.props.game.chosenOne.uid); }} style={{ flex: 1, flexDirection: 'column', width: '60px', height: '110px', backgroundColor: '#4990E2', alignItems: 'center', justifyContent: 'center', borderRadius: '6px', boxShadow: 'grey -1px 3px 12px' }}>
+
+            <div onClick={() => { this.props.rollDice(this.props.auth.uid, this.props.game.chosenOne.uid); }} style={{ flex: 1, paddingBottom: '5px', flexDirection: 'column', marginBottom: '6px', width: '80px', backgroundColor: '#4990E2', alignItems: 'center', justifyContent: 'center', borderRadius: '6px', boxShadow: 'grey -1px 3px 10px' }}>
               <div style={{ flex: 1, textAlign: 'center', color: 'white', fontSize: '36px', fontWeight: 'bold' }}>{this.props.game.rollCount}</div>
               <div style={{ flex: 1, textAlign: 'center', color: 'white', fontSize: '16px' }} >ROLL</div>
             </div>
@@ -23,10 +23,10 @@ class DiceBox extends Component {
 
             {
               (rolled !== '?' && this.props.auth.uid === this.props.game.chosenOne.uid) ?
-                <div style={{ width: '60px', backgroundColor: '#73C217', alignItems: 'center', justifyContent: 'center', borderRadius: '6px', boxShadow: 'grey -1px 3px 12px' }}>
-                  <div style={{ textAlign: 'center', color: 'white', height: '25px', fontSize: '14px', alignSelf: 'center', alignItems: 'center', marginTop: '6px' }} onClick={this.props.game.submitted ? () => { console.log('already called'); } : () => { this.props.submitRoll(); }}>{this.props.game.submitted ? 'already submitted' : 'SUBMIT'}</div>
+                <div style={{ display: 'flex', flex: 0.5, width: '80px', backgroundColor: '#73C217', alignItems: 'center', justifyContent: 'center', borderRadius: '6px', boxShadow: 'grey -1px 3px 10px', marginTop: '7px' }}>
+                  <div style={{ flex: 1, textAlign: 'center', color: 'white', fontSize: '13px', alignSelf: 'center', alignItems: 'center' }} onClick={this.props.game.submitted ? null : () => { this.props.submitRoll(); }}>{this.props.game.submitted ? ' SUBMITTED' : 'SUBMIT'}</div>
                 </div>
-              : <div />
+              : <div style={{ display: 'flex', flex: 0.5, width: '80px', backgroundColor: 'white' }} />
               }
 
           </div>
