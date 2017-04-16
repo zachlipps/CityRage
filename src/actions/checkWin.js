@@ -24,24 +24,39 @@ export const killPlayer = uid => (dispatch, storeState) => {
   game.child('/playerPosition').once('value')
   .then((playerArr) => {
     const newPlayerPos = playerArr.val().filter(playerID => playerID !== uid);
+    const newPlayers = game.child('/playerPosition').set(newPlayerPos);
+    const newGameSize = game.child('/gameSize').set(newPlayerPos.length);
+    const chosenOne = game.child('/chosenOne').once('value');
+    const king = game.child('/king').once('value');
 
-    game.child('/playerPosition').set(newPlayerPos);
-    game.child('/gameSize').set(newPlayerPos.length);
-    dispatch({ type: 'UPDATE_DEAD', payload: 'YOYOYO' });
+    Promise.all([newPlayers, newGameSize, chosenOne, king])
+    .then(([newPlayers, newGameSize, chosenOne, king]) => {
+      let newCurrentTurn = '';
 
-    if (newPlayerPos.length === 1) {
-      game.child(`/players/${newPlayerPos[0]}`).once('value')
-      .then(winner => game.child('winner').set(winner.val()));
-    }
-  })
-  .then(() => {
-    game.child('/deadPlayers').once('value', (snapshot) => {
-      if (!snapshot.val()) {
-        game.child('/deadPlayers').set([uid]);
+      if (chosenOne.val().uid === king.val().uid) {
+        newCurrentTurn = newPlayerPos.indexOf(chosenOne.val().uid) + 1;
+        game.child('/currentTurn').set(newCurrentTurn);
       } else {
-        const newDeadPlayerArr = [...snapshot.val(), uid];
-        game.child('/deadPlayers').set(newDeadPlayerArr);
+        newCurrentTurn = newPlayerPos.indexOf(chosenOne.val().uid);
+        game.child('/currentTurn').set(newCurrentTurn);
       }
+      dispatch({ type: 'UPDATE_DEAD', payload: 'deadPlayers' });
+
+      if (newPlayerPos.length === 1) {
+        game.child(`/players/${newPlayerPos[0]}`).once('value')
+      .then(winner => game.child('winner').set(winner.val()));
+      }
+    })
+
+    .then(() => {
+      game.child('/deadPlayers').once('value', (snapshot) => {
+        if (!snapshot.val()) {
+          game.child('/deadPlayers').set([uid]);
+        } else {
+          const newDeadPlayerArr = [...snapshot.val(), uid];
+          game.child('/deadPlayers').set(newDeadPlayerArr);
+        }
+      });
     });
   });
 };
