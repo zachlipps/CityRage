@@ -85,7 +85,12 @@ class CurrentUser extends React.Component {
             }
           </div>
           <button onClick={() => this.revealHand()}>{this.state.showHand ? 'HideCards' : 'ShowCards'}</button>
+
+
+          <button onClick={() => { this.props.increaseHealth(auth.uid); }} >up health</button>
+
           {/* <button onClick={() => { this.props.increaseHealth(auth.uid); }} >up health</button>
+
           <button onClick={() => { this.props.decreaseHealth(auth.uid); }}>down health</button>
           <button onClick={() => { this.props.increasePoints(auth.uid); }} >up Points</button>
           <button onClick={() => { this.props.decreasePoints(auth.uid); }}>down Points</button>

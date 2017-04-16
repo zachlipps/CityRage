@@ -31,9 +31,9 @@ export const killPlayer = uid => (dispatch, storeState) => {
 
     Promise.all([newPlayers, newGameSize, chosenOne, king])
     .then(([newPlayers, newGameSize, chosenOne, king]) => {
-      let newCurrentTurn = '';
+      let newCurrentTurn;
 
-      if (chosenOne.val().uid === king.val().uid) {
+      if (chosenOne.val().uid === uid) {
         newCurrentTurn = newPlayerPos.indexOf(chosenOne.val().uid) + 1;
         game.child('/currentTurn').set(newCurrentTurn);
       } else {
