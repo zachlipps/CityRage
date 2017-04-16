@@ -69,6 +69,20 @@ const cards = [
     effect: 'miracle',
   },
   {
+    title: 'Siphon',
+    cost: 5,
+    type: 'Discard',
+    ability: 'KING: 1 DMG TO ALL OTHER PLAYERS & HEAL BY THAT MUCH',
+    effect: 'siphon',
+  },
+  {
+    title: 'Pax Romana',
+    cost: 5,
+    type: 'Discard',
+    ability: 'ALL PLAYERS HEAL 3',
+    effect: 'pax_romana',
+  },
+  {
     title: 'Savant',
     cost: 8,
     type: 'Discard',
