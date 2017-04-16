@@ -1,5 +1,6 @@
-const fire = {};
 import { gameSettings } from '../initial-state';
+
+const fire = {};
 
 // effects of cards with type = 'discard'
 fire.golden_goose = (consumer) => {
@@ -53,6 +54,27 @@ fire.apocalypse = (consumer, room) => {
 
 fire.savant = () => {
   console.log('savant fired but not implemented!');
+};
+
+fire.siphon = (consumer, room) => {
+  if (consumer.uid === room.king.uid) {
+    const players = room.players;
+    let dmgDealt = 0;
+    for (const key in players) {
+      if (players[key].uid !== consumer.uid) {
+        players[key].stats.health -= 1;
+        dmgDealt += 1;
+      }
+    }
+    const newHealth = Math.min(consumer.stats.health + dmgDealt, gameSettings.maxHealth);
+    consumer.stats.health = newHealth;
+  }
+};
+fire.pax_romana = (consumer = null, room) => {
+  const players = room.players;
+  for (const key in players) {
+    players[key].stats.health = Math.min(players[key].stats.health += 3, gameSettings.maxHealth);
+  }
 };
 
 // effects of cards with type = 'keep'
