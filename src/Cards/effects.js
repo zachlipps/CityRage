@@ -23,6 +23,10 @@ fire.super_saiyan = (consumer) => {
   consumer.stats.energy += 12;
 };
 
+fire.triple_bird = (consumer) => {
+  consumer.stats.health -= 3;
+  consumer.stats.points += 3;
+};
 // heal cards need to max health at 10
 fire.heal = (consumer) => {
   const newHealth = Math.min(consumer.stats.health + 2, gameSettings.maxHealth);
