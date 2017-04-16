@@ -75,7 +75,7 @@ class CurrentUser extends React.Component {
                   </div>
                 </div>
                 <div style={{ display: 'flex', marginLeft: '20px' }} >
-                  { this.props.auth.uid == this.props.game.chosenOne.uid && <DiceBox auth={this.props.auth} />}
+                  { (this.props.auth.uid == this.props.game.chosenOne.uid && item.uid == this.props.game.chosenOne.uid) && <DiceBox auth={this.props.auth} />}
                 </div>
 
                 {this.state.showHand && Array.isArray(item.hand) && <PlayerHand cards={item.hand} />}
