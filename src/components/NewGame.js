@@ -40,12 +40,12 @@ export default class NewGame extends React.Component {
             Game Name
             <input type="text" onChange={e => this.handleName(e)} name="Game Name" />
         </div>
+
         <Link to="/games-list">
           <button
             onClick={() => { this.submitInput(); }}
           >Create Game</button>
         </Link>
-
 
       </div>
     );
