@@ -1,22 +1,27 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import StartGame from '../containers/StartGameContainer';
+import '../assets/lobby.css';
 
 export default class Lobby extends React.Component {
 
   renderLobby() {
     return (
-      <div>
-        <h3>Lobby: {this.props.game.name}</h3>
-        <h4>Players in lobby:</h4>
-        {this.props.lobby.map(person => <div key={person}> Name/ID: {person}</div>)}
-        <button onClick={() => this.props.playersInLobby(this.props.gid)} >show me whos here!</button>
-
-        <Link to="/games-list">
-          <button
-            onClick={() => { this.props.leaveGame(this.props.auth.uid); }}
-          >Leave</button>
-        </Link>
+      <div className="lobby-container">
+        <div className="column1">
+          <div style={{ fontWeight: 'bold' }}>Game Name</div>
+          <div>{this.props.game.name}</div>
+          <Link to="/games-list">
+            <button
+              className="bttn"
+              onClick={() => { this.props.leaveGame(this.props.auth.uid); }}
+            >Leave</button>
+          </Link>
+        </div>
+        <div className="column2">
+          <div><button className="bttn" onClick={() => this.props.playersInLobby(this.props.gid)}>Show Players!</button></div>
+          {this.props.lobby.map(person => <div key={person}>{person}</div>)}
+        </div>
       </div>
     );
   }
@@ -27,7 +32,7 @@ export default class Lobby extends React.Component {
       <div>
         { this.props.game.started ? null : this.renderLobby() }
 
-        { this.props.game.gid === this.props.auth.gid && <StartGame />}
+        { this.props.game.gid === this.props.auth.gid && <div style={{ margin: '5px' }}><StartGame /></div>}
       </div>
     );
   }

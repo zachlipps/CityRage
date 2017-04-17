@@ -1,11 +1,27 @@
 .new_game_form {
   display: flex;
-  justify-content: flex-start;
+  flex-direction: row;
+  justify-content: space-around;
   align-items: center;
-  margin-top: 25px;
-  margin-left: 15px;
+  border-radius: 8px;
+  box-shadow: grey -1px 3px 12px; 
+  background: -webkit-linear-gradient(left top, lightseagreen, cyan);
+  background: -o-linear-gradient(bottom right, lightseagreen, cyan);
+  background: -moz-linear-gradient(bottom right, lightseagreen, cyan); 
+  background: linear-gradient(to bottom right, lightseagreen, cyan);
+  width: 340px;
+  height: 75px;
+  margin: 5px;
+  font-weight: bold;
 }
 .name_input {
-  margin-left: 15px;
-  margin-right: 15px;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+button {
+  background-color: rebeccapurple;
+  border-radius: 8px;
+  padding: 5px;
+  color: ghostwhite;
 }
