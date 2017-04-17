@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import '../assets/newGame.css';
 
 export default class NewGame extends React.Component {
   constructor(props) {
@@ -28,7 +29,7 @@ export default class NewGame extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="new_game_form">
         {/* <form onSubmit={this.submitInput}>
           <label>
             Game Name
@@ -36,9 +37,9 @@ export default class NewGame extends React.Component {
           </label>
           <input type="submit" value="Create Game" />
         </form>*/}
-        <div>
-            Game Name
-            <input type="text" onChange={e => this.handleName(e)} name="Game Name" />
+        <div> Game Name </div>
+        <div className="name_input">
+          <input type="text" onChange={e => this.handleName(e)} name="Game Name" />
         </div>
 
         <Link to="/games-list">
