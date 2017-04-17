@@ -8,6 +8,23 @@ import points from '../assets/media/points.png';
 
 import PlayerHand from './PlayerHand';
 
+// this can be temporary, just a thought
+import rick from '../assets/media/funMonsters/rick.png';
+import cenaSmash from '../assets/media/funMonsters/cenaSmash.png';
+import cyberKitty from '../assets/media/funMonsters/cyberKitty.png';
+import gigazaur from '../assets/media/funMonsters/gigazaur.png';
+import golfMeeseeks from '../assets/media/funMonsters/golfMeeseeks.png';
+import kingDedede from '../assets/media/funMonsters/kingDedede.png';
+
+const charactersOBJ = {
+  rick,
+  cenaSmash,
+  cyberKitty,
+  gigazaur,
+  golfMeeseeks,
+  kingDedede,
+};
+
 class CurrentUser extends React.Component {
   constructor(props) {
     super(props);
@@ -34,7 +51,7 @@ class CurrentUser extends React.Component {
 
   render() {
     const { auth } = this.props;
-    // console.log(this.props.playersOnline);
+    console.log(this.props);
     return (
       <div className="CurrentUser">
         <div className="CurrentUser--identification">
@@ -48,7 +65,7 @@ class CurrentUser extends React.Component {
                     { (item.uid == this.props.game.chosenOne.uid) && <DiceBox auth={this.props.auth} />}
                   </div>
                   <div key={item.uid} style={{ display: 'flex', flex: 1, maxWidth: '400px', flexDirection: 'row', backgroundColor: '#F0F7FF', alignItems: 'center', boxShadow: 'grey -1px 3px 12px', borderTopLeftRadius: 10, borderTopRightRadius: 10, borderBottomLeftRadius: 10, borderBottomRightRadius: 10, paddingLeft: '10px', paddingRight: '10px' }}>
-                    <div style={{ flex: 1 }}><img style={{ margin: '10px', width: '100px', height: '100px', borderRadius: 100 }} src={item.photoURL} alt={item.photoURL} /></div>
+                    <div style={{ flex: 1 }}><img style={{ margin: '10px', width: '100px', height: '100px', borderRadius: 100 }} src={charactersOBJ[this.props.game.players[item.uid].character.image]} alt={item.photoURL} /></div>
                     <div style={{ flex: 3 }}>
                       <div style={{ flex: 1, flexDirection: 'column', alignSelf: 'center', margin: '10px' }}>
                         <div style={{ fontSize: '24px', margin: '10px' }}>{item.displayName} {this.generatePlayerIcon(item, this.props.game)}</div>
@@ -83,13 +100,13 @@ class CurrentUser extends React.Component {
 
           <button onClick={() => { this.props.increaseHealth(auth.uid); }} >up health</button>
 
-          {/* <button onClick={() => { this.props.increaseHealth(auth.uid); }} >up health</button>
+          <button onClick={() => { this.props.increaseHealth(auth.uid); }} >up health</button>
 
           <button onClick={() => { this.props.decreaseHealth(auth.uid); }}>down health</button>
           <button onClick={() => { this.props.increasePoints(auth.uid); }} >up Points</button>
           <button onClick={() => { this.props.decreasePoints(auth.uid); }}>down Points</button>
           <button onClick={() => { this.props.increaseEnergy(auth.uid); }} >up Energy</button>
-          <button onClick={() => { this.props.decreaseEnergy(auth.uid); }}>down Energy</button>*/}
+          <button onClick={() => { this.props.decreaseEnergy(auth.uid); }}>down Energy</button>
         </div>
       </div >
     );

@@ -28,6 +28,7 @@ const initializePlayer = (uid, idx) => database.ref(`/users/${uid}`).once('value
       hand: {
         test: 'test',
       },
+      character: 'none',
     });
     return [uid, playerObj];
   });

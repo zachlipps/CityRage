@@ -20,5 +20,12 @@ export const playersInLobby = gid => (dispatch) => {
       return userNameList;
     })
     .then(userNameList => dispatch(setPlayersInLobby(userNameList)));
+  })
+  // this is gonne be jenky as crap but whatevs
+  .then(() => {
+    game.child('started').once('value')
+    .then((started) => {
+      started.val() ? null : setTimeout(() => { dispatch(playersInLobby(gid)); }, 2000);
+    });
   });
 };
