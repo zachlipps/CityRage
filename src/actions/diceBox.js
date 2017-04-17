@@ -150,18 +150,18 @@ export const submitRoll = () => (dispatch, storeState) => {
       }
 
       if (currentRoll[3] && currentRoll[3].length >= 3) {
-        const pointsIncrease = currentRoll[3].length;
-        dispatch(changeStat(currentPlayer, pointsIncrease, 'points'));
+        const pointsIncreaseFrom3 = currentRoll[3].length;
+        dispatch(changeStat(currentPlayer, pointsIncreaseFrom3, 'points'));
       }
 
       if (currentRoll[2] && currentRoll[2].length >= 3) {
-        const pointsIncrease = currentRoll[2].length - 1;
-        dispatch(changeStat(currentPlayer, pointsIncrease, 'points'));
+        const pointsIncreaseFrom2 = currentRoll[2].length - 1;
+        dispatch(changeStat(currentPlayer, pointsIncreaseFrom2, 'points'));
       }
 
       if (currentRoll[1] && currentRoll[1].length >= 3) {
-        const pointsIncrease = currentRoll[1].length - 2;
-        dispatch(changeStat(currentPlayer, pointsIncrease, 'points'));
+        const pointsIncreaseFrom1 = currentRoll[1].length - 2;
+        dispatch(changeStat(currentPlayer, pointsIncreaseFrom1, 'points'));
       }
 
       if (currentRoll.attack) {

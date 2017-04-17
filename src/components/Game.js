@@ -3,7 +3,7 @@ import CurrentUser from '../containers/CurrentUserContainer';
 import DiceBox from '../containers/DiceBoxContainer';
 import Market from '../containers/MarketContainer';
 import KickKing from '../containers/kickKingContainer';
-import ChatBox from '../containers/ChatBoxContainer'
+import ChatBox from '../containers/ChatBoxContainer';
 
 import map from '../assets/media/sf-map.png';
 
