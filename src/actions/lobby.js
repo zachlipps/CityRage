@@ -9,7 +9,6 @@ const setPlayersInLobby = array => ({
 export const playersInLobby = gid => (dispatch) => {
   const game = database.ref(`games/${gid}`);
 
-  console.log('Im firing shit poop');
   game.child('/playerPosition').once('value').then((playerList) => {
     const userList = [];
     playerList.val().forEach((uid) => {

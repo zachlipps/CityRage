@@ -1,5 +1,6 @@
 import { database } from '../firebase';
 import { gameSettings } from '../initial-state';
+import { endTurn } from './diceBox';
 
 export const checkWin = players => (dispatch, storeState) => {
   const gid = storeState().auth.gid;
@@ -41,6 +42,11 @@ export const killPlayer = uid => (dispatch, storeState) => {
         game.child('/currentTurn').set(newCurrentTurn);
       }
       dispatch({ type: 'UPDATE_DEAD', payload: 'deadPlayers' });
+
+      if (uid === king.val().uid) {
+        console.log('the KING is DEAD');
+        dispatch(endTurn());
+      }
 
       if (newPlayerPos.length === 1) {
         game.child(`/players/${newPlayerPos[0]}`).once('value')
