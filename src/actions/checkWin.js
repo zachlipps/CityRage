@@ -44,7 +44,6 @@ export const killPlayer = uid => (dispatch, storeState) => {
       dispatch({ type: 'UPDATE_DEAD', payload: 'deadPlayers' });
 
       if (uid === king.val().uid) {
-        console.log('the KING is DEAD');
         dispatch(endTurn());
       }
 
