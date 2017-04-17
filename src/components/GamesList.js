@@ -26,8 +26,8 @@ export default class GamesList extends React.Component {
       <div className="lobby_tiles_container">
         {this.props.gamesList.map(gameItem =>
           <div className="lobby_tile" key={gameItem.gid}>
-            <div className="room_name">Room Name:</div>
-            <div className="room_name">{gameItem.name}</div>
+            <div className="room_name">Game Name</div>
+            <div>{gameItem.name}</div>
             <button onClick={() => { this.changeGid(gameItem.gid); this.props.joinGame(this.props.auth.uid, gameItem.gid); }}>JOIN GAME</button>
           </div>)}
       </div>

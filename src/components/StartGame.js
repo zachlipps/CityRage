@@ -1,6 +1,7 @@
 import React from 'react';
 import Game from '../containers/GameContainer';
 import SelectCharacter from '../containers/SelectCharacterContainer';
+import '../assets/startGame.css';
 
 export default class StartGame extends React.Component {
   constructor(props) {
@@ -23,7 +24,7 @@ export default class StartGame extends React.Component {
   render() {
     // console.log(this.props, 'startGame component Is getting CRAY');
     return (
-      <div>{!this.props.game.started && <button onClick={() => { this.props.startGame(); }}>Start Game</button>}
+      <div>{!this.props.game.started && <button className="start-bttn" onClick={() => { this.props.startGame(); }}>Start Game</button>}
         {/* <div>Who's going? {this.props.game}</div>*/}
         {/* {this.props.game.started ?  : <div />}*/}
         {(this.props.game.started && !this.props.game.charactersSelected) ? <div><SelectCharacter /></div> : <div />}

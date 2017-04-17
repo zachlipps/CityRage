@@ -10,12 +10,12 @@
   align-items: center;
   border-radius: 8px;
   box-shadow: grey -1px 3px 12px; 
-  background: -webkit-linear-gradient(left top, cyan, #764893);
-  background: -o-linear-gradient(bottom right, cyan, #764893);
-  background: -moz-linear-gradient(bottom right, cyan, #764893); 
-  background: linear-gradient(to bottom right, cyan, #764893);
-  height: 175px;
-  width: 175px;
+  background: -webkit-linear-gradient(left top, cyan, lightseagreen);
+  background: -o-linear-gradient(bottom right, cyan, lightseagreen);
+  background: -moz-linear-gradient(bottom right, cyan, lightseagreen); 
+  background: linear-gradient(to bottom right, cyan, lightseagreen);
+  height: 120px;
+  min-width: 175px;
   margin: 5px;
 }
 .lobby_tile > button {
@@ -24,6 +24,10 @@
   padding: 8px;
   border-radius: 8px;
   font-weight: bold;
+  background-color: rebeccapurple;
+  border-radius: 8px;
+  padding: 5px;
+  color: ghostwhite;
 }
 .room_name {
   display: flex;

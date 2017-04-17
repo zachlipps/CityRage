@@ -4,26 +4,33 @@ font-family: 'Roboto', sans-serif;
 
 .nav-container {
   height: 80px;
-  background-color: lightgray;
+  box-shadow: grey -1px 3px 12px; 
+  background: -webkit-linear-gradient(left top, lightseagreen, cyan);
+  background: -o-linear-gradient(bottom right, lightseagreen, cyan);
+  background: -moz-linear-gradient(bottom right, lightseagreen, cyan); 
+  background: linear-gradient(to bottom right, lightseagreen, cyan);
+  border-radius: 8px;
+  margin: 5px;
 }
 .nav-link {
   float: left;
   margin: 20px;
   padding: 10px;
-  border: 1px solid beige;
+  border: 1px solid rebeccapurple;
   border-radius: 5px;
-  background-color: beige;
+  background-color: rebeccapurple;
   text-decoration: none;
-  color: grey;
+  color: ghostwhite;
   text-align: center;
 }
 .nav-right {
   float: right;
 }
 .nav-link:hover {
-  background-color: darkcyan;
-  color: white;
-  border-color: darkcyan;
+  background-color: white;
+  color: black;
+  border-color: white;
+  font-weight: bold;
 }
 
 /*.dice-toggled {
