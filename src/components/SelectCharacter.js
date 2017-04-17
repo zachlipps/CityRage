@@ -23,7 +23,7 @@ class SelectCharacter extends Component {
 
   createPlayerImages() {
     return this.props.state.game.characters.map((character, index) => (
-      <div onClick={() => this.props.selectCharacter(this.props.state.auth.uid, character, index)}>
+      <div style={character.selected ? { border: '5px solid red' } : {}} onClick={() => this.props.selectCharacter(this.props.state.auth.uid, character, index)}>
         <h3>{character.name}</h3>
         <img style={{ width: '200px', height: '200px' }} src={charactersOBJ[character.image]} />
       </div>
