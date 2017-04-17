@@ -10,6 +10,15 @@ export const playersInLobby = gid => (dispatch) => {
   const game = database.ref(`games/${gid}`);
 
   game.child('/playerPosition').once('value').then((playerList) => {
-    dispatch(setPlayersInLobby(playerList.val()));
+    const userList = [];
+    playerList.val().forEach((uid) => {
+      userList.push(database.ref(`users/${uid}`).once('value'));
+    });
+    Promise.all(userList)
+    .then((resolvedUserList) => {
+      const userNameList = resolvedUserList.map(user => user.val().displayName);
+      return userNameList;
+    })
+    .then(userNameList => dispatch(setPlayersInLobby(userNameList)));
   });
 };
