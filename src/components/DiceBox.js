@@ -9,13 +9,13 @@ class DiceBox extends Component {
 
   showIcon(val) {
     if (val === 'health') {
-      return <img style={{ width: '25px', height: '25px' }} src={bangYellow} />;
+      return <img style={{ width: '25px', height: '25px' }} src={healthYellow} />;
     }
     if (val === 'energy') {
       return <img style={{ width: '25px', height: '25px' }} src={energyYellow} />;
     }
     if (val === 'attack') {
-      return <img style={{ width: '25px', height: '25px' }} src={healthYellow} />;
+      return <img style={{ width: '25px', height: '25px' }} src={bangYellow} />;
     }
     return val;
   }
