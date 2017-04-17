@@ -220,7 +220,7 @@ export const endTurn = () => (dispatch, storeState) => {
       game.child('/rollCount').set(gameSettings.initialRolls);
       game.child('/submitted').set(false);
       game.child('/diceBox').set(defaultDice);
-      game.child('/chosenOne').set({ uid: player.val().uid, displayName: player.val().displayName });
+      game.child('/chosenOne').set({ uid: player.val().uid, displayName: player.val().displayName, photoURL: player.val().photoURL });
       game.child('kingAttackedOnTurn').set(false);
 
       if (player.val().kingOnTurnStart) {

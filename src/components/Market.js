@@ -34,7 +34,7 @@ class Market extends Component {
   render() {
     return (
       <div>
-        <div className="market-container">
+        <div className="market-container" style={{ justifyContent: 'center' }}>
 
           <div>
             <button

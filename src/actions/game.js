@@ -89,7 +89,7 @@ const setFirstPlayer = () => (dispatch, storeState) => {
   }).then((firstPlayer) => {
     game.child('/players').once('value')
     .then((players) => {
-      game.child('/chosenOne').set({ uid: players.val()[firstPlayer].uid, displayName: players.val()[firstPlayer].displayName });
+      game.child('/chosenOne').set({ uid: players.val()[firstPlayer].uid, displayName: players.val()[firstPlayer].displayName, photoURL: players.val()[firstPlayer].photoURL });
     });
   }).then(() => {
     game.child('started').set(true);
