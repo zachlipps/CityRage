@@ -32,7 +32,7 @@ export default class Game extends React.Component {
 
         <div style={{ position: 'relative', flex: 1, display: 'flex', alignContent: 'center' }}>
 
-          <div><img style={{ width: '1150', height: '190px' }} src={map} /></div>
+          <img style={{ flex: 1, width: '1150', height: '190px' }} src={map} />
 
           { this.props.game.king.uid && <div
             style={{

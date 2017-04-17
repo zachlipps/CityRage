@@ -53,7 +53,7 @@ class DiceBox extends Component {
 
           {!this.props.game.submitted && this.showRollCount()}
           {!this.props.game.submitted && this.showSubmit()}
-          {this.props.game.submitted && !this.props.game.kingAttackedOnTurn && this.endYourTurn()}
+          {this.props.game.submitted && !this.props.game.kingAttackedOnTurn && (this.props.auth.uid === this.props.game.chosenOne.uid) && this.endYourTurn()}
 
         </div>
 
