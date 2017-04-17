@@ -131,6 +131,8 @@ export const submitRoll = () => (dispatch, storeState) => {
       const currentPlayer = snapshot.val().uid;
       const currentRoll = groupBy(submittedRoll);
 
+      console.log('here is the current roll', currentRoll);
+
       if (currentRoll.health) {
         game.child('/king').once('value', (kingSpot) => {
           if (kingSpot.val().uid !== currentPlayer) {
@@ -237,7 +239,7 @@ const attack = (numAttacks, currentPlayerID) => (dispatch, storeState) => {
   const king = game.child('king').once('value');
   const playerPos = game.child('/playerPosition').once('value');
   const requests = [king, playerPos];
-
+  console.log('I am in attack with the current numAttacks', numAttacks);
   Promise.all(requests)
   .then((snapshots) => {
     const kingID = snapshots[0].val().uid;
