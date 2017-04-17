@@ -112,8 +112,8 @@ const initalizeOnGameStart = () => (dispatch, storeState) => {
     four: { val: '?', selected: false },
     five: { val: '?', selected: false },
     six: { val: '?', selected: false },
-  },
-  );
+  });
+  game.child('messages').set([{id:'intialize the messages', text:''}])
 };
 
 
