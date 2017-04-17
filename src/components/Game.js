@@ -6,6 +6,21 @@ import KickKing from '../containers/kickKingContainer';
 import ChatBox from '../containers/ChatBoxContainer';
 
 import map from '../assets/media/sf-map.png';
+import rick from '../assets/media/funMonsters/rick.png';
+import cenaSmash from '../assets/media/funMonsters/cenaSmash.png';
+import cyberKitty from '../assets/media/funMonsters/cyberKitty.png';
+import gigazaur from '../assets/media/funMonsters/gigazaur.png';
+import golfMeeseeks from '../assets/media/funMonsters/golfMeeseeks.png';
+import kingDedede from '../assets/media/funMonsters/kingDedede.png';
+
+const charactersOBJ = {
+  rick,
+  cenaSmash,
+  cyberKitty,
+  gigazaur,
+  golfMeeseeks,
+  kingDedede,
+};
 
 
 export default class Game extends React.Component {
@@ -52,7 +67,7 @@ export default class Game extends React.Component {
                 borderRadius: '100%',
                 borderColor: 'white',
                 borderWidth: '2px',
-              }} src={this.props.game.king.photoURL}
+              }} src={charactersOBJ[this.props.game.king.character]}
             />
             <div style={{ textAlign: 'center', fontWeight: 'bold', fontSize: '30px' }}>{this.props.game.king.displayName}</div>
           </div>}

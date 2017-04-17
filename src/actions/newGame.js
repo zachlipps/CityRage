@@ -28,7 +28,6 @@ export const createNewGame = (name, numPlayers = 4) => (dispatch) => {
         { name: 'MR MEESEEKS', image: 'golfMeeseeks', selected: false },
         { name: 'KING DEDEDE', image: 'kingDedede', selected: false },
       ],
-      winner: 'none',
     });
   dispatch({ type: 'ADD_USER', type: 'user' });
 };
