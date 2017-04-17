@@ -3,6 +3,7 @@ import CurrentUser from '../containers/CurrentUserContainer';
 import DiceBox from '../containers/DiceBoxContainer';
 import Market from '../containers/MarketContainer';
 import KickKing from '../containers/kickKingContainer';
+import ChatBox from '../containers/ChatBoxContainer'
 
 import map from '../assets/media/sf-map.png';
 
@@ -58,10 +59,12 @@ export default class Game extends React.Component {
 
         </div>
 
+
         <Market />
         {this.checkKing() && <KickKing />}
 
         <CurrentUser auth={this.props.auth} />
+        <ChatBox />
         {/* <DiceBox auth={this.props.auth} />*/}
 
 
