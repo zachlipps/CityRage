@@ -68,7 +68,9 @@ class CurrentUser extends React.Component {
                     <div style={{ flex: 1 }}><img style={{ margin: '10px', width: '100px', height: '100px', borderRadius: 100 }} src={charactersOBJ[this.props.game.players[item.uid].character.image]} alt={item.photoURL} /></div>
                     <div style={{ flex: 3 }}>
                       <div style={{ flex: 1, flexDirection: 'column', alignSelf: 'center', margin: '10px' }}>
-                        <div style={{ fontSize: '24px', margin: '10px' }}>{item.displayName} {this.generatePlayerIcon(item, this.props.game)}</div>
+
+                        <div style={{ fontSize: '24px', margin: '10px' }}>{item.displayName} {this.generatePlayerIcon(item, this.props.game)} <HealthBar health={item.stats.health} />   </div>
+
                         <div style={{ flex: 1, flexDirection: 'row', display: 'flex' }}>
 
                           <div style={{ flex: 1, flexDirection: 'row', display: 'flex', alignItems: 'center' }}>
