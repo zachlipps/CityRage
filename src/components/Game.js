@@ -3,9 +3,24 @@ import CurrentUser from '../containers/CurrentUserContainer';
 import DiceBox from '../containers/DiceBoxContainer';
 import Market from '../containers/MarketContainer';
 import KickKing from '../containers/kickKingContainer';
-import ChatBox from '../containers/ChatBoxContainer'
+import ChatBox from '../containers/ChatBoxContainer';
 
 import map from '../assets/media/sf-map.png';
+import rick from '../assets/media/funMonsters/rick.png';
+import cenaSmash from '../assets/media/funMonsters/cenaSmash.png';
+import cyberKitty from '../assets/media/funMonsters/cyberKitty.png';
+import gigazaur from '../assets/media/funMonsters/gigazaur.png';
+import golfMeeseeks from '../assets/media/funMonsters/golfMeeseeks.png';
+import kingDedede from '../assets/media/funMonsters/kingDedede.png';
+
+const charactersOBJ = {
+  rick,
+  cenaSmash,
+  cyberKitty,
+  gigazaur,
+  golfMeeseeks,
+  kingDedede,
+};
 
 
 export default class Game extends React.Component {
@@ -42,19 +57,19 @@ export default class Game extends React.Component {
               flexDirection: 'column',
               position: 'absolute',
               left: '45%',
-              top: '12%',
+             /* top: '10%', */
             }}
           >
             <img
-              style={{ width: '100px',
-                boxShadow: 'grey -1px 3px 10px',
-                height: '100px',
-                borderRadius: '100%',
-                borderColor: 'white',
+              style={{ width: '150px',
+                /* boxShadow: 'grey -1px 3px 10px', */
+                height: '150px',
+                /* borderRadius: '100%', */
+                borderColor: 'black',
                 borderWidth: '2px',
-              }} src={this.props.game.king.photoURL}
+              }} src={charactersOBJ[this.props.game.king.character]}
             />
-            <div style={{ textAlign: 'center', fontWeight: 'bold', fontSize: '30px' }}>{this.props.game.king.displayName}</div>
+            <div style={{ textAlign: 'center', fontWeight: 'bold', fontSize: '25px' }}>{this.props.game.king.displayName}</div>
           </div>}
 
         </div>

@@ -4,9 +4,10 @@ import { gameSettings } from '../initial-state';
 
 export const setKing = () => (dispatch, storeState) => {
   const gid = storeState().auth.gid;
-  const kingUid = storeState().auth.uid;
   const game = database.ref(`games/${gid}`);
 
+
+  console.log('setKIGN indfakdshlkfjashdlkjfh;');
   function setNewKing() {
     game.child('/chosenOne').once('value')
     .then((currentPlayer) => {
@@ -17,13 +18,24 @@ export const setKing = () => (dispatch, storeState) => {
     });
   }
 
-  if (kingUid) {
-    game.child(`/players/${kingUid}/kingOnTurnStart`).set(false)
-    .then(setNewKing());
-  } else {
-    setNewKing();
-  }
+  game.child('king').once('value').then((king) => {
+    if (king.val() !== 'none') {
+      game.child(`/players/${king.val().uid}/kingOnTurnStart`).set(false)
+      .then(setNewKing());
+    } else {
+      game.child('/chosenOne').once('value')
+      .then((chosenOne) => {
+        game.child(`/players/${chosenOne.val().uid}`).once('value')
+        .then((currentPlayer) => {
+          console.log(currentPlayer.val(), 'shit poop');
+          game.child('chosenOne').set({ uid: currentPlayer.val().uid, displayName: currentPlayer.val().displayName, photoURL: currentPlayer.val().photoURL, character: currentPlayer.val().character.image })
+        .then(() => setNewKing());
+        });
+      });
+    }
+  });
 };
+
 
 export const stayOnHill = () => (dispatch, storeState) => {
   const gid = storeState().auth.gid;

@@ -150,18 +150,18 @@ export const submitRoll = () => (dispatch, storeState) => {
       }
 
       if (currentRoll[3] && currentRoll[3].length >= 3) {
-        const pointsIncrease = currentRoll[3].length;
-        dispatch(changeStat(currentPlayer, pointsIncrease, 'points'));
+        const pointsIncreaseFrom3 = currentRoll[3].length;
+        dispatch(changeStat(currentPlayer, pointsIncreaseFrom3, 'points'));
       }
 
       if (currentRoll[2] && currentRoll[2].length >= 3) {
-        const pointsIncrease = currentRoll[2].length - 1;
-        dispatch(changeStat(currentPlayer, pointsIncrease, 'points'));
+        const pointsIncreaseFrom2 = currentRoll[2].length - 1;
+        dispatch(changeStat(currentPlayer, pointsIncreaseFrom2, 'points'));
       }
 
       if (currentRoll[1] && currentRoll[1].length >= 3) {
-        const pointsIncrease = currentRoll[1].length - 2;
-        dispatch(changeStat(currentPlayer, pointsIncrease, 'points'));
+        const pointsIncreaseFrom1 = currentRoll[1].length - 2;
+        dispatch(changeStat(currentPlayer, pointsIncreaseFrom1, 'points'));
       }
 
       if (currentRoll.attack) {
@@ -222,7 +222,7 @@ export const endTurn = () => (dispatch, storeState) => {
       game.child('/rollCount').set(gameSettings.initialRolls);
       game.child('/submitted').set(false);
       game.child('/diceBox').set(defaultDice);
-      game.child('/chosenOne').set({ uid: player.val().uid, displayName: player.val().displayName, photoURL: player.val().photoURL });
+      game.child('/chosenOne').set({ uid: player.val().uid, displayName: player.val().displayName, photoURL: player.val().photoURL, character: player.val().character });
       game.child('kingAttackedOnTurn').set(false);
 
       if (player.val().kingOnTurnStart) {
