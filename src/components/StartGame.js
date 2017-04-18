@@ -33,7 +33,7 @@ export default class StartGame extends React.Component {
         {/* <div>Who's going? {this.props.game}</div>*/}
         {/* {this.props.game.started ?  : <div />}*/}
         {(this.props.game.started && !this.props.game.charactersSelected) ? <div><SelectCharacter /></div> : <div />}
-        {(this.props.game.started && this.props.game.charactersSelected) ? <div className={this.addWinnerClass()} ><Game /></div> : <div />}
+        {(this.props.game.started && this.props.game.charactersSelected) ? <div className="gameContainer"><canvas id={this.addWinnerClass()} /><Game className={this.addWinnerClass()} /> </div> : <div />}
         {/* <div><Game /></div>*/}
 
 
