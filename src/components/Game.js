@@ -57,19 +57,19 @@ export default class Game extends React.Component {
               flexDirection: 'column',
               position: 'absolute',
               left: '45%',
-              top: '12%',
+             /* top: '10%', */
             }}
           >
             <img
-              style={{ width: '100px',
-                boxShadow: 'grey -1px 3px 10px',
-                height: '100px',
-                borderRadius: '100%',
-                borderColor: 'white',
+              style={{ width: '150px',
+                /* boxShadow: 'grey -1px 3px 10px', */
+                height: '150px',
+                /* borderRadius: '100%', */
+                borderColor: 'black',
                 borderWidth: '2px',
               }} src={charactersOBJ[this.props.game.king.character]}
             />
-            <div style={{ textAlign: 'center', fontWeight: 'bold', fontSize: '30px' }}>{this.props.game.king.displayName}</div>
+            <div style={{ textAlign: 'center', fontWeight: 'bold', fontSize: '25px' }}>{this.props.game.king.displayName}</div>
           </div>}
 
         </div>
