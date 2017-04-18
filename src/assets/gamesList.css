@@ -9,12 +9,11 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  border-radius: 8px;
+  border-radius: 2px;
+  border: 2px solid darkslategrey;
   box-shadow: grey -1px 3px 12px; 
-  background: -webkit-linear-gradient(left top, cyan, yellow);
-  background: -o-linear-gradient(bottom right, cyan, yellow);
-  background: -moz-linear-gradient(bottom right, cyan, yellow); 
-  background: linear-gradient(to bottom right, cyan, yellow);
+  background:  #ffff5a;
+  opacity: 0.7;
   height: 120px;
   min-width: 175px;
   margin: 5px;
@@ -22,19 +21,11 @@
 .lobby_tile > button {
   display: flex;
   margin-top: 15px;
-  padding: 8px;
-  border-radius: 8px;
-  font-weight: bold;
-  background-color: rebeccapurple;
-  border-radius: 8px;
+  border-radius: 4px;
+  background-color: black;
   padding: 5px;
   color: ghostwhite;
 }
 .room_name {
-  display: flex;
   font-weight: bold;
-}
-.game_hash {
-  display: flex;
-  font-size: 10px;
 }
