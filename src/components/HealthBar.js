@@ -18,9 +18,9 @@ class HealthBar extends Component {
   }
 
   render() {
-    let health = this.props.health || 10;
+    let health = (this.props.health > 10) ? 10 : this.props.health;
     let maxHealth = this.props.maxHealth || 10;
-    let percentage = Math.floor((this.state.displayHealth / maxHealth) * 100);
+    let percentage = Math.floor((this.health / maxHealth) * 100);
 
     return (
       <div className="outer-bar" style={{
