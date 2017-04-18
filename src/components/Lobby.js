@@ -9,7 +9,7 @@ export default class Lobby extends React.Component {
     return (
       <div className="lobby-container">
         <div className="column1">
-          <div style={{ fontWeight: 'bold' }}>Game Name</div>
+          <div style={{ fontWeight: 'bold' }}>Room Name</div>
           <div>{this.props.game.name}</div>
           <Link to="/games-list">
             <button

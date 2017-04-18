@@ -103,19 +103,19 @@ fire.singularity = () => {
 // effect on end_turn (self-referential effects)
 fire.symbiosis_x = (consumer) => {
   consumer.stats.health -= 1;
-  consumer.stats.energy += 1;
+  consumer.stats.energy += 2;
 };
 
 fire.symbiosis_z = (consumer) => {
   if (consumer.stats.energy > 0 && consumer.stats.health < gameSettings.maxHealth) {
-    consumer.stats.energy -= 1;
+    consumer.stats.energy -= 2;
     consumer.stats.health += 1;
   }
 };
 
 fire.symbiosis_super = (consumer) => {
   consumer.stats.points += 1;
-  consumer.stats.health -= 2;
+  consumer.stats.energy -= 2;
 };
 
 export default fire;
