@@ -37,7 +37,7 @@ export default class NewGame extends React.Component {
           </label>
           <input type="submit" value="Create Game" />
         </form>*/}
-        <div> Game Name </div>
+        <div> Room Name </div>
         <div className="name_input">
           <input type="text" onChange={e => this.handleName(e)} name="Game Name" />
         </div>
