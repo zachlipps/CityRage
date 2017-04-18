@@ -17,7 +17,7 @@ class Home extends React.Component {
 
   renderSignOut() {
     return (
-      <div className="nav-link" onClick={() => { this.props.auth ? this.props.signOut(this.props.auth.uid) : null; }}>
+      <div className="nav-link sign-out" onClick={() => { this.props.auth ? this.props.signOut(this.props.auth.uid) : null; }}>
         Sign Out
       </div>
     );

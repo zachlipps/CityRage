@@ -45,7 +45,7 @@ export default class NewGame extends React.Component {
 
           <Link to="/games-list">
             <button
-              className="create-game"
+              className="create-game-bttn"
               onClick={() => { this.submitInput(); }}
             >Create Game</button>
           </Link>
