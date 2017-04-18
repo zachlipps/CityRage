@@ -1,7 +1,6 @@
 .reception-container {
   display: flex;
   flex-direction: row;
-  justify-content: flex-start;
   margin-top: 5px;
 }
 .reception-container > div {
@@ -17,9 +16,10 @@
   background: -o-linear-gradient(bottom right, cyan, yellow);
   background: -moz-linear-gradient(bottom right, cyan, yellow); 
   background: linear-gradient(to bottom right, cyan, yellow);
-  width: 400px;
-  margin: 5px;
-  margin-left: 15px;
+  width: 350px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  margin-left: 20px;
 }
 .columnB > div {
   display: flex;
@@ -31,16 +31,49 @@
   background: -o-linear-gradient(bottom right, cyan, yellow);
   background: -moz-linear-gradient(bottom right, cyan, yellow); 
   background: linear-gradient(to bottom right, cyan, yellow);
-  width: 675px;
+  width: 750px;
   height: 500px;
-  margin: 5px;
+  margin-top: 5px;
+  margin-right: 15px;
   font-weight: bold;
 }
 .welcome {
-  height:75px;
+  height:70px;
 }
 .credits {
   display: flex;
+  justify-content: center;
   flex-direction: column;
   height: 400px;
+}
+.credits > div {
+  margin: 15px;
+}
+.cred-title {
+  font-size: 35px;
+  font-weight: bold;
+}
+.true-author {
+  font-weight: bold;
+  width: 180px;
+}
+.rules {
+  display: flex;
+  flex-wrap: wrap;
+  word-wrap: 
+}
+.rules-text {
+  overflow-wrap: break-word;
+}
+span {
+  font-weight: bold;
+}
+.author {
+  font-size: 20px;
+}
+a {
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
 }

@@ -1,3 +1,10 @@
+.form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 450px;
+  /*border: 1px solid red;*/
+}
 .new_game_form {
   display: flex;
   flex-direction: row;
@@ -5,23 +12,25 @@
   align-items: center;
   border-radius: 8px;
   box-shadow: grey -1px 3px 12px; 
-  background: -webkit-linear-gradient(left top, lightseagreen, cyan);
-  background: -o-linear-gradient(bottom right, lightseagreen, cyan);
-  background: -moz-linear-gradient(bottom right, lightseagreen, cyan); 
-  background: linear-gradient(to bottom right, lightseagreen, cyan);
-  width: 340px;
-  height: 75px;
+  background: -webkit-linear-gradient(left top, cyan, yellow);
+  background: -o-linear-gradient(bottom right, cyan, yellow);
+  background: -moz-linear-gradient(bottom right, cyan, yellow); 
+  background: linear-gradient(to bottom right, cyan, yellow);
+  width: 900px;
+  height: 115px;
   margin: 5px;
   font-weight: bold;
 }
-.name_input {
-  margin-left: 5px;
-  margin-right: 5px;
+.new-game-input {
+  padding: 12px;
+  font-size: 30px;
+  border-radius: 8px;
 }
-
-button {
+.create-game {
   background-color: rebeccapurple;
   border-radius: 8px;
-  padding: 5px;
+  padding: 15px;
+  font-size: 20px;
+  font-weight: bold;
   color: ghostwhite;
 }

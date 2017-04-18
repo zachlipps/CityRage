@@ -5,10 +5,10 @@
   align-items: center;
   border-radius: 8px;
   box-shadow: grey -1px 3px 12px; 
-  background: -webkit-linear-gradient(left top, cyan, yellow);
-  background: -o-linear-gradient(bottom right, cyan, yellow);
-  background: -moz-linear-gradient(bottom right, cyan, yellow); 
-  background: linear-gradient(to bottom right, cyan, yellow);
+  background: -webkit-linear-gradient(left top, lightgrey, grey);
+  background: -o-linear-gradient(bottom right, lightgrey, grey);
+  background: -moz-linear-gradient(bottom right, lightgrey, grey); 
+  background: linear-gradient(to bottom right, lightgrey, grey);
   width: 320px;
   height: 200px;
   margin: 5px;
@@ -18,10 +18,10 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: -webkit-linear-gradient(left top, lightseagreen, cyan);
-  background: -o-linear-gradient(bottom right, lightseagreen, cyan);
-  background: -moz-linear-gradient(bottom right, lightseagreen, cyan); 
-  background: linear-gradient(to bottom right, lightseagreen, cyan);
+  background: -webkit-linear-gradient(left top, grey, slategray);
+  background: -o-linear-gradient(bottom right, grey, slategray);
+  background: -moz-linear-gradient(bottom right, grey, slategray); 
+  background: linear-gradient(to bottom right, grey, slategray);
   border-radius: 8px;
   margin: 5px;
   height: 180px;
@@ -32,7 +32,7 @@
 .column2 {
   width: 160px;
 }
-.bttn {
+.leave-bttn {
   display: flex;
   padding: 8px;
   border-radius: 8px;

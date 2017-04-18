@@ -42,7 +42,7 @@ class Market extends Component {
               onClick={() => this.props.userResetMarket(this.props.user, this.props.chosenOne_uid)}
             >
               <div className="in-bttn">
-                <div>ResetCards</div>
+                <div>Refresh</div>
                 <div className="card-cost">
                   <div style={{ fontSize: '15px' }}> —2 </div>
                   <div><img className="cost-logo" src={energy} alt="E" /></div>
