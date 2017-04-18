@@ -21,7 +21,7 @@ const initialState = {
 };
 
 export const gameSettings = {
-  pointsToWin: 20,
+  pointsToWin: 5,
   initialHealth: 10,
   maxHealth: 10,
   startTurnKing: 2,

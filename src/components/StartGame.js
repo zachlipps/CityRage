@@ -1,6 +1,7 @@
 import React from 'react';
 import Game from '../containers/GameContainer';
 import SelectCharacter from '../containers/SelectCharacterContainer';
+import Confetti from './Confetti';
 import '../assets/startGame.css';
 
 export default class StartGame extends React.Component {
@@ -34,6 +35,7 @@ export default class StartGame extends React.Component {
         {/* {this.props.game.started ?  : <div />}*/}
         {(this.props.game.started && !this.props.game.charactersSelected) ? <div><SelectCharacter /></div> : <div />}
         {(this.props.game.started && this.props.game.charactersSelected) ? <div className={this.addWinnerClass()} ><Game /> </div> : <div />}
+        {(this.props.game.winner ? <Confetti /> : <div />)}
         {/* <div><Game /></div>*/}
 
 
