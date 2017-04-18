@@ -15,11 +15,13 @@ class ChatBox extends Component {
 
   sendMessage(e) {
     e.preventDefault()
-    this.props.sendMessage({ 
-      id: this.props.auth.uid,
-      text: this.state.textInput 
-    })
-    this.setState({ textInput: '' })
+    if (this.state.textInput.trim().length){
+      this.props.sendMessage({ 
+        id: this.props.auth.uid,
+        text: this.state.textInput.trim()
+      })
+      this.setState({ textInput: '' })      
+    }
   }
 
   generatePlayersInfo(playerData, playerOrder) {
@@ -102,7 +104,8 @@ class ChatBox extends Component {
           paddingLeft: '0px 15px',
           backgroundColor: '#eff2f4',
           borderRadius: '10px',
-          marginTop: '15px'
+          marginTop: '15px',
+          fontSize: '14px'
         }}>
         {this.renderMessages(messages, playersInfo)}
         </div>

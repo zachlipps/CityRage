@@ -8,6 +8,8 @@ import points from '../assets/media/points.png';
 import HealthBar from '../components/HealthBar';
 import PlayerHand from './PlayerHand';
 
+
+
 // this can be temporary, just a thought
 import rick from '../assets/media/funMonsters/rick.png';
 import cenaSmash from '../assets/media/funMonsters/cenaSmash.png';
