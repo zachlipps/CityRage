@@ -32,27 +32,30 @@ class Home extends React.Component {
 
         <div className="columnA">
           <div className="welcome">
-            Welcome to City Rampage!
+            <span>Welcome to City Rampage!</span>
             { this.props.auth.status === 'SIGNED_IN' && this.renderSignOut()}
           </div>
 
           <div className="credits">
-            <div style={{ fontWeight: 'bold' }}>Credits</div>
-            <div className="authors">
-              <div>Zach Lipps</div>
-              <div>Derek Alia</div>
-              <div>Jaime Pericas</div>
-              <div>Westin Funk</div>
-            </div>
-            <div className="inspiration">
-              <div style={{ fontWeight: 'bold' }}>Based on King of Tokyo</div>
-              <div>by Richard Garfield</div>
-            </div>
+            <div className="cred-title">Credits</div>
+
+            <div><a target="_blank" href="https://www.linkedin.com/in/zachary-lipps-a60071b2/">Zach Lipps</a></div>
+            <div><a target="_blank" href="https://github.com/derekalia">Derek Alia</a></div>
+            <div><a target="_blank" href="https://www.linkedin.com/in/jaime-pericas-saez/">Jaime Pericas</a></div>
+            <div><a target="_blank" href="https://github.com/westinfunk">Westin Funk</a></div>
+
+          </div>
+          <div className="inspiration">
+            <div className="true-author">Based on King of Tokyo</div>
+            <div>by Richard Garfield</div>
           </div>
         </div>
 
         <div className="columnB">
-          <div className="rules">Game Rules</div>
+          <div className="rules">
+            Game Rules
+          </div>
+
         </div>
 
       </div>

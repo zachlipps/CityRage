@@ -5,10 +5,10 @@
   align-items: center;
   border-radius: 8px;
   box-shadow: grey -1px 3px 12px; 
-  background: -webkit-linear-gradient(left top, lightseagreen, cyan);
-  background: -o-linear-gradient(bottom right, lightseagreen, cyan);
-  background: -moz-linear-gradient(bottom right, lightseagreen, cyan); 
-  background: linear-gradient(to bottom right, lightseagreen, cyan);
+  background: -webkit-linear-gradient(left top, cyan, yellow);
+  background: -o-linear-gradient(bottom right, cyan, yellow);
+  background: -moz-linear-gradient(bottom right, cyan, yellow); 
+  background: linear-gradient(to bottom right, cyan, yellow);
   width: 340px;
   height: 75px;
   margin: 5px;
