@@ -59,6 +59,7 @@ fire.quake = (consumer, room) => {
 
 fire.apocalypse = (consumer, room) => {
   const players = room.players;
+
   for (const key in players) {
     if (players[key].uid !== consumer.uid) {
       players[key].stats.health -= 3;

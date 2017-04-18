@@ -1,7 +1,6 @@
 import { database } from '../firebase';
 import { gameSettings } from '../initial-state';
 import { endTurn } from './diceBox';
-import celebrate from './celebrate';
 
 export const checkWin = players => (dispatch, storeState) => {
   const gid = storeState().auth.gid;
@@ -13,8 +12,7 @@ export const checkWin = players => (dispatch, storeState) => {
     }
     if (players[i].stats.points >= gameSettings.pointsToWin) {
       console.log(players[i].displayName, ' won the game');
-      game.child('winner').set(players[i])
-      .then(() => dispatch(celebrate()));
+      game.child('winner').set(players[i]);
     }
   }
 };
@@ -51,8 +49,7 @@ export const killPlayer = uid => (dispatch, storeState) => {
 
       if (newPlayerPos.length === 1) {
         game.child(`/players/${newPlayerPos[0]}`).once('value')
-      .then(winner => game.child('winner').set(winner.val()))
-      .then(() => dispatch(celebrate()));
+      .then(winner => game.child('winner').set(winner.val()));
       }
     })
 
