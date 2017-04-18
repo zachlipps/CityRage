@@ -1,16 +1,15 @@
 .lobby-container {
   display: flex;
-  flex-direction: row;
-  justify-content: space-around;
+  flex-direction: column;
   align-items: center;
-  border-radius: 8px;
+  justify-content: center space-around;
+  border-radius: 4px;
+  border: 2px solid #ffff5a;
   box-shadow: grey -1px 3px 12px; 
-  background: -webkit-linear-gradient(left top, cyan, yellow);
-  background: -o-linear-gradient(bottom right, cyan, yellow);
-  background: -moz-linear-gradient(bottom right, cyan, yellow); 
-  background: linear-gradient(to bottom right, cyan, yellow);
-  width: 320px;
-  height: 200px;
+  background: darkslategray;
+  opacity: 0.8;
+  width: 400px;
+  height: 400px;
   margin: 5px;
 }
 .lobby-container > div {
@@ -18,21 +17,21 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: -webkit-linear-gradient(left top, lightseagreen, cyan);
-  background: -o-linear-gradient(bottom right, lightseagreen, cyan);
-  background: -moz-linear-gradient(bottom right, lightseagreen, cyan); 
-  background: linear-gradient(to bottom right, lightseagreen, cyan);
-  border-radius: 8px;
-  margin: 5px;
-  height: 180px;
+  box-shadow: grey -1px 3px 12px; 
+  background: #ffff5a;
+  border-radius: 2px;
 }
 .column1 {
-  width: 120px;
+  padding-top: 8px;
+  width: 360px;
+  height: 100px;
 }
 .column2 {
-  width: 160px;
+  width: 360px;
+  height: 250px;
+  margin-bottom: 14px;
 }
-.bttn {
+.leave-bttn {
   display: flex;
   padding: 8px;
   border-radius: 8px;
@@ -40,8 +39,8 @@
   text-decoration: none;
   margin-top: 15px;
   margin-bottom: 15px;
-  background-color: rebeccapurple;
-  border-radius: 8px;
-  padding: 5px;
+  background-color: #1b1b1b;
   color: ghostwhite;
+  border-radius: 4px;
+  padding: 8px;
 }

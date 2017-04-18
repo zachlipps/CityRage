@@ -49,7 +49,7 @@ export const gameSettings = {
 // database.ref('/currentPlayer').set('none');
 
 
-database.ref('games').set('');
+// database.ref('games').set('');
 //   {
 //     aqwewq334: {
 //       // started: false,

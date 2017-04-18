@@ -1,10 +1,9 @@
 import shuffle from 'lodash/shuffle';
 
-// dummyCards for testing
 const cards = [
   // bellow are cards with type='discard'
   // note: these cards do not need a 'window' key
-  // since their effect is immediately implemented after being bought
+  // since their effect is immediately applied after being bought
   {
     title: 'Golden Goose',
     cost: 4,
@@ -18,6 +17,13 @@ const cards = [
     type: 'Discard',
     ability: 'GAIN 3 PTS',
     effect: 'demolished_treasury',
+  },
+  {
+    title: 'Kamikaze',
+    cost: 4,
+    type: 'Discard',
+    ability: 'Take 3 DMG, DEAL 2 DMG TO ALL OTHER PLAYERS',
+    effect: 'kamikaze',
   },
   {
     title: 'Quake',
@@ -51,7 +57,7 @@ const cards = [
     title: 'Super Saiyan!',
     cost: 8,
     type: 'Discard',
-    ability: '+12 ENERGY',
+    ability: '+11 ENERGY',
     effect: 'super_saiyan',
   },
   {
@@ -89,13 +95,6 @@ const cards = [
     ability: '-3 HEALTH & +3 PTS',
     effect: 'triple_bird',
   },
-  {
-    title: 'Savant',
-    cost: 8,
-    type: 'Discard',
-    ability: 'TAKE ANOTHER TURN AFTER THIS ONE',
-    effect: 'savant',
-  },
   // bellow are cards with type='keep'
   {
     title: 'Boost!',
@@ -103,6 +102,7 @@ const cards = [
     type: 'Keep',
     ability: 'DEAL +1 WHEN ATTACKING',
     effect: 'boost',
+    window: 'dice',
   },
   {
     title: 'Shield',
@@ -110,6 +110,7 @@ const cards = [
     type: 'Keep',
     ability: 'ALL DMG TO YOU -1',
     effect: 'shield',
+    window: 'dice',
   },
   {
     title: 'Brain Growth',
@@ -117,6 +118,7 @@ const cards = [
     type: 'Keep',
     ability: 'ADD A 1 TO YOUR DICE ON SUBMIT',
     effect: 'brain_growth',
+    window: 'dice',
   },
   {
     title: 'Singularity',
@@ -124,8 +126,16 @@ const cards = [
     type: 'Keep',
     ability: 'ADD A 3 TO YOUR DICE ON SUBMIT',
     effect: 'brain_growth',
+    window: 'dice',
   },
   // effect on end turn
+  {
+    title: 'Savant',
+    cost: 8,
+    type: 'Discard',
+    ability: 'TAKE ANOTHER TURN AFTER THIS ONE',
+    effect: 'savant',
+  },
   {
     title: 'Symbiosis X',
     cost: 3,
@@ -151,7 +161,6 @@ const cards = [
     window: 'end_turn',
   },
 ];
-// dummyCards for testing
 
 const market = {
   deck: shuffle(cards),

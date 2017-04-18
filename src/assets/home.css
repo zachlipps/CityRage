@@ -1,46 +1,92 @@
+body {
+  background-color: lightgrey;
+}
 .reception-container {
   display: flex;
   flex-direction: row;
-  justify-content: flex-start;
   margin-top: 5px;
 }
 .reception-container > div {
   width: 500px;
 }
+.columnB {
+  
+}
 .columnA > div {
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 8px;
+  border-radius: 2px;
+  border: 2px solid #ffff5a;
   box-shadow: grey -1px 3px 12px; 
-  background: -webkit-linear-gradient(left top, cyan, yellow);
-  background: -o-linear-gradient(bottom right, cyan, yellow);
-  background: -moz-linear-gradient(bottom right, cyan, yellow); 
-  background: linear-gradient(to bottom right, cyan, yellow);
-  width: 400px;
-  margin: 5px;
+  background: darkslategrey;
+  width: 350px;
+  margin-top: 5px;
+  margin-bottom: 5px;
   margin-left: 15px;
+  opacity: 0.8;
 }
 .columnB > div {
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 8px;
+  border-radius: 2px;
+  border: 2px solid #ffff5a;
   box-shadow: grey -1px 3px 12px; 
-  background: -webkit-linear-gradient(left top, cyan, yellow);
-  background: -o-linear-gradient(bottom right, cyan, yellow);
-  background: -moz-linear-gradient(bottom right, cyan, yellow); 
-  background: linear-gradient(to bottom right, cyan, yellow);
-  width: 675px;
-  height: 500px;
-  margin: 5px;
-  font-weight: bold;
+  background: darkslategrey;
+  width: 150%;
+  height: 510px;
+  margin-top: 5px;
+  margin-right: 15px;
+  opacity: 0.8;
 }
 .welcome {
-  height:75px;
+  height:70px;
+  color: #ffff5a;
 }
 .credits {
   display: flex;
+  justify-content: center;
   flex-direction: column;
   height: 400px;
+}
+.credits > div {
+  margin: 15px;
+}
+.cred-title {
+  font-size: 25px;
+  font-weight: bold;
+}
+.inspiration {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 30px;
+}
+.true-author {
+  font-weight: bold;
+  width: 180px;
+}
+.rules {
+  display: flex;
+  flex-wrap: wrap;
+  word-wrap: 
+}
+.rules-text {
+  overflow-wrap: break-word;
+}
+span {
+  font-weight: bold;
+  font-size: 17px;
+}
+.author {
+  font-size: 20px;
+}
+a {
+  text-decoration: none;
+  color: black;
+}
+a:hover {
+  text-decoration: none;
+  color: #ffff5a;
 }
