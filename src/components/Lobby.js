@@ -13,14 +13,15 @@ export default class Lobby extends React.Component {
           <div>{this.props.game.name}</div>
           <Link to="/">
             <button
-              className="bttn"
+              className="leave-bttn"
               onClick={() => { this.props.leaveGame(this.props.auth.uid); }}
             >Leave</button>
           </Link>
         </div>
         <div className="column2">
+          <div style={{ fontWeight: 'bold', marginBottom: '5px' }}> Players in Lobby</div>
           {this.props.lobby.map(person => <div key={person}>{person}</div>)}
-          <div><button className="bttn" onClick={() => this.props.playersInLobby(this.props.gid)}>Show Players!</button></div>
+          <div><button className="leave-bttn" onClick={() => this.props.playersInLobby(this.props.gid)}>Show Players!</button></div>
         </div>
       </div>
     );
