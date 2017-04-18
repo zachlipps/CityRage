@@ -5,7 +5,7 @@ import DiceBox from '../containers/DiceBoxContainer';
 import energy from '../assets/media/energy.png';
 import health from '../assets/media/health.png';
 import points from '../assets/media/points.png';
-
+import HealthBar from '../components/HealthBar';
 import PlayerHand from './PlayerHand';
 
 // this can be temporary, just a thought
@@ -69,7 +69,7 @@ class CurrentUser extends React.Component {
                     <div style={{ flex: 3 }}>
                       <div style={{ flex: 1, flexDirection: 'column', alignSelf: 'center', margin: '10px' }}>
 
-                        <div style={{ fontSize: '24px', margin: '10px' }}>{item.displayName} {this.generatePlayerIcon(item, this.props.game)} <HealthBar health={item.stats.health} />   </div>
+                        <div style={{ fontSize: '24px', margin: '10px' }}>{item.displayName} {this.generatePlayerIcon(item, this.props.game)} <HealthBar health={item.stats.health} />     </div>
 
                         <div style={{ flex: 1, flexDirection: 'row', display: 'flex' }}>
 
