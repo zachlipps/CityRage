@@ -28,7 +28,7 @@ export const setKing = () => (dispatch, storeState) => {
         game.child(`/players/${chosenOne.val().uid}`).once('value')
         .then((currentPlayer) => {
           console.log(currentPlayer.val(), 'shit poop');
-          game.child('chosenOne').set({ uid: currentPlayer.val().uid, displayName: currentPlayer.val().displayName, photoURL: currentPlayer.val().photoURL, character: currentPlayer.val().character.image })
+          game.child('chosenOne').set({ uid: currentPlayer.val().uid, displayName: currentPlayer.val().displayName, photoURL: currentPlayer.val().photoURL, character: currentPlayer.val().character })
         .then(() => setNewKing());
         });
       });

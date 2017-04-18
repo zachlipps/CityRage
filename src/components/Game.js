@@ -46,7 +46,7 @@ export default class Game extends React.Component {
     if (this.props.game.winner) {
       return this.props.game.winner.character.image;
     }
-    return this.props.game.king.character;
+    return this.props.game.king.character.image;
   }
 
   kingOrWinnerText() {
