@@ -4,6 +4,7 @@ import DiceBox from '../containers/DiceBoxContainer';
 import Market from '../containers/MarketContainer';
 import KickKing from '../containers/kickKingContainer';
 import ChatBox from '../containers/ChatBoxContainer';
+import '../assets/Game.css';
 
 import map from '../assets/media/sf-map.png';
 import rick from '../assets/media/funMonsters/rick.png';
@@ -41,8 +42,23 @@ export default class Game extends React.Component {
     return kingAttack;
   }
 
+  kingOrWinnerImage() {
+    if (this.props.game.winner) {
+      return this.props.game.winner.character.image;
+    }
+    return this.props.game.king.character;
+  }
+
+  kingOrWinnerText() {
+    if (this.props.game.winner) {
+      return `${this.props.game.winner.displayName} HELLA WINS`;
+    }
+    return `KING : ${this.props.game.king.displayName}`;
+  }
+
   render() {
     // console.log('Game Component', this.props, this.props.game.chosenOne !== this.props.auth.uid);
+    console.log(this.props.game);
     return (
       <div style={{ display: 'flex', flexDirection: 'column' }}>
 
@@ -67,9 +83,9 @@ export default class Game extends React.Component {
                 /* borderRadius: '100%', */
                 borderColor: 'black',
                 borderWidth: '2px',
-              }} src={charactersOBJ[this.props.game.king.character]}
+              }} src={charactersOBJ[this.kingOrWinnerImage()]}
             />
-            <div style={{ textAlign: 'center', fontWeight: 'bold', fontSize: '25px' }}>{this.props.game.king.displayName}</div>
+            <div style={{ textAlign: 'center', fontWeight: 'bold', fontSize: '25px' }}>{this.kingOrWinnerText()}</div>
           </div>}
 
         </div>
