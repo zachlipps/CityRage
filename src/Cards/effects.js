@@ -20,7 +20,7 @@ fire.power_up = (consumer) => {
 };
 
 fire.super_saiyan = (consumer) => {
-  consumer.stats.energy += 12;
+  consumer.stats.energy += 11;
 };
 
 fire.triple_bird = (consumer) => {
@@ -56,10 +56,6 @@ fire.apocalypse = (consumer, room) => {
   }
 };
 
-fire.savant = () => {
-  console.log('savant fired but not implemented!');
-};
-
 fire.siphon = (consumer, room) => {
   if (consumer.uid === room.king.uid) {
     const players = room.players;
@@ -90,9 +86,6 @@ fire.boost = () => {
 fire.shield = () => {
   console.log('savant fired but not implemented!');
 };
-fire.swift = () => {
-  console.log('swift fired but not implemented!');
-};
 fire.brain_growth = () => {
   console.log('brain_growth fired but not implemented!');
 };
@@ -101,21 +94,29 @@ fire.singularity = () => {
 };
 
 // effect on end_turn (self-referential effects)
+fire.savant = () => {
+  console.log('savant fired but not implemented!');
+};
+
 fire.symbiosis_x = (consumer) => {
-  consumer.stats.health -= 1;
-  consumer.stats.energy += 2;
+  if (consumer.health > 0) {
+    consumer.stats.health -= 1;
+    consumer.stats.energy += 2;
+  }
 };
 
 fire.symbiosis_z = (consumer) => {
-  if (consumer.stats.energy > 0 && consumer.stats.health < gameSettings.maxHealth) {
+  if (consumer.stats.energy > 1 && consumer.stats.health < gameSettings.maxHealth) {
     consumer.stats.energy -= 2;
     consumer.stats.health += 1;
   }
 };
 
 fire.symbiosis_super = (consumer) => {
-  consumer.stats.points += 1;
-  consumer.stats.energy -= 2;
+  if (consumer.stats.energy > 1) {
+    consumer.stats.points += 1;
+    consumer.stats.energy -= 2;
+  }
 };
 
 export default fire;

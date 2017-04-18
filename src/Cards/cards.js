@@ -1,10 +1,9 @@
 import shuffle from 'lodash/shuffle';
 
-// dummyCards for testing
 const cards = [
   // bellow are cards with type='discard'
   // note: these cards do not need a 'window' key
-  // since their effect is immediately implemented after being bought
+  // since their effect is immediately applied after being bought
   {
     title: 'Golden Goose',
     cost: 4,
@@ -51,7 +50,7 @@ const cards = [
     title: 'Super Saiyan!',
     cost: 8,
     type: 'Discard',
-    ability: '+12 ENERGY',
+    ability: '+11 ENERGY',
     effect: 'super_saiyan',
   },
   {
@@ -103,6 +102,7 @@ const cards = [
     type: 'Keep',
     ability: 'DEAL +1 WHEN ATTACKING',
     effect: 'boost',
+    window: 'dice',
   },
   {
     title: 'Shield',
@@ -110,6 +110,7 @@ const cards = [
     type: 'Keep',
     ability: 'ALL DMG TO YOU -1',
     effect: 'shield',
+    window: 'dice',
   },
   {
     title: 'Brain Growth',
@@ -117,6 +118,7 @@ const cards = [
     type: 'Keep',
     ability: 'ADD A 1 TO YOUR DICE ON SUBMIT',
     effect: 'brain_growth',
+    window: 'dice',
   },
   {
     title: 'Singularity',
@@ -124,6 +126,7 @@ const cards = [
     type: 'Keep',
     ability: 'ADD A 3 TO YOUR DICE ON SUBMIT',
     effect: 'brain_growth',
+    window: 'dice',
   },
   // effect on end turn
   {
@@ -151,7 +154,6 @@ const cards = [
     window: 'end_turn',
   },
 ];
-// dummyCards for testing
 
 const market = {
   deck: shuffle(cards),
