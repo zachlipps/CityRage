@@ -1,7 +1,6 @@
 .reception-container {
   display: flex;
   flex-direction: row;
-  justify-content: flex-start;
   margin-top: 5px;
 }
 .reception-container > div {
@@ -37,10 +36,39 @@
   font-weight: bold;
 }
 .welcome {
-  height:75px;
+  height:70px;
 }
 .credits {
   display: flex;
+  justify-content: center;
   flex-direction: column;
   height: 400px;
+}
+.credits > div {
+  margin: 15px;
+}
+.cred-title {
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.authors {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+.true-author {
+  font-weight: bold;
+  width: 180px;
+}
+.rules {
+  display: flex;
+  flex-wrap: wrap;
+  word-wrap: 
+}
+.rules-text {
+  overflow-wrap: break-word;
+}
+span {
+  font-weight: bold;
 }
