@@ -39,10 +39,10 @@ class Home extends React.Component {
           <div className="credits">
             <div className="cred-title">Credits</div>
 
-            <div><a target="_blank" href="https://www.linkedin.com/in/zachary-lipps-a60071b2/">Zach Lipps</a></div>
-            <div><a target="_blank" href="https://github.com/derekalia">Derek Alia</a></div>
-            <div><a target="_blank" href="https://www.linkedin.com/in/jaime-pericas-saez/">Jaime Pericas</a></div>
-            <div><a target="_blank" href="https://github.com/westinfunk">Westin Funk</a></div>
+            <div className="author"><a target="_blank" href="https://www.linkedin.com/in/zachary-lipps-a60071b2/">Zach Lipps</a></div>
+            <div className="author"><a target="_blank" href="https://github.com/derekalia">Derek Alia</a></div>
+            <div className="author"><a target="_blank" href="https://github.com/westinfunk">Westin Funk</a></div>
+            <div className="author"><a target="_blank" href="https://www.linkedin.com/in/jaime-pericas-saez/">Jaime Pericas</a></div>
 
           </div>
           <div className="inspiration">

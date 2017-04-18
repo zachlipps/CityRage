@@ -11,7 +11,7 @@ export default class Lobby extends React.Component {
         <div className="column1">
           <div style={{ fontWeight: 'bold' }}>Room Name</div>
           <div>{this.props.game.name}</div>
-          <Link to="/games-list">
+          <Link to="/">
             <button
               className="bttn"
               onClick={() => { this.props.leaveGame(this.props.auth.uid); }}
@@ -19,8 +19,8 @@ export default class Lobby extends React.Component {
           </Link>
         </div>
         <div className="column2">
-          <div><button className="bttn" onClick={() => this.props.playersInLobby(this.props.gid)}>Show Players!</button></div>
           {this.props.lobby.map(person => <div key={person}>{person}</div>)}
+          <div><button className="bttn" onClick={() => this.props.playersInLobby(this.props.gid)}>Show Players!</button></div>
         </div>
       </div>
     );
