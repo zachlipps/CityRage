@@ -5,25 +5,4 @@
   color: ghostwhite;
 }
 
-.gameContainer {
-    display: flex;
-    position: relative; 
-}
-
-#win {
-  /*background-color: purple;*/
-  pointer-events: none;
-  overflow: hidden;
-  background: transparent;
-  z-index: 99999999999999999;
-  display: flex; 
-  position: absolute;
-  top: 0%;
-  left: 0%; 
-}
-
-.win {
-  pointer-events: none; 
-}
-
 
