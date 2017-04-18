@@ -11,6 +11,7 @@
   justify-content: space-around;
   align-items: center;
   border-radius: 4px;
+  border: 2px solid #ffff5a;
   box-shadow: grey -1px 3px 12px; 
   background: darkslategrey;
   opacity: 0.9;

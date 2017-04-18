@@ -19,6 +19,13 @@ const cards = [
     effect: 'demolished_treasury',
   },
   {
+    title: 'Kamikaze',
+    cost: 4,
+    type: 'Discard',
+    ability: 'Take 3 DMG, DEAL 2 DMG TO ALL OTHER PLAYERS',
+    effect: 'kamikaze',
+  },
+  {
     title: 'Quake',
     cost: 3,
     type: 'Discard',
@@ -88,13 +95,6 @@ const cards = [
     ability: '-3 HEALTH & +3 PTS',
     effect: 'triple_bird',
   },
-  {
-    title: 'Savant',
-    cost: 8,
-    type: 'Discard',
-    ability: 'TAKE ANOTHER TURN AFTER THIS ONE',
-    effect: 'savant',
-  },
   // bellow are cards with type='keep'
   {
     title: 'Boost!',
@@ -129,6 +129,13 @@ const cards = [
     window: 'dice',
   },
   // effect on end turn
+  {
+    title: 'Savant',
+    cost: 8,
+    type: 'Discard',
+    ability: 'TAKE ANOTHER TURN AFTER THIS ONE',
+    effect: 'savant',
+  },
   {
     title: 'Symbiosis X',
     cost: 3,

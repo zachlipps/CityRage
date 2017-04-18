@@ -2,9 +2,8 @@
   background-color: #1b1b1b;
   color: ghostwhite;
   border-radius: 4px;
-  padding: 5px;
-}
-.gameContainer {
+  padding: 8px;
+}.gameContainer {
     display: flex;
     position: relative; 
 }

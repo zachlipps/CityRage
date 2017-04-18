@@ -24,7 +24,7 @@
   color: white;
 }
 .cards:hover {
-  background-color: lightseagreen;
+  background-color: yellow;
 }
 .card-cost {
   display: flex;
@@ -60,9 +60,7 @@
   justify-content: center space-around;
   align-items: center;
   background-color: orange;
-  border-radius: 42px;
-  border-bottom: 2px solid darkorange;
-  border-right: 2px solid darkorange;
+  border-radius: 4px;
   color: white;
   text-align: center;
   width: 75px;
@@ -76,7 +74,7 @@
   border-radius: 4px;
   height: 75px;
   width: 75px;
-  background-color: lightseagreen;
+  background-color: black;
   font-weight: bold;
   color: ghostwhite;
 }
@@ -91,7 +89,7 @@
   flex-direction: row;
 }
 #reset-bttn:hover {
-  background-color: lightgreen;
+  background-color: grey;
 }
 
 

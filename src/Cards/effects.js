@@ -38,6 +38,16 @@ fire.miracle = (consumer) => {
   consumer.stats.health = newHealth;
 };
 
+fire.kamikaze = (consumer, room) => {
+  const players = room.players;
+  consumer.stats.health -= 3;
+  for (const key in players) {
+    if (players[key].uid !== consumer.uid) {
+      players[key].stats.health -= 2;
+    }
+  }
+};
+
 fire.quake = (consumer, room) => {
   const players = room.players;
   for (const key in players) {
