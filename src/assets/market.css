@@ -77,6 +77,8 @@
   height: 75px;
   width: 75px;
   background-color: lightseagreen;
+  font-weight: bold;
+  color: ghostwhite;
 }
 .in-bttn {
   display: flex;
