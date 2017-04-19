@@ -68,12 +68,14 @@ export const rollDice = (uid, chosenId) => (dispatch, storeState) => {
           }
         }
         // Promise.all(pArray)
-      }).then(() => {
+      })
+      .then(() => {
         game.child('/diceBox').once('value').then((updatedDice) => {
           dispatch(updateRolls(updatedDice.val()));
           dispatch(decrementRoll());
         });
-      }).then(() => {
+      })
+      .then(() => {
         if (rollCount.val() === 1) {
           dispatch(submitRoll());
         }
