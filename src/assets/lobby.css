@@ -17,9 +17,11 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  border: 2px solid #ffff5a;
   box-shadow: grey -1px 3px 12px; 
-  background: #ffff5a;
+  background: darkslategrey;
   border-radius: 2px;
+    color: #ffff5a;
 }
 .column1 {
   padding-top: 8px;

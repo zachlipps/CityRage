@@ -10,13 +10,14 @@
   justify-content: center;
   align-items: center;
   border-radius: 2px;
-  border: 2px solid darkslategrey;
+  border: 2px solid #ffff5a;
   box-shadow: grey -1px 3px 12px; 
-  background:  #ffff5a;
+  background: darkslategrey;
   opacity: 0.7;
   height: 120px;
   min-width: 175px;
   margin: 5px;
+  color: #ffff5a;
 }
 .lobby_tile > button {
   display: flex;
