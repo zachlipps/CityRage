@@ -1,6 +1,4 @@
 import shuffle from 'lodash/shuffle';
-
-import db from './dbQueries';
 import { database } from '../firebase';
 import { gameSettings } from '../initial-state';
 import fire from '../Cards/effects';
@@ -27,14 +25,16 @@ function dealCard(obj) {
 export const buyCard = (card, buyerId, chosenOneUid) => (dispatch, storeState) => {
   if (buyerId === chosenOneUid) {
     const gid = storeState().auth.gid;
-    let market = {};
+    const game = database.ref(`games/${gid}`);
 
-    db.getGame(gid)
-    .then((gameData) => {
+
+    let market = {};
+    game.once('value', (gameData) => {
       const room = gameData.val();
-      console.log('game data in first promise process', room);
       const consumer = room.players[buyerId];
       market = room.market;
+      firebaseFix(market);
+
       if (consumer.stats.energy >= card.cost) {
         consumer.stats.energy -= card.cost;
         market.face_up = market.face_up.filter(c => c.title !== card.title);
@@ -51,13 +51,10 @@ export const buyCard = (card, buyerId, chosenOneUid) => (dispatch, storeState) =
         dealCard(market);
         regenDeckIfEmpty(market);
       }
-      return room;
+      game.child('market').set(market)
+    .then(() => game.child('players').set(room.players));
     })
-    .then((room) => {
-      db.setGame(gid, room);
-      return room;
-    })
-    .then(room => dispatch({ type: 'DEAL_CARD', payload: room.market }));
+  .then(() => dispatch({ type: 'DEAL_CARD', payload: market }));
   }
 };
 
