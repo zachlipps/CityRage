@@ -197,12 +197,13 @@ export const endTurn = () => (dispatch, storeState) => {
       const allPlayers = players.val();
       const cardOwner = allPlayers[chosenOne.val().uid];
 
-      cardOwner.hand.forEach((card) => {
+
+      cardOwner.hand ? cardOwner.hand.forEach((card) => {
         if (card.window === 'end_turn') {
           fire[card.effect](cardOwner);
         }
         game.child('players').set(allPlayers);
-      });
+      }) : null;
     });
   });
   // end: end_turn card effects
