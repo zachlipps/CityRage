@@ -38,41 +38,36 @@ fire.miracle = (consumer) => {
   consumer.stats.health = newHealth;
 };
 
-fire.kamikaze = (consumer, room) => {
-  const players = room.players;
+fire.kamikaze = (consumer, { players, playerPosition }) => {
   consumer.stats.health -= 3;
   for (const key in players) {
-    if (players[key].uid !== consumer.uid) {
+    if (players[key].uid !== consumer.uid && playerPosition.indexOf(players[key].uid) !== -1) {
       players[key].stats.health -= 2;
     }
   }
 };
 
-fire.quake = (consumer, room) => {
-  const players = room.players;
+fire.quake = (consumer, { players, playerPosition }) => {
   for (const key in players) {
-    if (players[key].uid !== consumer.uid) {
+    if (players[key].uid !== consumer.uid && playerPosition.indexOf(players[key].uid) !== -1) {
       players[key].stats.health -= 1;
     }
   }
 };
 
-fire.apocalypse = (consumer, room) => {
-  const players = room.players;
-
+fire.apocalypse = (consumer, { players, playerPosition }) => {
   for (const key in players) {
-    if (players[key].uid !== consumer.uid) {
+    if (players[key].uid !== consumer.uid && playerPosition.indexOf(players[key].uid) !== -1) {
       players[key].stats.health -= 3;
     }
   }
 };
 
-fire.siphon = (consumer, room) => {
-  if (consumer.uid === room.king.uid) {
-    const players = room.players;
+fire.siphon = (consumer, { players, playerPosition, king }) => {
+  if (consumer.uid === king.uid) {
     let dmgDealt = 0;
     for (const key in players) {
-      if (players[key].uid !== consumer.uid) {
+      if (players[key].uid !== consumer.uid && playerPosition.indexOf(players[key].uid) !== -1) {
         players[key].stats.health -= 1;
         dmgDealt += 1;
       }
@@ -81,10 +76,12 @@ fire.siphon = (consumer, room) => {
     consumer.stats.health = newHealth;
   }
 };
-fire.pax_romana = (consumer = null, room) => {
-  const players = room.players;
+
+fire.pax_romana = (consumer = null, { players, playerPosition }) => {
   for (const key in players) {
-    players[key].stats.health = Math.min(players[key].stats.health += 3, gameSettings.maxHealth);
+    if (playerPosition.indexOf(players[key].uid) !== -1) {
+      players[key].stats.health = Math.min(players[key].stats.health += 3, gameSettings.maxHealth);
+    }
   }
 };
 
