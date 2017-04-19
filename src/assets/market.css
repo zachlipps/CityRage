@@ -24,7 +24,7 @@
   color: white;
 }
 .cards:hover {
-  background-color: yellow;
+  background-color: lightyellow;
 }
 .card-cost {
   display: flex;

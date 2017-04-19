@@ -9,9 +9,6 @@ body {
 .reception-container > div {
   width: 500px;
 }
-.columnB {
-  
-}
 .columnA > div {
   display: flex;
   justify-content: center;
@@ -49,6 +46,7 @@ body {
   justify-content: center;
   flex-direction: column;
   height: 400px;
+  color: #ffff5a;
 }
 .credits > div {
   margin: 15px;
@@ -84,7 +82,7 @@ span {
 }
 a {
   text-decoration: none;
-  color: black;
+  color: #ffff5a;
 }
 a:hover {
   text-decoration: none;
