@@ -61,7 +61,7 @@ class Market extends Component {
 
           <div className="market-cards deck-disc">
             <div>Discar Pile</div>
-            <div>{this.props.market.discarded.length} cards</div>
+            <div>{this.props.market.discarded ? this.props.market.discarded.length : 0} cards</div>
           </div>
 
         </div>

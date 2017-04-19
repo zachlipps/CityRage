@@ -1,5 +1,7 @@
 import React, { PropTypes } from 'react';
 import { database } from '../firebase';
+import { charactersOBJ } from '../initial-state';
+
 import map from 'lodash/map';
 import DiceBox from '../containers/DiceBoxContainer';
 import energy from '../assets/media/energy.png';
@@ -9,23 +11,8 @@ import HealthBar from '../components/HealthBar';
 import PlayerHand from './PlayerHand';
 
 
-
 // this can be temporary, just a thought
-import rick from '../assets/media/funMonsters/rick.png';
-import cenaSmash from '../assets/media/funMonsters/cenaSmash.png';
-import cyberKitty from '../assets/media/funMonsters/cyberKitty.png';
-import gigazaur from '../assets/media/funMonsters/gigazaur.png';
-import golfMeeseeks from '../assets/media/funMonsters/golfMeeseeks.png';
-import kingDedede from '../assets/media/funMonsters/kingDedede.png';
 
-const charactersOBJ = {
-  rick,
-  cenaSmash,
-  cyberKitty,
-  gigazaur,
-  golfMeeseeks,
-  kingDedede,
-};
 
 class CurrentUser extends React.Component {
   constructor(props) {
@@ -53,7 +40,7 @@ class CurrentUser extends React.Component {
 
   render() {
     const { auth } = this.props;
-    console.log(this.props);
+
     return (
       <div className="CurrentUser">
         <div className="CurrentUser--identification">
@@ -61,7 +48,7 @@ class CurrentUser extends React.Component {
           <p className="CurrentUser--email">{auth.email}</p>*/}
           <div style={{ display: 'flex', flex: 1, flexDirection: 'column' }}>
             {map(this.props.playersOnline, item =>
-              <div>
+              <div key={item.uid}>
                 <div style={{ display: 'flex', flexDirection: 'row', marginBottom: '15px' }}>
                   <div style={{ marginLeft: '20px', flex: 1 }} >
                     { (item.uid == this.props.game.chosenOne.uid) && <DiceBox auth={this.props.auth} />}
@@ -71,7 +58,7 @@ class CurrentUser extends React.Component {
                     <div style={{ flex: 3 }}>
                       <div style={{ flex: 1, flexDirection: 'column', alignSelf: 'center', margin: '10px' }}>
 
-                        <div style={{ fontSize: '24px', margin: '10px' }}>{item.displayName} {this.generatePlayerIcon(item, this.props.game)} <HealthBar health={item.stats.health} />     </div>
+                        <div style={{ fontSize: '24px', margin: '10px' }}>{item.displayName} {this.generatePlayerIcon(item, this.props.game)} <HealthBar health={item.stats.health} />               </div>
 
                         <div style={{ flex: 1, flexDirection: 'row', display: 'flex' }}>
 
