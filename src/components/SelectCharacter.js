@@ -17,7 +17,6 @@ class SelectCharacter extends Component {
   }
 
   render() {
-    console.log('here are selectCHAR props', this.props.state);
     return (
       <div style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-around' }}>
 

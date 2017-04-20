@@ -43,8 +43,6 @@ export default class Game extends React.Component {
   }
 
   render() {
-    // console.log('Game Component', this.props, this.props.game.chosenOne !== this.props.auth.uid);
-    console.log(this.props.game);
     return (
       <div style={{ display: 'flex', flexDirection: 'column' }}>
 
