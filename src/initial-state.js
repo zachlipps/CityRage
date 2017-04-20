@@ -6,6 +6,10 @@ import cyberKitty from './assets/media/funMonsters/cyberKitty.png';
 import gigazaur from './assets/media/funMonsters/gigazaur.png';
 import golfMeeseeks from './assets/media/funMonsters/golfMeeseeks.png';
 import kingDedede from './assets/media/funMonsters/kingDedede.png';
+import gollum from './assets/media/funMonsters/gollum.png';
+import pekka from './assets/media/funMonsters/pekka.png';
+import stewie from './assets/media/funMonsters/stewie.png';
+import zombie from './assets/media/funMonsters/zombie.png';
 
 export const charactersOBJ = {
   rick,
@@ -14,6 +18,10 @@ export const charactersOBJ = {
   gigazaur,
   golfMeeseeks,
   kingDedede,
+  gollum,
+  pekka,
+  stewie,
+  zombie,
 };
 
 
