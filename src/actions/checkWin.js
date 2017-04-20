@@ -6,15 +6,18 @@ export const checkWin = players => (dispatch, storeState) => {
   const gid = storeState().auth.gid;
   const game = database.ref(`games/${gid}`);
 
-  for (const i in players) {
-    if (players[i].stats.health <= 0) {
-      dispatch(killPlayer(players[i].uid));
+  game.child('/playerPosition').once('value')
+  .then((playerPosition) => {
+    for (const uid in players) {
+      if (playerPosition.val() && players[uid].stats.health <= 0 && playerPosition.val().indexOf(uid) !== -1) {
+        dispatch(killPlayer(uid));
+      }
+      if (players[uid].stats.points >= gameSettings.pointsToWin) {
+        console.log(players[uid].displayName, ' won the game');
+        game.child('winner').set(players[uid]);
+      }
     }
-    if (players[i].stats.points >= gameSettings.pointsToWin) {
-      console.log(players[i].displayName, ' won the game');
-      game.child('winner').set(players[i]);
-    }
-  }
+  });
 };
 
 
