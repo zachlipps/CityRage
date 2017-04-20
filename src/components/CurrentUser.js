@@ -13,6 +13,9 @@ import PlayerHand from './PlayerHand';
 import '../assets/CurrentUser.css';
 
 
+import KickKing from '../containers/kickKingContainer';
+
+
 // this can be temporary, just a thought
 
 
@@ -44,6 +47,17 @@ class CurrentUser extends React.Component {
     });
   }
 
+  checkKing() {
+    let kingAttack = false;
+    if (this.props.game.king !== undefined) {
+      kingAttack = this.props.auth.uid === this.props.game.king.uid &&
+        this.props.game.kingAttackedOnTurn === true &&
+        this.props.game.king !== null &&
+        this.props.game.chosenOne.uid !== this.props.auth.uid;
+    }
+    return kingAttack;
+  }
+
 
   render() {
     const { auth } = this.props;
@@ -66,27 +80,26 @@ class CurrentUser extends React.Component {
                       <div style={{ flex: 1, flexDirection: 'column', alignSelf: 'center', margin: '10px' }}>
 
                         <div style={{ fontSize: '24px', margin: '10px' }}>{player.displayName} {this.generatePlayerIcon(player, this.props.game)} <HealthBar health={player.stats.health} /> </div>
-
                         <div style={{ flex: 1, flexDirection: 'row', display: 'flex' }}>
 
-                          <div style={{ flex: 1, flexDirection: 'row', display: 'flex', alignItems: 'center' }}>
+                         <div style={{ flex: 1, flexDirection: 'row', display: 'flex', alignItems: 'center' }}>
                             <div style={{ flex: 1, margin: '5px' }}><img style={{ width: '25px', height: '25px' }} src={health} /></div>
                             <div style={{ flex: 1, margin: '5px', fontSize: '16px' }}> {player.stats.health}</div>
                           </div>
-                          <div style={{ flex: 1, flexDirection: 'row', display: 'flex', alignItems: 'center' }}>
+                         <div style={{ flex: 1, flexDirection: 'row', display: 'flex', alignItems: 'center' }}>
                             <div style={{ flex: 1, margin: '5px' }}><img style={{ width: '25px', height: '25px' }} src={energy} /></div>
                             <div style={{ flex: 1, margin: '5px', fontSize: '16px' }}> {player.stats.energy}</div>
                           </div>
-                          <div style={{ flex: 1, flexDirection: 'row', display: 'flex', alignItems: 'center' }}>
+                         <div style={{ flex: 1, flexDirection: 'row', display: 'flex', alignItems: 'center' }}>
                             <div style={{ flex: 1, margin: '5px' }}><img style={{ width: '25px', height: '25px' }} src={points} /></div>
                             <div style={{ flex: 1, margin: '5px', fontSize: '16px' }}> {player.stats.points}</div>
                           </div>
 
-                        </div>
+                       </div>
                       </div>
                     </div>
                   </div>
-                  <div style={{ display: 'flex', flex: 1, flexDirection: 'row' }} />
+                  <div style={{ display: 'flex', flex: 1, flexDirection: 'row', alignItems: 'center' }}><div style={{ marginLeft: '15px' }}>{((player.uid === this.props.game.king.uid) && this.checkKing()) && <KickKing />}</div></div>
                 </div>
                 {this.state.showHand && Array.isArray(player.hand) && <PlayerHand cards={player.hand} />}
               </div>,

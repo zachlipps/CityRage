@@ -78,7 +78,6 @@ export default class Game extends React.Component {
 
 
         <Market />
-        {this.checkKing() && <KickKing />}
 
         <CurrentUser auth={this.props.auth} />
         <ChatBox />
