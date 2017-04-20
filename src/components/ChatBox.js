@@ -71,6 +71,7 @@ class ChatBox extends Component {
 
 
     return (
+
       <div
         className="chat-box" style={{
           margin: '20px',
@@ -102,6 +103,7 @@ class ChatBox extends Component {
               width: '70%',
             }} onChange={this.updateTextInput.bind(this)} value={this.state.textInput}
           />
+
         </form>
         <div
           className="messages" style={{
