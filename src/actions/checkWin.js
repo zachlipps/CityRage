@@ -1,6 +1,7 @@
 import { database } from '../firebase';
 import { gameSettings } from '../initial-state';
 import { endTurn } from './diceBox';
+import { setKing } from './kickKing';
 
 export const checkWin = players => (dispatch, storeState) => {
   const gid = storeState().auth.gid;
@@ -49,6 +50,7 @@ export const killPlayer = uid => (dispatch, storeState) => {
 
       if (uid === king.val().uid) {
         game.child('king').set('none');
+        dispatch(setKing());
       }
 
       if (newPlayerPos.length === 1) {
