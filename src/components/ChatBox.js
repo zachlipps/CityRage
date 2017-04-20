@@ -73,7 +73,7 @@ class ChatBox extends Component {
     return (
       <div className="chat-box" style={{ 
         margin: '20px',
-        backgroundColor: '#e8eff4',
+        backgroundColor: '#c4cec6',
         borderRadius: '10px',
         padding: '12px 15px 20px 20px'
       }}>
@@ -82,11 +82,11 @@ class ChatBox extends Component {
             height: '30px',
             width: '100px',
             background: '#fff',
-            color: '#6aa8d1',
-            border: '5px solid #6aa8d1',
+            color: '#4b808c',
+            border: '5px solid #4b808c',
             borderRadius: '30px',
             cursor: 'pointer',
-            fontSize: '18px'
+            fontSize: '15px'
           }} 
           onClick={ this.sendMessage.bind(this) }/>
           <input type="text" style={{
