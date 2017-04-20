@@ -122,6 +122,9 @@ export const submitRoll = () => (dispatch, storeState) => {
   const gid = storeState().auth.gid;
   const game = database.ref(`games/${gid}`);
   const submittedRoll = [];
+  let pointsFrom1 = 0;
+  let pointsFrom2 = 0;
+  let pointsFrom3 = 0;
 
   game.child('/diceBox').once('value', (snapshot) => {
     for (const i in snapshot.val()) {
@@ -152,18 +155,16 @@ export const submitRoll = () => (dispatch, storeState) => {
       }
 
       if (currentRoll[3] && currentRoll[3].length >= 3) {
-        const pointsIncreaseFrom3 = currentRoll[3].length;
-        dispatch(changeStat(currentPlayer, pointsIncreaseFrom3, 'points'));
+        pointsFrom3 = currentRoll[3].length;
       }
-
       if (currentRoll[2] && currentRoll[2].length >= 3) {
-        const pointsIncreaseFrom2 = currentRoll[2].length - 1;
-        dispatch(changeStat(currentPlayer, pointsIncreaseFrom2, 'points'));
+        pointsFrom2 = currentRoll[2].length - 1;
       }
-
       if (currentRoll[1] && currentRoll[1].length >= 3) {
-        const pointsIncreaseFrom1 = currentRoll[1].length - 2;
-        dispatch(changeStat(currentPlayer, pointsIncreaseFrom1, 'points'));
+        pointsFrom1 = currentRoll[1].length - 2;
+      }
+      if (currentRoll[1] || currentRoll[2] || currentRoll[3]) {
+        dispatch(changeStat(currentPlayer, pointsFrom3 + pointsFrom2 + pointsFrom1, 'points'));
       }
 
       if (currentRoll.attack) {
