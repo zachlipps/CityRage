@@ -32,7 +32,7 @@ const cards = [
   },
   {
     title: 'Quake',
-    cost: 3,
+    cost: 4,
     type: 'Discard',
     ability: 'DEAL 1 DMG TO ALL OTHER PLAYERS',
     effect: 'quake',
@@ -67,7 +67,7 @@ const cards = [
   },
   {
     title: 'Heal',
-    cost: 2,
+    cost: 3,
     type: 'Discard',
     ability: 'GAIN 2 HEALTH',
     effect: 'heal',
@@ -101,20 +101,14 @@ const cards = [
     effect: 'triple_bird',
   },
   // bellow are cards with type='keep'
+
+  // start: window = dice
   {
     title: 'Boost!',
-    cost: 3,
+    cost: 5,
     type: 'Keep',
     ability: 'DEAL +1 WHEN ATTACKING',
     effect: 'boost',
-    window: 'dice',
-  },
-  {
-    title: 'Shield',
-    cost: 4,
-    type: 'Keep',
-    ability: 'ALL DMG TO YOU —1',
-    effect: 'shield',
     window: 'dice',
   },
   {
@@ -130,9 +124,11 @@ const cards = [
     cost: 7,
     type: 'Keep',
     ability: 'ADD A 3 TO YOUR DICE ON SUBMIT',
-    effect: 'brain_growth',
+    effect: 'singularity',
     window: 'dice',
   },
+  // end: window = dice
+
   // effect on end turn
   {
     title: 'Savant',
@@ -140,6 +136,15 @@ const cards = [
     type: 'Discard',
     ability: 'TAKE ANOTHER TURN AFTER THIS ONE',
     effect: 'savant',
+    window: 'end_turn',
+  },
+  {
+    title: 'Aura',
+    cost: 9,
+    type: 'Keep',
+    ability: 'ON END TURN: +1 HEALTH',
+    effect: 'aura',
+    window: 'end_turn',
   },
   {
     title: 'Symbiosis X',
@@ -165,6 +170,7 @@ const cards = [
     effect: 'symbiosis_super',
     window: 'end_turn',
   },
+  // end: effect on end turn
 ];
 
 const market = {
