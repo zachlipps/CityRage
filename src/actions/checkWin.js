@@ -63,7 +63,7 @@ export const killPlayer = uid => (dispatch, storeState) => {
       game.child('/deadPlayers').once('value', (snapshot) => {
         if (!snapshot.val()) {
           game.child('/deadPlayers').set([uid]);
-        } else {
+        } else if (snapshot.val().indexOf(uid) === -1) {
           const newDeadPlayerArr = [...snapshot.val(), uid];
           game.child('/deadPlayers').set(newDeadPlayerArr);
         }
