@@ -101,17 +101,14 @@ fire.pax_romana = (consumer = null, { players, playerPosition }) => {
 // effects of cards with type = 'keep'
 
 // effect on dice submission
-fire.boost = () => {
-  console.log('roar fired but not implemented!');
+fire.boost = (diceRoll) => {
+  diceRoll.attack.push('attack');
 };
-fire.shield = () => {
-  console.log('savant fired but not implemented!');
+fire.brain_growth = (diceRoll) => {
+  diceRoll[1].push('1');
 };
-fire.brain_growth = () => {
-  console.log('brain_growth fired but not implemented!');
-};
-fire.singularity = () => {
-  console.log('singularity fired but not implemented!');
+fire.singularity = (diceRoll) => {
+  diceRoll[3].push('3');
 };
 
 // effect on end_turn (self-referential effects)
@@ -119,8 +116,14 @@ fire.savant = () => {
   console.log('savant fired but not implemented!');
 };
 
+fire.aura = (consumer) => {
+  if (consumer.stats.health < 10) {
+    consumer.stats.health += 1;
+  }
+};
+
 fire.symbiosis_x = (consumer) => {
-  if (consumer.health > 0) {
+  if (consumer.stats.health > 0) {
     consumer.stats.health -= 1;
     consumer.stats.energy += 2;
   }

@@ -49,7 +49,7 @@ const decrementRoll = () => (dispatch, storeState) => {
   });
 };
 
-export const rollDice = (uid, chosenId) => (dispatch, storeState) => {
+export const rollDice = (uid, chosenId, roller) => (dispatch, storeState) => {
   if (uid === chosenId) {
     const gid = storeState().auth.gid;
     const game = database.ref(`games/${gid}`);
@@ -77,7 +77,7 @@ export const rollDice = (uid, chosenId) => (dispatch, storeState) => {
       })
       .then(() => {
         if (rollCount.val() === 1) {
-          dispatch(submitRoll());
+          dispatch(submitRoll(roller));
         }
       });
       }
@@ -118,7 +118,7 @@ export const selectDice = (die, uid, chosenId) => (dispatch, storeState) => {
   }
 };
 
-export const submitRoll = () => (dispatch, storeState) => {
+export const submitRoll = roller => (dispatch, storeState) => {
   const gid = storeState().auth.gid;
   const game = database.ref(`games/${gid}`);
   const submittedRoll = [];
@@ -136,7 +136,7 @@ export const submitRoll = () => (dispatch, storeState) => {
       const currentPlayer = snapshot.val().uid;
       const currentRoll = groupBy(submittedRoll);
 
-      console.log('here is the current roll', currentRoll);
+      console.log('ROLLER before if statements', roller);
 
       if (currentRoll.health) {
         game.child('/king').once('value', (kingSpot) => {
@@ -154,6 +154,14 @@ export const submitRoll = () => (dispatch, storeState) => {
         });
       }
 
+      // start - CARD EFFECTS for dice.
+      roller.hand ? roller.hand.forEach((card) => {
+        if (card.window === 'dice') {
+          fire[card.effect](currentRoll);
+        }
+      }) : null;
+      // end — card effect for dice.
+
       if (currentRoll[3] && currentRoll[3].length >= 3) {
         pointsFrom3 = currentRoll[3].length;
       }
@@ -169,6 +177,7 @@ export const submitRoll = () => (dispatch, storeState) => {
 
       if (currentRoll.attack) {
         const attacks = -currentRoll.attack.length;
+
         dispatch(attack(attacks, currentPlayer));
       }
     });
