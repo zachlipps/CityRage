@@ -10,10 +10,7 @@
 }  
 
 @keyframes changeShadow{
-
-
   0% {box-shadow: 0px 0px 20px 4px #F1C516}
   60% {box-shadow: 0px 0px 20px 8px #F1C516}
   100% {box-shadow: 0px 0px 20px 4px #F1C516}
-
 }
