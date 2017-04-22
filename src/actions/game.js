@@ -5,6 +5,7 @@ import market from '../Cards/cards';
 import { startListeningForUsers } from './users';
 import { marketListener } from './market.js';
 import { gameSettings } from '../initial-state';
+import { playersInLobby } from './lobby';
 
 const startGameAction = gameData => ({
   type: 'UPDATE_GAME_DATA',
@@ -122,5 +123,6 @@ export const startListeningGameChanges = () => (dispatch, storeState) => {
 
   game.on('value', (snapshot) => {
     dispatch(startGameAction(snapshot.val()));
+    dispatch(playersInLobby(snapshot.val()));
   });
 };
