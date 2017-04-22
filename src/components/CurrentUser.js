@@ -65,8 +65,7 @@ class CurrentUser extends React.Component {
     return (
       <div className="CurrentUser">
         <div className="CurrentUser--identification">
-          {/* <h3 className="CurrentUser--displayName">{auth.displayName}</h3>
-          <p className="CurrentUser--email">{auth.email}</p>*/}
+
           <div style={{ display: 'flex', flex: 1, flexDirection: 'column' }}>
             {map(this.props.playersOnline, player =>
               <div key={player.uid} >
@@ -82,20 +81,20 @@ class CurrentUser extends React.Component {
                         <div style={{ fontSize: '24px', margin: '10px' }}>{player.displayName} {this.generatePlayerIcon(player, this.props.game)} <HealthBar health={player.stats.health} /> </div>
                         <div style={{ flex: 1, flexDirection: 'row', display: 'flex' }}>
 
-                         <div style={{ flex: 1, flexDirection: 'row', display: 'flex', alignItems: 'center' }}>
+                          <div style={{ flex: 1, flexDirection: 'row', display: 'flex', alignItems: 'center' }}>
                             <div style={{ flex: 1, margin: '5px' }}><img style={{ width: '25px', height: '25px' }} src={health} /></div>
                             <div style={{ flex: 1, margin: '5px', fontSize: '16px' }}> {player.stats.health}</div>
                           </div>
-                         <div style={{ flex: 1, flexDirection: 'row', display: 'flex', alignItems: 'center' }}>
+                          <div style={{ flex: 1, flexDirection: 'row', display: 'flex', alignItems: 'center' }}>
                             <div style={{ flex: 1, margin: '5px' }}><img style={{ width: '25px', height: '25px' }} src={energy} /></div>
                             <div style={{ flex: 1, margin: '5px', fontSize: '16px' }}> {player.stats.energy}</div>
                           </div>
-                         <div style={{ flex: 1, flexDirection: 'row', display: 'flex', alignItems: 'center' }}>
+                          <div style={{ flex: 1, flexDirection: 'row', display: 'flex', alignItems: 'center' }}>
                             <div style={{ flex: 1, margin: '5px' }}><img style={{ width: '25px', height: '25px' }} src={points} /></div>
                             <div style={{ flex: 1, margin: '5px', fontSize: '16px' }}> {player.stats.points}</div>
                           </div>
 
-                       </div>
+                        </div>
                       </div>
                     </div>
                   </div>
