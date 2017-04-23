@@ -29,7 +29,7 @@ export const charactersOBJ = {
   cube,
   Lordofevil,
   Aloak,
-  Firebases
+  Firebase
 };
 
 
