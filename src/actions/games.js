@@ -13,7 +13,7 @@ const setGidtoAuth = gid => ({
 
 
 export const grabListOfGames = () => (dispatch) => {
-  database.ref('games').once('value').then((games) => {
+  database.ref('games').on('value', (games) => {
     const checkedGames = [];
     const gamesData = games.val();
 
@@ -50,7 +50,7 @@ export const joinGame = (uid, gid) => (dispatch) => {
           const newPlayers = [...playersInGame.val(), uid];
           game.child('/playerPosition').set(newPlayers);
         }
-        if (playersInGame.val().length < gameSettings.maxPlayers) {
+        if (playersInGame.val() && playersInGame.val().length < gameSettings.maxPlayers) {
           // error handle
         }
       })
