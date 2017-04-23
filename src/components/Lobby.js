@@ -10,7 +10,7 @@ export default class Lobby extends React.Component {
       <div className="lobby-container">
         <div className="column1">
           <div style={{ fontWeight: 'bold' }}>Room Name</div>
-          <div>{this.props.game.name}</div>
+          <div>{this.props.game ? this.props.game.name : null}</div>
           <Link to="/">
             <button
               className="leave-bttn"
@@ -31,7 +31,7 @@ export default class Lobby extends React.Component {
       <div>
         { this.props.game && this.props.game.started ? null : this.renderLobby() }
 
-        { this.props.game.gid === this.props.auth.gid && <div style={{ margin: '5px' }}><StartGame /></div>}
+        { this.props.game && this.props.game.gid === this.props.auth.gid && <div style={{ margin: '5px' }}><StartGame /></div>}
       </div>
     );
   }
