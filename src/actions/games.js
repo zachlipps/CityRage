@@ -32,17 +32,49 @@ const updateGameData = gameData => ({
   gameData,
 });
 
-export const joinGame = (uid, gid) => (dispatch) => {
+export const joinGame = (uid, gid) => (dispatch, storeState) => {
   let game = '';
+  const LeaveGid = storeState().auth.gid;
+  const oldGame = database.ref(`games/${LeaveGid}`);
 
-  database.ref(`users/${uid}/currentGame`).set(gid).then(() => {
-    dispatch(setGidtoAuth(gid));
-  });
+  oldGame.child('/playerPosition').once('value', (snapshot) => {
+    const currentPlayerIndex = snapshot.val() ? snapshot.val().indexOf(uid) : -1;
+    if (currentPlayerIndex !== -1) {
+      const playerArr = snapshot.val();
+      playerArr.splice(currentPlayerIndex, 1);
 
-  database.ref(`games/${gid}`).once('value').then((gameData) => {
-    game = database.ref(`games/${gameData.val().gid}`);
-  }).then(() => {
-    game.child('/playerPosition').once('value')
+      oldGame.child('/playerPosition').set(playerArr)
+      .then(() => {
+        oldGame.child('/players').off();
+        oldGame.off();
+        oldGame.child('/market').off();
+        database.ref(`users/${uid}/currentGame`).set('');
+      });
+
+
+      // off(listener)
+      // set player array without user
+      dispatch({ type: 'LEAVE_GAME', playerArr });
+      dispatch({ type: 'REMOVE_GAME' });
+
+      // set playersOnline to  []
+      dispatch({ type: 'UPDATE_PLAYERS', players: [] });
+      // set game to null
+      dispatch({ type: 'UPDATE_GAME_DATA', gameData: null });
+      // set gamelist?
+    }
+  })
+  .then(() => {
+    console.log('hellsadlf');
+
+    database.ref(`users/${uid}/currentGame`).set(gid).then(() => {
+      dispatch(setGidtoAuth(gid));
+    });
+
+    database.ref(`games/${gid}`).once('value').then((gameData) => {
+      game = database.ref(`games/${gameData.val().gid}`);
+    }).then(() => {
+      game.child('/playerPosition').once('value')
       .then((playersInGame) => {
         if (!playersInGame.val()) {
           game.child('/playerPosition').set([uid]);
@@ -60,6 +92,7 @@ export const joinGame = (uid, gid) => (dispatch) => {
           dispatch(updateGameData(data));
         });
       });
+    });
   });
 };
 
@@ -98,6 +131,7 @@ export const leaveGame = uid => (dispatch, storeState) => {
       // set game to null
       dispatch({ type: 'UPDATE_GAME_DATA', gameData: null });
       // set gamelist?
+      return game.child('/numPlayers').once('value');
     }
   });
 };
