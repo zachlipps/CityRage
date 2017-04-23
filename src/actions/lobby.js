@@ -10,13 +10,9 @@ export const playersInLobby = game => (dispatch) => {
   const playerList = game.playerPosition;
   const userList = [];
 
-  if (playerList) {
-    playerList.forEach((uid) => {
-      userList.push(database.ref(`users/${uid}`).once('value'));
-    });
-  }
-
-
+  playerList.forEach((uid) => {
+    userList.push(database.ref(`users/${uid}`).once('value'));
+  });
   Promise.all(userList)
     .then((resolvedUserList) => {
       const userNameList = resolvedUserList.map(user => user.val().displayName);
