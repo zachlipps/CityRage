@@ -8,13 +8,15 @@ import NewGame from '../containers/NewGameContainer';
 import GamesList from '../containers/GamesListContainer';
 import Rules from '../components/Rules';
 import '../assets/App.css';
+import logo from '../assets/media/iconlrg.png';
 
 const Application = ({ auth, signIn, signOut, game }) => (
   <Router>
     <main className="Application">
       <div>
         <div className="nav-container">
-          <div style={{ alignSelf: 'center', fontWeight: 'bold', flex: 1 }} ><Link className="nav-link" to="/">CITYRAGE</Link></div>
+          <div><img style={{ width: '40px', padding: '6px', marginLeft: '6px', marginRight: '-10px' }} src={logo} /></div>
+          <div style={{ alignSelf: 'center', fontWeight: 'bold', flex: 1, fontSize: '25px' }} ><Link className="nav-link" to="/">CITYRAGE</Link></div>
           <div style={{ alignSelf: 'center', float: 'left', flex: 1 }} ><Link className="nav-link" to="/">Home</Link></div>
           <div style={{ flex: 7 }} />
           { auth.status === 'ANONYMOUS' && <div style={{ alignSelf: 'center', display: 'flex', alignItems: 'center', float: 'left' }} className="nav-link"><SignIn signIn={signIn} /></div> }

@@ -86,12 +86,12 @@ class CurrentUser extends React.Component {
 
     return (
       <div className="CurrentUser">
-        <div className="CurrentUser--identification">
+        <div className="CurrentUser--identification" style={{ flexDirection: 'column', display: 'flex' }}>
 
-          <div style={{ height: '100px', width: '700px', backgroundColor: 'grey' }}>
+          <div className="tip" style={{ }}>
             {this.turnBanner()}
             {/* this will link you to an unbuilt rules page */}
-            <a href="/rules" target="_blank" rel="noopener noreferrer" >Rules</a>
+            <a href="/rules" target="_blank" rel="noopener noreferrer" >RULES</a>
           </div>
 
           <div style={{ display: 'flex', flex: 1, flexDirection: 'column' }}>
@@ -140,7 +140,7 @@ class CurrentUser extends React.Component {
             }
           </div>
           {/* <button onClick={() => this.revealHand()}>{this.state.showHand ? 'HideCards' : 'ShowCards'}</button>*/}
-
+          {/*
 
           <button onClick={() => { this.props.increaseHealth(auth.uid); }} >up health</button>
 
@@ -150,7 +150,7 @@ class CurrentUser extends React.Component {
           <button onClick={() => { this.props.increasePoints(auth.uid); }} >up Points</button>
           <button onClick={() => { this.props.decreasePoints(auth.uid); }}>down Points</button>
           <button onClick={() => { this.props.increaseEnergy(auth.uid); }} >up Energy</button>
-          <button onClick={() => { this.props.decreaseEnergy(auth.uid); }}>down Energy</button>
+          <button onClick={() => { this.props.decreaseEnergy(auth.uid); }}>down Energy</button>*/}
         </div>
       </div >
     );
