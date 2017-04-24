@@ -7,6 +7,7 @@ import DiceBox from '../containers/DiceBoxContainer';
 import energy from '../assets/media/energy.png';
 import health from '../assets/media/health.png';
 import points from '../assets/media/points.png';
+import playerHandImage from '../assets/media/playerHand.png';
 import HealthBar from '../components/HealthBar';
 import PlayerHand from './PlayerHand';
 
@@ -23,7 +24,8 @@ class CurrentUser extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      showHand: true,
+      showHand: {},
+      reRender: true,
     };
   }
 
@@ -41,10 +43,11 @@ class CurrentUser extends React.Component {
     return this.props.game.chosenOne && playerUID === this.props.game.chosenOne.uid ? 'chosenOne' : 'notChosenOne';
   }
 
-  revealHand() {
-    this.setState({
-      showHand: !this.state.showHand,
-    });
+  revealHand(uid) {
+    console.log('reveal being called');
+    this.state.showHand[uid] = !this.state.showHand[uid];
+    // this.setState = { reRender: !this.state.reRender };
+    this.forceUpdate();
   }
 
   checkKing() {
@@ -67,13 +70,13 @@ class CurrentUser extends React.Component {
         <div className="CurrentUser--identification">
 
           <div style={{ display: 'flex', flex: 1, flexDirection: 'column' }}>
-            {map(this.props.playersOnline, player =>
+            {map(this.props.playersOnline, (player, uid) => (
               <div key={player.uid} >
                 <div style={{ display: 'flex', flexDirection: 'row', marginBottom: '15px' }}>
                   <div style={{ marginLeft: '20px', flex: 1 }} >
                     { (player.uid == this.props.game.chosenOne.uid) && <DiceBox auth={this.props.auth} />}
                   </div>
-                  <div key={player.uid} className={this.stlyeChosenOne(player.uid)} style={{ display: 'flex', flex: 1, maxWidth: '400px', flexDirection: 'row', alignItems: 'center', borderTopLeftRadius: 10, borderTopRightRadius: 10, borderBottomLeftRadius: 10, borderBottomRightRadius: 10, paddingLeft: '10px', paddingRight: '10px' }}>
+                  <div key={player.uid} className={this.stlyeChosenOne(player.uid)} style={{ display: 'flex', flex: 1, maxWidth: '400px', flexDirection: 'row', alignItems: 'center', borderTopLeftRadius: 10, borderTopRightRadius: 10, borderBottomLeftRadius: 10, borderBottomRightRadius: 10, paddingLeft: '10px', paddingRight: '10px', cursor: 'pointer' }} onClick={() => this.revealHand(uid)}>
                     <div style={{ flex: 1 }}><img style={{ margin: '10px', width: '100px', height: '100px', borderRadius: 100 }} src={charactersOBJ[this.props.game.players[player.uid].character.image]} alt={player.photoURL} /></div>
                     <div style={{ flex: 3 }}>
                       <div style={{ flex: 1, flexDirection: 'column', alignSelf: 'center', margin: '10px' }}>
@@ -93,6 +96,10 @@ class CurrentUser extends React.Component {
                             <div style={{ flex: 1, margin: '5px' }}><img style={{ width: '25px', height: '25px' }} src={points} /></div>
                             <div style={{ flex: 1, margin: '5px', fontSize: '16px' }}> {player.stats.points}</div>
                           </div>
+                          <div style={{ flex: 1, flexDirection: 'row', display: 'flex', alignItems: 'center' }}>
+                            <div style={{ flex: 1, margin: '5px' }}><img style={{ width: '25px', height: '25px' }} src={playerHandImage} /></div>
+                            <div style={{ flex: 1, margin: '5px', fontSize: '16px' }}> { player.hand ? player.hand.length : 0 }</div>
+                          </div>
 
                         </div>
                       </div>
@@ -100,12 +107,13 @@ class CurrentUser extends React.Component {
                   </div>
                   <div style={{ display: 'flex', flex: 1, flexDirection: 'row', alignItems: 'center' }}><div style={{ marginLeft: '15px' }}>{((player.uid === this.props.game.king.uid) && this.checkKing()) && <KickKing />}</div></div>
                 </div>
-                {this.state.showHand && Array.isArray(player.hand) && <PlayerHand cards={player.hand} />}
-              </div>,
-            )
+                { !this.state.showHand[uid] ? this.state.showHand[uid] = false : null }
+                {this.state.showHand[uid] && Array.isArray(player.hand) && <PlayerHand cards={player.hand} />}
+              </div>
+              ))
             }
           </div>
-          <button onClick={() => this.revealHand()}>{this.state.showHand ? 'HideCards' : 'ShowCards'}</button>
+          {/* <button onClick={() => this.revealHand()}>{this.state.showHand ? 'HideCards' : 'ShowCards'}</button>*/}
 
 
           <button onClick={() => { this.props.increaseHealth(auth.uid); }} >up health</button>
