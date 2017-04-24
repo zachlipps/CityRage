@@ -28,7 +28,8 @@ export default class StartGame extends React.Component {
 
   render() {
     return (
-      <div>{this.props.game && !this.props.game.started && <button className="start-bttn" onClick={() => { this.props.startGame(); }}>Start Game</button>}
+      <div>
+        {this.props.game && !this.props.game.started && <div style={{ flex: 1, display: 'flex', justifyContent: 'center' }}><div style={{ backgroundColor: '#7ED321', color: 'white' }} className="start-bttn" onClick={() => { this.props.startGame(); }}>Start Game</div></div>}
         {/* <div>Who's going? {this.props.game}</div>*/}
         {/* {this.props.game.started ?  : <div />}*/}
         {(this.props.game.started && !this.props.game.charactersSelected) ? <div><SelectCharacter /></div> : <div />}

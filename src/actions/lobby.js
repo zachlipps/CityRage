@@ -16,7 +16,7 @@ export const playersInLobby = game => (dispatch) => {
     });
     Promise.all(userList)
     .then((resolvedUserList) => {
-      const userNameList = resolvedUserList.map(user => user.val().displayName);
+      const userNameList = resolvedUserList.map((user) => [user.val().displayName, user.val().photoURL]);
       return userNameList;
     })
     .then(userNameList => dispatch(setPlayersInLobby(userNameList)));
