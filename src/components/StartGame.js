@@ -16,7 +16,6 @@ export default class StartGame extends React.Component {
     // this.props.marketListener();
   }
   handleStartGame() {
-    // console.log('started the game');
     this.setState({
       started: true,
     });
@@ -28,7 +27,6 @@ export default class StartGame extends React.Component {
 
 
   render() {
-    // console.log(this.props, 'startGame component Is getting CRAY');
     return (
       <div>{this.props.game && !this.props.game.started && <button className="start-bttn" onClick={() => { this.props.startGame(); }}>Start Game</button>}
         {/* <div>Who's going? {this.props.game}</div>*/}

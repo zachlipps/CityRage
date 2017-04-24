@@ -14,7 +14,6 @@ export const checkWin = players => (dispatch, storeState) => {
         dispatch(killPlayer(uid));
       }
       if (players[uid].stats.points >= gameSettings.pointsToWin) {
-        console.log(players[uid].displayName, ' won the game');
         game.child('winner').set(players[uid]);
       }
     }
