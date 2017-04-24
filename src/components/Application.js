@@ -6,6 +6,7 @@ import Lobby from '../containers/LobbyContainer';
 import Home from '../containers/HomeContainer';
 import NewGame from '../containers/NewGameContainer';
 import GamesList from '../containers/GamesListContainer';
+import Rules from '../components/Rules';
 import '../assets/App.css';
 
 const Application = ({ auth, signIn, signOut, game }) => (
@@ -24,6 +25,7 @@ const Application = ({ auth, signIn, signOut, game }) => (
         <Route path="/newgame" component={NewGame} />
         <Route exact path="/games-list" component={GamesList} />
         <Route path="/games-list/lobby/:game" component={Lobby} />
+        <Route path="/rules" component={Rules} />
       </div>
     </main>
   </Router>

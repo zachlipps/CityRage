@@ -60,6 +60,26 @@ class CurrentUser extends React.Component {
     return kingAttack;
   }
 
+  turnBanner() {
+    const game = this.props.game;
+
+    if (game.chosenOne.uid !== this.props.auth.uid && this.props.auth.uid === game.king.uid && game.kingAttackedOnTurn) {
+      // you are the king and someone is attacking you
+      return <p> {`It is ${game.chosenOne.displayName}'s turn and she/he is attacking you`} </p>;
+    } else if (game.chosenOne.uid !== this.props.auth.uid) {
+      // not your turn
+      return <p> {`It is ${game.chosenOne.displayName}'s turn`} </p>;
+    } else if (!game.submitted) {
+      // your turn roll phase
+      return <p>{'Roll phase: roll the die and select the any you want to keep, dice will submit when you press submit or after your third roll'}</p>;
+    } else if (game.king.displayName && game.kingAttackedOnTurn) {
+      // your turn and you are attacking the king
+      return <p>{`You just attacked the the king, ${game.king.displayName} is being asked if he wants to leave the city`}</p>;
+    }
+    // your turn, already submitted roll and resolved attacks on king
+    return <p>{'Buy phase: Buy any cards from the market and then end your turn'}</p>;
+  }
+
 
   render() {
     const { auth } = this.props;
@@ -68,7 +88,14 @@ class CurrentUser extends React.Component {
       <div className="CurrentUser">
         <div className="CurrentUser--identification">
 
+          <div style={{ height: '100px', width: '700px', backgroundColor: 'grey' }}>
+            {this.turnBanner()}
+            {/* this will link you to an unbuilt rules page */}
+            <a href="/rules" target="_blank" rel="noopener noreferrer" >Rules</a>
+          </div>
+
           <div style={{ display: 'flex', flex: 1, flexDirection: 'column' }}>
+
             {map(this.props.playersOnline, (player, uid) => (
               <div key={player.uid} >
                 <div style={{ display: 'flex', flexDirection: 'row', marginBottom: '15px' }}>
