@@ -13,10 +13,10 @@ const Application = ({ auth, signIn, signOut, game }) => (
     <main className="Application">
       <div>
         <div className="nav-container">
-          <div><Link className="nav-link" to="/">Home</Link></div>
-          { auth.status === 'ANONYMOUS' && <div><SignIn signIn={signIn} /></div> }
-          { auth.status === 'SIGNED_IN' && <div><Link className="nav-link" to="/newgame">New Game</Link></div> }
-          { auth.status === 'SIGNED_IN' && <div><Link className="nav-link" to="/games-list">Games List</Link></div> }
+          <div style={{ alignSelf: 'center', fontWeight: 'bold' }} ><Link className="nav-link" to="/">CITYRAGE</Link></div>
+          <div style={{ alignSelf: 'center', float: 'left' }} ><Link className="nav-link" to="/">Home</Link></div>
+          { auth.status === 'ANONYMOUS' && <div style={{ alignSelf: 'center', display: 'flex', alignItems: 'center', float: 'left' }}><SignIn signIn={signIn} /></div> }
+          { auth.status === 'SIGNED_IN' && <div style={{ alignSelf: 'center', display: 'flex', alignItems: 'center' }} onClick={() => { auth ? signOut(auth.uid) : null; }}>Sign Out</div>}
         </div>
         { auth.status === 'AWAITING_AUTH_RESPONSE' && <Loading /> }
 
