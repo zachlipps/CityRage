@@ -45,10 +45,8 @@ export default class Game extends React.Component {
   render() {
     return (
       <div style={{ display: 'flex', flexDirection: 'column' }}>
-
         <div style={{ position: 'relative', flex: 1, display: 'flex', alignContent: 'center', justifyContent: 'center' }}>
-
-          <img style={{ display: 'flex', flex: 1, height: '190px', borderRadius: '8px', alignItems: 'center' }} src={map} />
+          <img style={{ display: 'flex', flex: 1, height: '190px', alignItems: 'center', marginTop: '-5px', zIndex: -1 }} src={map} />
 
           { this.props.game.king.uid && <div
             style={{
@@ -78,7 +76,7 @@ export default class Game extends React.Component {
         <Market />
 
         <CurrentUser auth={this.props.auth} />
-        <ChatBox />
+        {/* <ChatBox />*/}
         {/* <DiceBox auth={this.props.auth} />*/}
 
 

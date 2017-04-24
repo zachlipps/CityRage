@@ -9,7 +9,7 @@ class SelectCharacter extends Component {
 
   createPlayerImages() {
     return this.props.state.game.characters.map((character, index) => (
-      <div className="char-div" key={character.name} style={character.selected ? { border: '2px solid red' } : {}} onClick={() => this.props.selectCharacter(this.props.state.auth.uid, character, index)}>
+      <div className="char-div" key={character.name} style={character.selected ? { border: '3px solid blue' } : {}} onClick={() => this.props.selectCharacter(this.props.state.auth.uid, character, index)}>
         <div className="char-name">{character.name.toUpperCase()}</div>
         <img style={{ width: '150px', height: '150px' }} src={charactersOBJ[character.image]} />
       </div>
@@ -18,12 +18,12 @@ class SelectCharacter extends Component {
 
   render() {
     return (
-      <div style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-around' }}>
-
-        { this.createPlayerImages() }
-
+      <div>
+        <div style={{ fontSize: '35px', padding: '10px', textAlign: 'center', fontWeight: 'bold', paddingTop: '25px', paddingBottom: '-10px' }}>SELECT YOUR CHARACTER</div>
+        <div style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-around' }}>
+          { this.createPlayerImages() }
+        </div>
       </div>
-
     );
   }
 }
