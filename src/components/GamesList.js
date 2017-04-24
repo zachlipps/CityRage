@@ -34,7 +34,7 @@ export default class GamesList extends React.Component {
               </div>
               {/* <div>{ this.props.game[gameItem.name] && this.props.game.playerPosition ? this.props.game.playerPosition.length : 0 }</div>*/}
               <div style={{ width: '100px', height: '50px', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                <div style={{ flex: 1, alignContent: 'center', textAlign: 'center' }}>JOIN GAME</div>
+                <div style={{ flex: 1, alignContent: 'center', textAlign: 'center', cursor: 'pointer' }}>JOIN GAME</div>
               </div>
             </div>
             <div style={{ flex: 1 }} />
