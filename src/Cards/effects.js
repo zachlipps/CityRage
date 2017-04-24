@@ -120,8 +120,8 @@ fire.singularity = (diceRoll) => {
 };
 
 // b. effect on end_turn (self-referential effects)
-fire.savant = () => {
-  console.log('savant fired but not implemented!');
+fire.savant = (consumer, game) => {
+  game.savant = true;
 };
 
 fire.aura = (consumer) => {

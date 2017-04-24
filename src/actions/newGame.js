@@ -11,6 +11,7 @@ export const createNewGame = (name, numPlayers = 4) => (dispatch) => {
       rollCount: gameSettings.initialRolls,
       started: false,
       submitted: false,
+      savant: false,
       diceBox: {
         one: { val: '?', selected: false },
         two: { val: '?', selected: false },

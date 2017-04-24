@@ -200,6 +200,7 @@ export const submitRoll = roller => (dispatch, storeState) => {
 
 
 export const endTurn = () => (dispatch, storeState) => {
+  let nextTurn;
   const gid = storeState().auth.gid;
   const game = database.ref(`games/${gid}`);
 
@@ -222,10 +223,18 @@ export const endTurn = () => (dispatch, storeState) => {
 
   const currentTurn = game.child('/currentTurn').once('value');
   const gameSize = game.child('/gameSize').once('value');
-  Promise.all([currentTurn, gameSize])
-  .then(([currentTurn, gameSize]) => {
-    const nextTurn = (currentTurn.val() + 1) % gameSize.val();
+  const savant = game.child('/savant').once('value');
+
+  Promise.all([currentTurn, gameSize, savant])
+  .then(([currentTurn, gameSize, savant]) => {
+    if (savant.val()) {
+      nextTurn = (currentTurn.val()) % gameSize.val();
+    } else {
+      nextTurn = (currentTurn.val() + 1) % gameSize.val();
+    }
     game.child('/currentTurn').set(nextTurn);
+    game.child('/savant').set(false);
+
     return nextTurn;
   })
   .then((nextTurn) => {
@@ -252,7 +261,7 @@ const attack = (numAttacks, currentPlayerID) => (dispatch, storeState) => {
   const king = game.child('king').once('value');
   const playerPos = game.child('/playerPosition').once('value');
   const requests = [king, playerPos];
-  console.log('I am in attack with the current numAttacks', numAttacks);
+
   Promise.all(requests)
   .then((snapshots) => {
     const kingID = snapshots[0].val().uid;

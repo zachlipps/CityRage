@@ -136,7 +136,6 @@ const cards = [
     type: 'Discard',
     ability: 'TAKE ANOTHER TURN AFTER THIS ONE',
     effect: 'savant',
-    window: 'end_turn',
   },
   {
     title: 'Aura',

@@ -52,7 +52,8 @@ export const buyCard = (card, buyerId, chosenOneUid) => (dispatch, storeState) =
         regenDeckIfEmpty(market);
       }
       game.child('market').set(market)
-    .then(() => game.child('players').set(room.players));
+      .then(() => game.child('players').set(room.players))
+      .then(() => game.child('savant').set(room.savant));
     })
   .then(() => dispatch({ type: 'DEAL_CARD', payload: market }));
   }
