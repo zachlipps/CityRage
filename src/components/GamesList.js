@@ -23,7 +23,6 @@ export default class GamesList extends React.Component {
   }
 
   renderLobbyTiles() {
-    console.log(this.props);
     return (
       <div className="lobby_tiles_container" style={{ padding: '20px' }}>
         {this.props.gamesList.map(gameItem =>
