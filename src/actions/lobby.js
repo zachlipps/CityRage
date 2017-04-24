@@ -7,17 +7,19 @@ const setPlayersInLobby = array => ({
 
 
 export const playersInLobby = game => (dispatch) => {
-  const playerList = game.playerPosition;
-  const userList = [];
+  if (game && game.playerPosition) {
+    const playerList = game.playerPosition;
+    const userList = [];
 
-  playerList.forEach((uid) => {
-    userList.push(database.ref(`users/${uid}`).once('value'));
-  });
-  Promise.all(userList)
+    playerList.forEach((uid) => {
+      userList.push(database.ref(`users/${uid}`).once('value'));
+    });
+    Promise.all(userList)
     .then((resolvedUserList) => {
       const userNameList = resolvedUserList.map(user => user.val().displayName);
       return userNameList;
     })
     .then(userNameList => dispatch(setPlayersInLobby(userNameList)));
+  }
 };
 
