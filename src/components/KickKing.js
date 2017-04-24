@@ -3,7 +3,6 @@ import '../assets/kickKing.css';
 
 export default class KickKing extends React.Component {
   render() {
-    console.log('KICK KING PROPS', this.props);
     return (
       <div className="king-options-container">
         <div className="king-text">

@@ -62,8 +62,6 @@ export const joinGame = (uid, gid) => (dispatch, storeState) => {
       // set gamelist?
       })
       .then(() => {
-        console.log('hellsadlf');
-
         database.ref(`users/${uid}/currentGame`).set(gid).then(() => {
           dispatch(setGidtoAuth(gid));
         });
@@ -92,8 +90,6 @@ export const joinGame = (uid, gid) => (dispatch, storeState) => {
         });
       });
     } else {
-      console.log('hellsadlf');
-
       database.ref(`users/${uid}/currentGame`).set(gid).then(() => {
         dispatch(setGidtoAuth(gid));
       });

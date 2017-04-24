@@ -44,7 +44,6 @@ class CurrentUser extends React.Component {
   }
 
   revealHand(uid) {
-    console.log('reveal being called');
     this.state.showHand[uid] = !this.state.showHand[uid];
     // this.setState = { reRender: !this.state.reRender };
     this.forceUpdate();
