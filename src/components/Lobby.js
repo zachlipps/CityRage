@@ -31,7 +31,6 @@ export default class Lobby extends React.Component {
   }
 
   render() {
-    console.log(this.props);
     return (
       <div>
         { this.props.game && this.props.game.started ? null : this.renderLobby() }
